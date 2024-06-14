@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
 		DFAEFA772C1BD7A000913FEC /* capuri-sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "capuri-sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = capuri_sunApp.swift; sourceTree = "<group>"; };
 		DFAEFA7C2C1BD7A000913FEC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		DFAEFA792C1BD7A000913FEC /* capuri-sun */ = {
 			isa = PBXGroup;
 			children = (
+				DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */,
 				DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */,
 				DFAEFA7C2C1BD7A000913FEC /* ContentView.swift */,
 				DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */,
@@ -273,6 +275,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "capuri-sun/capuri-sun.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"capuri-sun/Preview Content\"";
@@ -289,7 +292,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "choseyeon.capuri-sun";
+				PRODUCT_BUNDLE_IDENTIFIER = com.carpurisun.weatherkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -302,6 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "capuri-sun/capuri-sun.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"capuri-sun/Preview Content\"";
@@ -318,7 +322,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "choseyeon.capuri-sun";
+				PRODUCT_BUNDLE_IDENTIFIER = com.carpurisun.weatherkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
