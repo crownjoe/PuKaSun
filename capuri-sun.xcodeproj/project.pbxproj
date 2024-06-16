@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DFA0BF082C1F506B000E47D2 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA0BF072C1F506B000E47D2 /* WeatherView.swift */; };
 		DFAEFA7B2C1BD7A000913FEC /* capuri_sunApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */; };
 		DFAEFA7D2C1BD7A000913FEC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAEFA7C2C1BD7A000913FEC /* ContentView.swift */; };
 		DFAEFA7F2C1BD7A100913FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
+		DFA0BF072C1F506B000E47D2 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		DFAEFA772C1BD7A000913FEC /* capuri-sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "capuri-sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = capuri_sunApp.swift; sourceTree = "<group>"; };
 		DFAEFA7C2C1BD7A000913FEC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */,
 				DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */,
 				DFAEFA7C2C1BD7A000913FEC /* ContentView.swift */,
+				DFA0BF072C1F506B000E47D2 /* WeatherView.swift */,
 				DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */,
 				DFAEFA802C1BD7A100913FEC /* Preview Content */,
 			);
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFA0BF082C1F506B000E47D2 /* WeatherView.swift in Sources */,
 				DFAEFA7D2C1BD7A000913FEC /* ContentView.swift in Sources */,
 				DFAEFA7B2C1BD7A000913FEC /* capuri_sunApp.swift in Sources */,
 			);
