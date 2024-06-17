@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D12C1FDD710003A112 /* OnboardingView.swift */; };
+		DF9E78D42C1FDD7A0003A112 /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */; };
+		DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D52C1FDD810003A112 /* MainView.swift */; };
+		DF9E78D82C1FDD8A0003A112 /* SuncreamVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D72C1FDD8A0003A112 /* SuncreamVIew.swift */; };
+		DF9E78DA2C1FDD910003A112 /* UVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D92C1FDD910003A112 /* UVView.swift */; };
+		DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */; };
+		DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */; };
 		DFA0BF082C1F506B000E47D2 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA0BF072C1F506B000E47D2 /* WeatherView.swift */; };
 		DFAEFA7B2C1BD7A000913FEC /* capuri_sunApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */; };
-		DFAEFA7D2C1BD7A000913FEC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAEFA7C2C1BD7A000913FEC /* ContentView.swift */; };
 		DFAEFA7F2C1BD7A100913FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */; };
 		DFAEFA822C1BD7A100913FEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA812C1BD7A100913FEC /* Preview Assets.xcassets */; };
 		DFAEFA892C1BD7C300913FEC /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA882C1BD7C300913FEC /* .gitignore  */; };
@@ -17,10 +23,16 @@
 
 /* Begin PBXFileReference section */
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
+		DF9E78D12C1FDD710003A112 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
+		DF9E78D52C1FDD810003A112 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DF9E78D72C1FDD8A0003A112 /* SuncreamVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuncreamVIew.swift; sourceTree = "<group>"; };
+		DF9E78D92C1FDD910003A112 /* UVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVView.swift; sourceTree = "<group>"; };
+		DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
+		DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		DFA0BF072C1F506B000E47D2 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		DFAEFA772C1BD7A000913FEC /* capuri-sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "capuri-sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = capuri_sunApp.swift; sourceTree = "<group>"; };
-		DFAEFA7C2C1BD7A000913FEC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFAEFA812C1BD7A100913FEC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DFAEFA882C1BD7C300913FEC /* .gitignore  */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitignore "; sourceTree = "<group>"; };
@@ -37,6 +49,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF9E78CF2C1FDD580003A112 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF9E78D12C1FDD710003A112 /* OnboardingView.swift */,
+				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
+				DF9E78D52C1FDD810003A112 /* MainView.swift */,
+				DFA0BF072C1F506B000E47D2 /* WeatherView.swift */,
+				DF9E78DB2C1FDD9A0003A112 /* Information */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DF9E78DB2C1FDD9A0003A112 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				DF9E78D92C1FDD910003A112 /* UVView.swift */,
+				DF9E78D72C1FDD8A0003A112 /* SuncreamVIew.swift */,
+			);
+			path = Information;
+			sourceTree = "<group>";
+		};
+		DF9E78E02C1FDDEA0003A112 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		DF9E78E22C1FDDFF0003A112 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DFAEFA6E2C1BD7A000913FEC = {
 			isa = PBXGroup;
 			children = (
@@ -59,8 +108,9 @@
 			children = (
 				DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */,
 				DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */,
-				DFAEFA7C2C1BD7A000913FEC /* ContentView.swift */,
-				DFA0BF072C1F506B000E47D2 /* WeatherView.swift */,
+				DF9E78E02C1FDDEA0003A112 /* Extension */,
+				DF9E78CF2C1FDD580003A112 /* View */,
+				DF9E78E22C1FDDFF0003A112 /* Model */,
 				DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */,
 				DFAEFA802C1BD7A100913FEC /* Preview Content */,
 			);
@@ -147,7 +197,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFA0BF082C1F506B000E47D2 /* WeatherView.swift in Sources */,
-				DFAEFA7D2C1BD7A000913FEC /* ContentView.swift in Sources */,
+				DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */,
+				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
+				DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */,
+				DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */,
+				DF9E78D42C1FDD7A0003A112 /* AlarmView.swift in Sources */,
+				DF9E78DA2C1FDD910003A112 /* UVView.swift in Sources */,
+				DF9E78D82C1FDD8A0003A112 /* SuncreamVIew.swift in Sources */,
 				DFAEFA7B2C1BD7A000913FEC /* capuri_sunApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
