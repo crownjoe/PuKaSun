@@ -30,6 +30,17 @@ extension Color{
     
     static let suncreamBackBlue = Color(hex: "66A6F7")
     
+    //UVView
+    static let uv1 = Color(hex: "F8DFD4")
+    static let uv2 = Color(hex: "FBF9BC")
+    static let uv3 = Color(hex: "7FDBE0")
+    static let uv4 = Color(hex: "FFDB55")
+    static let uv5 = Color(hex: "FF7D7D")
+    
+    static let uvText = Color(hex: "DFEDFF")
+    
+    
+    
 }
 
 extension Color {
