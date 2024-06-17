@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7D2C20663A00415417 /* LocationManager.swift */; };
+		DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */; };
 		DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D12C1FDD710003A112 /* OnboardingView.swift */; };
 		DF9E78D42C1FDD7A0003A112 /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */; };
 		DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D52C1FDD810003A112 /* MainView.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
 		DF2EEE7D2C20663A00415417 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PukaSunView.swift; sourceTree = "<group>"; };
 		DF9E78D12C1FDD710003A112 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		DF9E78D52C1FDD810003A112 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -49,10 +51,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DF9E78CF2C1FDD580003A112 /* View */ = {
+		DF2EEE812C207AD900415417 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
 				DF9E78D12C1FDD710003A112 /* OnboardingView.swift */,
+				DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		DF9E78CF2C1FDD580003A112 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF2EEE812C207AD900415417 /* Onboarding */,
 				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
 				DF9E78D52C1FDD810003A112 /* MainView.swift */,
 				DF9E78DB2C1FDD9A0003A112 /* Information */,
@@ -196,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */,
 				DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */,
 				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
