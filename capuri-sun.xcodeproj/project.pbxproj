@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7D2C20663A00415417 /* LocationManager.swift */; };
 		DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D12C1FDD710003A112 /* OnboardingView.swift */; };
 		DF9E78D42C1FDD7A0003A112 /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */; };
 		DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D52C1FDD810003A112 /* MainView.swift */; };
@@ -14,7 +15,6 @@
 		DF9E78DA2C1FDD910003A112 /* UVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D92C1FDD910003A112 /* UVView.swift */; };
 		DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */; };
 		DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */; };
-		DFA0BF082C1F506B000E47D2 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA0BF072C1F506B000E47D2 /* WeatherView.swift */; };
 		DFAEFA7B2C1BD7A000913FEC /* capuri_sunApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */; };
 		DFAEFA7F2C1BD7A100913FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */; };
 		DFAEFA822C1BD7A100913FEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA812C1BD7A100913FEC /* Preview Assets.xcassets */; };
@@ -23,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
+		DF2EEE7D2C20663A00415417 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DF9E78D12C1FDD710003A112 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		DF9E78D52C1FDD810003A112 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -30,7 +31,6 @@
 		DF9E78D92C1FDD910003A112 /* UVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVView.swift; sourceTree = "<group>"; };
 		DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
 		DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		DFA0BF072C1F506B000E47D2 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		DFAEFA772C1BD7A000913FEC /* capuri-sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "capuri-sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = capuri_sunApp.swift; sourceTree = "<group>"; };
 		DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,7 +55,6 @@
 				DF9E78D12C1FDD710003A112 /* OnboardingView.swift */,
 				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
 				DF9E78D52C1FDD810003A112 /* MainView.swift */,
-				DFA0BF072C1F506B000E47D2 /* WeatherView.swift */,
 				DF9E78DB2C1FDD9A0003A112 /* Information */,
 			);
 			path = View;
@@ -108,6 +107,7 @@
 			children = (
 				DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */,
 				DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */,
+				DF2EEE7D2C20663A00415417 /* LocationManager.swift */,
 				DF9E78E02C1FDDEA0003A112 /* Extension */,
 				DF9E78CF2C1FDD580003A112 /* View */,
 				DF9E78E22C1FDDFF0003A112 /* Model */,
@@ -196,8 +196,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFA0BF082C1F506B000E47D2 /* WeatherView.swift in Sources */,
 				DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */,
+				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
 				DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */,
 				DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */,
