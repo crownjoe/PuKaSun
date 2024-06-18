@@ -18,26 +18,49 @@ struct MainView: View {
     @State private var temperature: String = ""
     
     var body: some View {
-        VStack {
+        
+        ZStack{
+            Color.backgroundBlue
+                .ignoresSafeArea(.all)
             
-            Text(uvIndex)
-            
-            Text(condition)
-            
-            Text(temperature)
-            
-            Text(address)
-                .onAppear {
-                    locationManager.getCurrentLocation { location in
-                        self.location = location
-                        self.address = locationManager.address
-                        if let location = location {
-                            getWeatherInfo(location)
-                        } else {
-                            print("위치 정보를 가져올 수 없습니다.")
+            HStack(spacing: 20){
+                HStack(spacing: 3){
+                    Image("img_location")
+                    
+                    Text(address)
+                        .font(.system(size: 15))
+                        .foregroundColor(.white)
+                    
+                        .onAppear {
+                            locationManager.getCurrentLocation { location in
+                                self.location = location
+                                self.address = locationManager.address
+                                if let location = location {
+                                    getWeatherInfo(location)
+                                } else {
+                                    print("위치 정보를 가져올 수 없습니다.")
+                                }
+                            }
                         }
-                    }
+                    
+                    Text(condition)
+                        .font(.system(size: 15))
+                        .foregroundColor(.white)
+                    
+                    Text(temperature)
+                        .font(.system(size: 15))
+                        .foregroundColor(.white)
                 }
+                .padding(.horizontal, 12)
+                .background(Color.suncreamBackBlue)
+                .cornerRadius(20)
+                
+                Image("img_alarm")
+                Image("img_suncream")
+                Image("img_uv")
+            }
+            
+            
         }
     }
     
@@ -80,5 +103,9 @@ struct MainView: View {
             return condition
         }
     }
+}
+
+#Preview {
+    MainView()
 }
 
