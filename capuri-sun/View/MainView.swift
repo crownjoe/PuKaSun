@@ -20,47 +20,49 @@ struct MainView: View {
     var body: some View {
         
         ZStack{
-            Color.backgroundBlue
+            Image("img_mainBackground")
                 .ignoresSafeArea(.all)
             
-            HStack(spacing: 20){
-                HStack(spacing: 3){
-                    Image("img_location")
-                    
-                    Text(address)
-                        .font(.system(size: 15))
-                        .foregroundColor(.white)
-                    
-                        .onAppear {
-                            locationManager.getCurrentLocation { location in
-                                self.location = location
-                                self.address = locationManager.address
-                                if let location = location {
-                                    getWeatherInfo(location)
-                                } else {
-                                    print("위치 정보를 가져올 수 없습니다.")
+            VStack{
+                HStack(spacing: 20){
+                    HStack(spacing: 3){
+                        Image("img_location")
+                        
+                        Text(address)
+                            .font(.system(size: 15))
+                            .foregroundColor(.white)
+                        
+                            .onAppear {
+                                locationManager.getCurrentLocation { location in
+                                    self.location = location
+                                    self.address = locationManager.address
+                                    if let location = location {
+                                        getWeatherInfo(location)
+                                    } else {
+                                        print("위치 정보를 가져올 수 없습니다.")
+                                    }
                                 }
                             }
-                        }
+                        
+                        Text(condition)
+                            .font(.system(size: 15))
+                            .foregroundColor(.white)
+                        
+                        Text(temperature)
+                            .font(.system(size: 15))
+                            .foregroundColor(.white)
+                    }
+                    .padding(.horizontal, 12)
+                    .background(Color.suncreamBackBlue)
+                    .cornerRadius(20)
                     
-                    Text(condition)
-                        .font(.system(size: 15))
-                        .foregroundColor(.white)
-                    
-                    Text(temperature)
-                        .font(.system(size: 15))
-                        .foregroundColor(.white)
+                    Image("img_alarm")
+                    Image("img_suncream")
+                    Image("img_uv")
                 }
-                .padding(.horizontal, 12)
-                .background(Color.suncreamBackBlue)
-                .cornerRadius(20)
-                
-                Image("img_alarm")
-                Image("img_suncream")
-                Image("img_uv")
+             Spacer()
+            
             }
-            
-            
         }
     }
     

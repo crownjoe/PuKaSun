@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7D2C20663A00415417 /* LocationManager.swift */; };
 		DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */; };
+		DF6A44812C21B18F0048EE4F /* CoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A44802C21B18F0048EE4F /* CoreMotionService.swift */; };
+		DF6A44822C21BF510048EE4F /* LiveActivityLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */; };
 		DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D12C1FDD710003A112 /* OnboardingView.swift */; };
 		DF9E78D42C1FDD7A0003A112 /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */; };
 		DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D52C1FDD810003A112 /* MainView.swift */; };
@@ -22,7 +24,7 @@
 		DFAEFA892C1BD7C300913FEC /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA882C1BD7C300913FEC /* .gitignore  */; };
 		DFF209702C21360A0011B243 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF2096F2C21360A0011B243 /* WidgetKit.framework */; };
 		DFF209722C21360A0011B243 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF209712C21360A0011B243 /* SwiftUI.framework */; };
-		DFF209752C21360A0011B243 /* LiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209742C21360A0011B243 /* LiveActivityBundle.swift */; };
+		DFF209752C21360A0011B243 /* LiveActivitytBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209742C21360A0011B243 /* LiveActivitytBundle.swift */; };
 		DFF209772C21360A0011B243 /* LiveActivityLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */; };
 		DFF209792C21360A0011B243 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209782C21360A0011B243 /* LiveActivity.swift */; };
 		DFF2097B2C21360A0011B243 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2097A2C21360A0011B243 /* AppIntent.swift */; };
@@ -58,6 +60,8 @@
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
 		DF2EEE7D2C20663A00415417 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PukaSunView.swift; sourceTree = "<group>"; };
+		DF6A447F2C21B15A0048EE4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DF6A44802C21B18F0048EE4F /* CoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionService.swift; sourceTree = "<group>"; };
 		DF9E78D12C1FDD710003A112 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		DF9E78D52C1FDD810003A112 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -73,7 +77,7 @@
 		DFF2096D2C21360A0011B243 /* LiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFF2096F2C21360A0011B243 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		DFF209712C21360A0011B243 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		DFF209742C21360A0011B243 /* LiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityBundle.swift; sourceTree = "<group>"; };
+		DFF209742C21360A0011B243 /* LiveActivitytBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitytBundle.swift; sourceTree = "<group>"; };
 		DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityLiveActivity.swift; sourceTree = "<group>"; };
 		DFF209782C21360A0011B243 /* LiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
 		DFF2097A2C21360A0011B243 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
@@ -169,9 +173,11 @@
 		DFAEFA792C1BD7A000913FEC /* capuri-sun */ = {
 			isa = PBXGroup;
 			children = (
+				DF6A447F2C21B15A0048EE4F /* Info.plist */,
 				DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */,
 				DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */,
 				DF2EEE7D2C20663A00415417 /* LocationManager.swift */,
+				DF6A44802C21B18F0048EE4F /* CoreMotionService.swift */,
 				DF9E78E02C1FDDEA0003A112 /* Extension */,
 				DF9E78CF2C1FDD580003A112 /* View */,
 				DF9E78E22C1FDDFF0003A112 /* Model */,
@@ -201,7 +207,7 @@
 		DFF209732C21360A0011B243 /* LiveActivity */ = {
 			isa = PBXGroup;
 			children = (
-				DFF209742C21360A0011B243 /* LiveActivityBundle.swift */,
+				DFF209742C21360A0011B243 /* LiveActivitytBundle.swift */,
 				DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */,
 				DFF209782C21360A0011B243 /* LiveActivity.swift */,
 				DFF2097A2C21360A0011B243 /* AppIntent.swift */,
@@ -317,8 +323,10 @@
 				DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */,
 				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
+				DF6A44812C21B18F0048EE4F /* CoreMotionService.swift in Sources */,
 				DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */,
 				DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */,
+				DF6A44822C21BF510048EE4F /* LiveActivityLiveActivity.swift in Sources */,
 				DF9E78D42C1FDD7A0003A112 /* AlarmView.swift in Sources */,
 				DF9E78DA2C1FDD910003A112 /* UVView.swift in Sources */,
 				DF9E78D82C1FDD8A0003A112 /* SuncreamVIew.swift in Sources */,
@@ -330,7 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFF209752C21360A0011B243 /* LiveActivityBundle.swift in Sources */,
+				DFF209752C21360A0011B243 /* LiveActivitytBundle.swift in Sources */,
 				DFF2097B2C21360A0011B243 /* AppIntent.swift in Sources */,
 				DFF209792C21360A0011B243 /* LiveActivity.swift in Sources */,
 				DFF209772C21360A0011B243 /* LiveActivityLiveActivity.swift in Sources */,
@@ -480,8 +488,10 @@
 				DEVELOPMENT_TEAM = 4QMNM64P9Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "capuri-sun/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 권한 요청";
+				INFOPLIST_KEY_NSMotionUsageDescription = "걸음수 데이터 측정을 위해 데이터 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -514,8 +524,10 @@
 				DEVELOPMENT_TEAM = 4QMNM64P9Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "capuri-sun/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 권한 요청";
+				INFOPLIST_KEY_NSMotionUsageDescription = "걸음수 데이터 측정을 위해 데이터 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
