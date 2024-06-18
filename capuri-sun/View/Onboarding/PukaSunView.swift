@@ -1,5 +1,5 @@
 //
-//  AlarmView.swift
+//  PukaSunView.swift
 //  capuri-sun
 //
 //  Created by 조세연 on 6/17/24.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct AlarmView: View {
+struct PukaSunView: View {
     var body: some View {
         ZStack{
-            Color.backgroundBlue
+            Color.suncreamPink
             
             
             
@@ -18,7 +18,6 @@ struct AlarmView: View {
     }
 }
 
-
 #Preview {
-    AlarmView()
+    PukaSunView()
 }

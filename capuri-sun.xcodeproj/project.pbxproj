@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7D2C20663A00415417 /* LocationManager.swift */; };
+		DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */; };
 		DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D12C1FDD710003A112 /* OnboardingView.swift */; };
 		DF9E78D42C1FDD7A0003A112 /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */; };
 		DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D52C1FDD810003A112 /* MainView.swift */; };
@@ -14,15 +16,48 @@
 		DF9E78DA2C1FDD910003A112 /* UVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D92C1FDD910003A112 /* UVView.swift */; };
 		DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */; };
 		DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */; };
-		DFA0BF082C1F506B000E47D2 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA0BF072C1F506B000E47D2 /* WeatherView.swift */; };
 		DFAEFA7B2C1BD7A000913FEC /* capuri_sunApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */; };
 		DFAEFA7F2C1BD7A100913FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */; };
 		DFAEFA822C1BD7A100913FEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA812C1BD7A100913FEC /* Preview Assets.xcassets */; };
 		DFAEFA892C1BD7C300913FEC /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA882C1BD7C300913FEC /* .gitignore  */; };
+		DFF209702C21360A0011B243 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF2096F2C21360A0011B243 /* WidgetKit.framework */; };
+		DFF209722C21360A0011B243 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF209712C21360A0011B243 /* SwiftUI.framework */; };
+		DFF209752C21360A0011B243 /* LiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209742C21360A0011B243 /* LiveActivityBundle.swift */; };
+		DFF209772C21360A0011B243 /* LiveActivityLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */; };
+		DFF209792C21360A0011B243 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209782C21360A0011B243 /* LiveActivity.swift */; };
+		DFF2097B2C21360A0011B243 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2097A2C21360A0011B243 /* AppIntent.swift */; };
+		DFF2097D2C21360B0011B243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFF2097C2C21360B0011B243 /* Assets.xcassets */; };
+		DFF209812C21360B0011B243 /* LiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DFF2096D2C21360A0011B243 /* LiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DFF2097F2C21360B0011B243 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFAEFA6F2C1BD7A000913FEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DFF2096C2C21360A0011B243;
+			remoteInfo = LiveActivityExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DFF209852C21360B0011B243 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DFF209812C21360B0011B243 /* LiveActivityExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
+		DF2EEE7D2C20663A00415417 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PukaSunView.swift; sourceTree = "<group>"; };
 		DF9E78D12C1FDD710003A112 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		DF9E78D52C1FDD810003A112 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -30,12 +65,20 @@
 		DF9E78D92C1FDD910003A112 /* UVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVView.swift; sourceTree = "<group>"; };
 		DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
 		DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		DFA0BF072C1F506B000E47D2 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		DFAEFA772C1BD7A000913FEC /* capuri-sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "capuri-sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = capuri_sunApp.swift; sourceTree = "<group>"; };
 		DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFAEFA812C1BD7A100913FEC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DFAEFA882C1BD7C300913FEC /* .gitignore  */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitignore "; sourceTree = "<group>"; };
+		DFF2096D2C21360A0011B243 /* LiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFF2096F2C21360A0011B243 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		DFF209712C21360A0011B243 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		DFF209742C21360A0011B243 /* LiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityBundle.swift; sourceTree = "<group>"; };
+		DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityLiveActivity.swift; sourceTree = "<group>"; };
+		DFF209782C21360A0011B243 /* LiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
+		DFF2097A2C21360A0011B243 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		DFF2097C2C21360B0011B243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DFF2097E2C21360B0011B243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,16 +89,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DFF2096A2C21360A0011B243 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFF209722C21360A0011B243 /* SwiftUI.framework in Frameworks */,
+				DFF209702C21360A0011B243 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DF9E78CF2C1FDD580003A112 /* View */ = {
+		DF2EEE812C207AD900415417 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
 				DF9E78D12C1FDD710003A112 /* OnboardingView.swift */,
+				DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		DF9E78CF2C1FDD580003A112 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF2EEE812C207AD900415417 /* Onboarding */,
 				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
 				DF9E78D52C1FDD810003A112 /* MainView.swift */,
-				DFA0BF072C1F506B000E47D2 /* WeatherView.swift */,
 				DF9E78DB2C1FDD9A0003A112 /* Information */,
 			);
 			path = View;
@@ -91,6 +151,8 @@
 			children = (
 				DFAEFA882C1BD7C300913FEC /* .gitignore  */,
 				DFAEFA792C1BD7A000913FEC /* capuri-sun */,
+				DFF209732C21360A0011B243 /* LiveActivity */,
+				DFF2096E2C21360A0011B243 /* Frameworks */,
 				DFAEFA782C1BD7A000913FEC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				DFAEFA772C1BD7A000913FEC /* capuri-sun.app */,
+				DFF2096D2C21360A0011B243 /* LiveActivityExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +171,7 @@
 			children = (
 				DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */,
 				DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */,
+				DF2EEE7D2C20663A00415417 /* LocationManager.swift */,
 				DF9E78E02C1FDDEA0003A112 /* Extension */,
 				DF9E78CF2C1FDD580003A112 /* View */,
 				DF9E78E22C1FDDFF0003A112 /* Model */,
@@ -125,6 +189,28 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		DFF2096E2C21360A0011B243 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DFF2096F2C21360A0011B243 /* WidgetKit.framework */,
+				DFF209712C21360A0011B243 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DFF209732C21360A0011B243 /* LiveActivity */ = {
+			isa = PBXGroup;
+			children = (
+				DFF209742C21360A0011B243 /* LiveActivityBundle.swift */,
+				DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */,
+				DFF209782C21360A0011B243 /* LiveActivity.swift */,
+				DFF2097A2C21360A0011B243 /* AppIntent.swift */,
+				DFF2097C2C21360B0011B243 /* Assets.xcassets */,
+				DFF2097E2C21360B0011B243 /* Info.plist */,
+			);
+			path = LiveActivity;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,15 +221,34 @@
 				DFAEFA732C1BD7A000913FEC /* Sources */,
 				DFAEFA742C1BD7A000913FEC /* Frameworks */,
 				DFAEFA752C1BD7A000913FEC /* Resources */,
+				DFF209852C21360B0011B243 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DFF209802C21360B0011B243 /* PBXTargetDependency */,
 			);
 			name = "capuri-sun";
 			productName = "capuri-sun";
 			productReference = DFAEFA772C1BD7A000913FEC /* capuri-sun.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DFF2096C2C21360A0011B243 /* LiveActivityExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFF209822C21360B0011B243 /* Build configuration list for PBXNativeTarget "LiveActivityExtension" */;
+			buildPhases = (
+				DFF209692C21360A0011B243 /* Sources */,
+				DFF2096A2C21360A0011B243 /* Frameworks */,
+				DFF2096B2C21360A0011B243 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LiveActivityExtension;
+			productName = LiveActivityExtension;
+			productReference = DFF2096D2C21360A0011B243 /* LiveActivityExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -156,6 +261,9 @@
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					DFAEFA762C1BD7A000913FEC = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					DFF2096C2C21360A0011B243 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 				};
@@ -174,6 +282,7 @@
 			projectRoot = "";
 			targets = (
 				DFAEFA762C1BD7A000913FEC /* capuri-sun */,
+				DFF2096C2C21360A0011B243 /* LiveActivityExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -189,6 +298,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DFF2096B2C21360A0011B243 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFF2097D2C21360B0011B243 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -196,8 +313,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFA0BF082C1F506B000E47D2 /* WeatherView.swift in Sources */,
+				DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */,
 				DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */,
+				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
 				DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */,
 				DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */,
@@ -208,7 +326,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DFF209692C21360A0011B243 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFF209752C21360A0011B243 /* LiveActivityBundle.swift in Sources */,
+				DFF2097B2C21360A0011B243 /* AppIntent.swift in Sources */,
+				DFF209792C21360A0011B243 /* LiveActivity.swift in Sources */,
+				DFF209772C21360A0011B243 /* LiveActivityLiveActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DFF209802C21360B0011B243 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DFF2096C2C21360A0011B243 /* LiveActivityExtension */;
+			targetProxy = DFF2097F2C21360B0011B243 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DFAEFA832C1BD7A100913FEC /* Debug */ = {
@@ -333,6 +470,7 @@
 		DFAEFA862C1BD7A100913FEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "capuri-sun/capuri-sun.entitlements";
@@ -344,6 +482,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 권한 요청";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -365,6 +504,7 @@
 		DFAEFA872C1BD7A100913FEC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "capuri-sun/capuri-sun.entitlements";
@@ -376,6 +516,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 권한 요청";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -388,6 +529,60 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.carpurisun.weatherkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DFF209832C21360B0011B243 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4QMNM64P9Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.carpurisun.weatherkit.LiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DFF209842C21360B0011B243 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4QMNM64P9Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.carpurisun.weatherkit.LiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -411,6 +606,15 @@
 			buildConfigurations = (
 				DFAEFA862C1BD7A100913FEC /* Debug */,
 				DFAEFA872C1BD7A100913FEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFF209822C21360B0011B243 /* Build configuration list for PBXNativeTarget "LiveActivityExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFF209832C21360B0011B243 /* Debug */,
+				DFF209842C21360B0011B243 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
