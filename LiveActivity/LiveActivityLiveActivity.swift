@@ -62,8 +62,8 @@ struct LiveActivityLiveActivity: Widget {
                 }
             }
             .padding(.vertical, 18)
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
+            .activityBackgroundTint(Color.white)
+            .activitySystemActionForegroundColor(Color(red: 0.74, green: 0.74, blue: 0.74))
             
         } dynamicIsland: { context in
             DynamicIsland {
@@ -80,9 +80,9 @@ struct LiveActivityLiveActivity: Widget {
                     // more content
                 }
             } compactLeading: {
-                Text("L")
+//                Image("img_dynamic")
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+//                Text("T \(context.state.emoji)")
             } minimal: {
                 Text(context.state.emoji)
             }
