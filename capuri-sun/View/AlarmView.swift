@@ -16,6 +16,7 @@ struct AlarmView: View {
     
     @AppStorage("alarmTime") var alarmTime: Double = 0.0
     
+    @State private var selectedButton: Int? = nil
     var body: some View {
         if !showMainView{
             ZStack {
