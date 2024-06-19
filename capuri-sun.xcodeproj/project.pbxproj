@@ -55,7 +55,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		873CABFE2C21F5620058E115 /* Background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background2.png; sourceTree = "<group>"; };
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
 		DF2EEE7D2C20663A00415417 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PukaSunView.swift; sourceTree = "<group>"; };
@@ -116,7 +115,6 @@
 			children = (
 				DF2EEE812C207AD900415417 /* Onboarding */,
 				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
-				873CABFE2C21F5620058E115 /* Background2.png */,
 				DF9E78D52C1FDD810003A112 /* MainView.swift */,
 				DF9E78DB2C1FDD9A0003A112 /* Information */,
 			);

@@ -1,77 +1,160 @@
-//
-//  AlarmView.swift
-//  capuri-sun
-//
-//  Created by 조세연 on 6/17/24.
-//
-
 import SwiftUI
 
-struct AlarmView: View {
+struct ContentView: View {
+    @State private var showPicker = false
+    @State private var selectedHour: Int? = nil
     var body: some View {
-            Text("자외선 차단제")
-            .font(.system(size: 30))
-            .bold()
-        Text("알림주기를 설정해 주세요")
-            .bold()
-            .font(.system(size: 30))
-        Button(action: {
-                            print("Button tapped!")
-                        }) {
-                            Text("")
-                                .font(.system(size: 20)) // 텍스트 크기를 20포인트로 설정
-                                .foregroundColor(.white)
-                                .frame(width: 307.96, height: 59) // 버튼의 너비와 높이를 설정
-                                .background(Color.blue)
-                                .cornerRadius(20) // 코너 반경을 20으로 설정
-                        }
-        Button(action: {
-                            print("Button tapped!")
-                        }) {
-                            Text("")
-                                .font(.system(size: 20)) // 텍스트 크기를 20포인트로 설정
-                                .foregroundColor(.white)
-                                .frame(width: 307.96, height: 59) // 버튼의 너비와 높이를 설정
-                                .background(Color.blue)
-                                .cornerRadius(20) // 코너 반경을 20으로 설정
-                        }
-        Button(action: {
-                            print("Button tapped!")
-                        }) {
-                            Text("")
-                                .font(.system(size: 20)) // 텍스트 크기를 20포인트로 설정
-                                .foregroundColor(.white)
-                                .frame(width: 307.96, height: 59) // 버튼의 너비와 높이를 설정
-                                .background(Color.blue)
-                                .cornerRadius(20) // 코너 반경을 20으로 설정
-                        }
-        Button(action: {
-                            print("Button tapped!")
-                        }) {
-                            Text("")
-                                .font(.system(size: 20)) // 텍스트 크기를 20포인트로 설정
-                                .foregroundColor(.white)
-                                .frame(width: 307.96, height: 59) // 버튼의 너비와 높이를 설정
-                                .background()
-                                .cornerRadius(20) // 코너 반경을 20으로 설정
-                        }
         
         
-        Button(action: {
+        ZStack {
+            Image("img_AlarmBackground")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            
+            VStack(alignment: .leading) {
+                Text("자외선 차단제")
+                    .font(.system(size: 30))
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                    .padding(.leading, 20)
+                    .padding(.top, 100)
+                Spacer().frame(height: 5)
+                HStack(spacing: 0) {
+                    Text("알림주기")
+                        .bold()
+                        .font(.system(size: 30))
+                        .foregroundColor(.alarmcolor3)
+                        .fontWeight(.bold)
+                        .padding(.leading, 20)
+                    Text("를 설정해 주세요")
+                        .bold()
+                        .font(.system(size: 30))
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                }
+                .padding(.bottom, 40)
+                
+                
+                VStack(spacing: 22) {
+                    
+                    ZStack {
+                        Color.alarmcolor
+                            .frame(width: 307.96, height: 59)
+                            .cornerRadius(20)
+                        
+                        
+                        HStack {
+                            Button(action: {
+                                print("Button tapped!")
+                            }) {
+                                Text("2시간마다")
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.white)
+                                
+                                
+                                Text("권장")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.alarmcolor3)
+                                    .frame(width: 49, height: 28)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .fill(Color.alarmcolor4)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(Color.alarmcolor5, lineWidth: 2)
+                                            )
+                                    )
+                            }
+                        }
+                    }
+                    
+                    Button(action: {
+                        print("Button tapped!")
+                    }) {
+                        Text("3시간마다")
+                            .fontWeight(.bold)
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                            .frame(width: 307.96, height: 59)
+                            .background(Color.alarmcolor)
+                            .cornerRadius(20)
+                    }
+                    
+                    
+                    VStack {
+                        Button(action: {
+                            showPicker.toggle()
+                        }) {
+                            Text("\(selectedHour != nil ? "\(selectedHour!)" : "__")시간마다")
+                                .fontWeight(.bold)
+                                .font(.system(size: 20))
+                                .foregroundColor(.white)
+                                .frame(width: 307.96, height: 59)
+                                .background(Color.alarmcolor)
+                                .cornerRadius(20)
+                                .padding(.bottom, 22)
+                        }
+                        
+                        
+                        // Picker가 나타나는 Sheet
+                        .sheet(isPresented: $showPicker) {
+                            VStack {
+                                Picker("시간", selection: $selectedHour) {
+                                    ForEach(1..<25, id: \.self) { hour in
+                                        Text("\(hour)").tag(hour as Int?)
+                                    }
+                                }
+                                .pickerStyle(WheelPickerStyle())
+                                .padding()
+                                
+                                Button("완료") {
+                                    showPicker.toggle()
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                        Button(action: {
                             print("Button tapped!")
                         }) {
-                            Text("")
-                                .font(.system(size: 20)) // 텍스트 크기를 20포인트로 설정
+                            Text("안받을게요🥲")
+                                .fontWeight(.bold)
+                                .font(.system(size: 20))
                                 .foregroundColor(.white)
-                                .frame(width: 307.96, height: 59) // 버튼의 너비와 높이를 설정
-                                .background(Color.blue)
-                                .cornerRadius(10) // 코너 반경을 20으로 설정
+                                .frame(width: 307.96, height: 59)
+                                .background(Color.alarmcolor)
+                                .cornerRadius(20)
+                                .padding(.bottom, 95)
                         }
-
+                        
+                        
+                        HStack {
+                            Button(action: {
+                                print("Button tapped!")
+                            }) {
+                                Text("시작하기")
+                                    .bold()
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.alarmcolor2)
+                                    .frame(width: 307.96, height: 59)
+                                    .background(Color.white)
+                                    .cornerRadius(10)
+                            }
+                            .padding()
+                        }
+                    }
+                }
+            }
         }
     }
+}
 
-
-#Preview {
-    AlarmView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
