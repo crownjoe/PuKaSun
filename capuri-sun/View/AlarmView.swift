@@ -119,6 +119,7 @@ struct AlarmView: View {
                                             Text("\(hour)").tag(hour as Int?)
                                         }
                                     }
+                                    .presentationDragIndicator(.visible)
                                     .pickerStyle(WheelPickerStyle())
                                     .padding()
                                     

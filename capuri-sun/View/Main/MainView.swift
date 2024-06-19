@@ -12,13 +12,6 @@ import ActivityKit
 
 struct MainView: View {
     
-//    @StateObject private var locationManager = LocationManager()
-//    @State private var location: CLLocation?
-//    @State private var address: String = ""
-//    @State private var uvIndex: String = ""
-//    @State private var condition: String = ""
-//    @State private var temperature: String = ""
-    
     @Binding var address: String
     @Binding var uvIndex: String
     @Binding var condition: String
@@ -35,105 +28,103 @@ struct MainView: View {
     @State private var twoThirdsPassed = false
     
     //@Query var alarms: [Alarm]
-//    @AppStorage("alarmTime") var alarmTime: Double = 0.2
+    //@AppStorage("alarmTime") var alarmTime: Double = 0.2
     @Binding var alarmTime: Double
     
     var body: some View {
-        // TODO: 캐릭터 바뀌게 & 시간 변하게
-        
-        ZStack{
-            Image("img_mainBackground")
-                .resizable()
-                .ignoresSafeArea(.all)
-            
-            VStack{
-                HStack(spacing: 20){
-                    HStack(spacing: 3){
-                        Image("img_location")
-                        
-                        Text(address)
-                            .font(.system(size: 15))
-                            .foregroundColor(.white)
-                        
-                            .onAppear {
-//                                locationManager.getCurrentLocation { location in
-//                                    self.location = location
-//                                    self.address = locationManager.address
-//                                    if let location = location {
-//                                        getWeatherInfo(location)
-//                                    } else {
-//                                        print("위치 정보를 가져올 수 없습니다.")
-//                                    }
-//                                }
-                            }
-                        
-                        Text(condition)
-                            .font(.system(size: 15))
-                            .foregroundColor(.white)
-                        
-                        Text(temperature)
-                            .font(.system(size: 15))
-                            .foregroundColor(.white)
-                    }
-                    .padding(.horizontal, 12)
-                    .background(Color.suncreamBackBlue)
-                    .cornerRadius(20)
-                    
-                    Image("img_alarm")
-                    Image("img_suncream")
-                    Image("img_uv")
-                }.padding(.bottom, 30)
+        NavigationView{
+            ZStack{
+                Image("img_mainBackground")
+                    .resizable()
+                    .ignoresSafeArea(.all)
                 
                 VStack{
-                    if uvIndex == "0" || uvIndex == "1" || uvIndex == "2" {
-                        UvView1
-                    } else if uvIndex == "3" || uvIndex == "4" || uvIndex == "5" {
-                        UvView2
-                    } else if uvIndex == "6" || uvIndex == "7" {
-                        UvView3
-                    } else if uvIndex == "8" || uvIndex == "9" || uvIndex == "10" {
-                        UvView4
-                    } else {
-                        UvView5
-                    }
+                    HStack(spacing: 20){
+                        HStack(spacing: 3){
+                            Image("img_location")
+                            
+                            Text(address)
+                                .font(.system(size: 15))
+                                .foregroundColor(.white)
+                            
+                            Text(condition)
+                                .font(.system(size: 15))
+                                .foregroundColor(.white)
+                            
+                            Text(temperature)
+                                .font(.system(size: 15))
+                                .foregroundColor(.white)
+                        }
+                        .padding(.horizontal, 12)
+                        .background(Color.suncreamBackBlue)
+                        .cornerRadius(20)
+                        
+                        NavigationLink(destination: AlarmView()){
+                            Image("img_alarm")
+                        }
+                        
+                        NavigationLink(destination: SuncreamView()){
+                            Image("img_suncream")
+                        }
+                        
+                        NavigationLink(destination: UVView()){
+                            Image("img_uv")
+                        }
+                        
+                    }.padding(.bottom, 30)
                     
-                    if oneThirdPassed && !twoThirdsPassed  {
-                        Image("img_char2")
-                            .frame(width: 148, height: 233)
-                            .padding(.leading, 40)
-                    }
+                    VStack{
+                        if uvIndex == "0" || uvIndex == "1" || uvIndex == "2" {
+                            UvView1
+                        } else if uvIndex == "3" || uvIndex == "4" || uvIndex == "5" {
+                            UvView2
+                        } else if uvIndex == "6" || uvIndex == "7" {
+                            UvView3
+                        } else if uvIndex == "8" || uvIndex == "9" || uvIndex == "10" {
+                            UvView4
+                        } else {
+                            UvView5
+                        }
+                        
+                        if oneThirdPassed && !twoThirdsPassed  {
+                            Image("img_char2")
+                                .frame(width: 148, height: 233)
+                                .padding(.leading, 40)
+                        }
+                        
+                        else if !oneThirdPassed && twoThirdsPassed {
+                            Image("img_char3")
+                                .frame(width: 148, height: 233)
+                                .padding(.leading, 40)
+                        }
+                        
+                        else {
+                            Image("img_char1")
+                                .frame(width: 148, height: 233)
+                                .padding(.leading, 40)
+                        }
+                        
+                        if !startTimer { // TODO: 다음날 외출 버튼이 떠야함!
+                            noticeOutAlarm
+                                .onTapGesture {
+                                    self.startTimer = true
+                                    startLivaActivity()
+                                }
+                        }
+                        else if startTimer && !newTimer{
+                            noticeAlarm
+                        }
+                        else if newTimer {
+                            noticeFinishAlarm
+                        }
+                        
+                    }.padding(.bottom, 30)
                     
-                    else if !oneThirdPassed && twoThirdsPassed {
-                        Image("img_char3")
-                            .frame(width: 148, height: 233)
-                            .padding(.leading, 40)
-                    }
-                    
-                    else {
-                        Image("img_char1")
-                            .frame(width: 148, height: 233)
-                            .padding(.leading, 40)
-                    }
-                
-                    if !startTimer { // TODO: 다음날 외출 버튼이 떠야함!
-                        noticeOutAlarm
-                            .onTapGesture {
-                                self.startTimer = true
-                                startLivaActivity()
-                            }
-                    }
-                    else if startTimer && !newTimer{
-                        noticeAlarm
-                    }
-                    else if newTimer {
-                        noticeFinishAlarm
-                    }
-                    
-                }.padding(.bottom, 30)
-                
+                }
             }
         }
-        
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.all)
     }
     
     private var UvView1: some View {
@@ -432,45 +423,6 @@ struct MainView: View {
         return "\(hours)시간 \(minutes)분"
     }
     
-//    func getWeatherInfo(_ location: CLLocation) {
-//        Task {
-//            do {
-//                let service = WeatherService()
-//                let result = try await service.weather(for: location)
-//                
-//                self.uvIndex = "\(result.currentWeather.uvIndex.value)"
-//                
-//                let temperatureValue = result.currentWeather.temperature.value
-//                self.temperature = "\(String(format: "%.1f", temperatureValue))°"
-//                
-//                self.condition = translateCondition(result.currentWeather.condition.description)
-//                
-//            } catch {
-//                print(String(describing: error))
-//            }
-//        }
-//    }
-    
-//    func translateCondition(_ condition: String) -> String {
-//        switch condition {
-//        case "Partly Cloudy", "Mostly Cloudy", "Cloudy":
-//            return "흐림"
-//        case "Clear", "Mostly Clear":
-//            return "맑음"
-//        case "Foggy":
-//            return "안개"
-//        case "Windy":
-//            return "바람"
-//        case "Rain", "Heavy Rain", "Drizzle":
-//            return "비"
-//        case "Snow", "Heavy Snow":
-//            return "눈"
-//        case "Strong Storms", "Thunder Storms":
-//            return "뇌우"
-//        default:
-//            return condition
-//        }
-//    }
 }
 
 //#Preview {

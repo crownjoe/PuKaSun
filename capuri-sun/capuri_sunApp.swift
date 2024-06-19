@@ -12,7 +12,6 @@ struct capuri_sunApp: App {
     var body: some Scene {
         WindowGroup {
             AlarmView()
-//            PukaSunView()
         }
     }
 }

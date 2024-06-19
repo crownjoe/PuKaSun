@@ -71,16 +71,15 @@ struct LiveActivityLiveActivity: Widget {
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
                     //다이나믹 터치했을 때
-                    
-                    Text("Leading")
+                    Image("img_pushDynamic")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
                     Text("Trailing")
                 }
-                DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
-                    // more content
-                }
+//                DynamicIslandExpandedRegion(.bottom) {
+//                    Text("Bottom \(context.state.emoji)")
+//                    // more content
+//                }
             } compactLeading: {
                 Image("img_dynamic")
             } compactTrailing: {
