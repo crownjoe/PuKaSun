@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var showPicker = false
     @State private var selectedHour: Int? = nil
+    @State private var selectedButton: Int? = nil
     var body: some View {
         
         
@@ -36,7 +37,9 @@ struct ContentView: View {
                 .padding(.bottom, 40)
                 
                 
-                VStack(spacing: 22) {
+                VStack(spacing: 22) {Button(action: {
+                    print("Button tapped!")
+                }) {
                     
                     ZStack {
                         Color.alarmcolor
@@ -45,9 +48,7 @@ struct ContentView: View {
                         
                         
                         HStack {
-                            Button(action: {
-                                print("Button tapped!")
-                            }) {
+                            
                                 Text("2시간마다")
                                     .fontWeight(.bold)
                                     .font(.system(size: 20))
@@ -68,6 +69,7 @@ struct ContentView: View {
                                     )
                             }
                         }
+                    
                     }
                     
                     Button(action: {
@@ -132,6 +134,8 @@ struct ContentView: View {
                         }
                         
                         
+                        
+                        
                         HStack {
                             Button(action: {
                                 print("Button tapped!")
@@ -143,8 +147,12 @@ struct ContentView: View {
                                     .frame(width: 307.96, height: 59)
                                     .background(Color.white)
                                     .cornerRadius(10)
+                                
                             }
+                            
+                           
                             .padding()
+                            
                         }
                     }
                 }
@@ -152,6 +160,8 @@ struct ContentView: View {
         }
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
