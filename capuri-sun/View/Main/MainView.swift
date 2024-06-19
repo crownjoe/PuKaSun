@@ -59,7 +59,7 @@ struct MainView: View {
                         .background(Color.suncreamBackBlue)
                         .cornerRadius(20)
                         
-                        NavigationLink(destination: AlarmView()){
+                        NavigationLink(destination: AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: alarmTime)){
                             Image("img_alarm")
                         }
                         
@@ -119,10 +119,10 @@ struct MainView: View {
                         }
                         
                     }.padding(.bottom, 30)
-                    
                 }
             }
         }
+        .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.all)
     }
@@ -425,7 +425,5 @@ struct MainView: View {
     
 }
 
-//#Preview {
-//    MainView()
-//}
+
 
