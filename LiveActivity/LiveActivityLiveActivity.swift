@@ -42,14 +42,14 @@ struct LiveActivityLiveActivity: Widget {
                         
                         Text("2시간 00분")
                             .font(.system(size: 26))
-                            .fontWeight(.semibold)
+                            .fontWeight(.heavy)
                             .foregroundColor(Color(red: 0.98, green: 0.64, blue: 0.84))
                         
                     }
                     
                     Text("후에 자외선 차단제를 발라주세요!")
                         .font(.system(size: 13))
-                        .fontWeight(.semibold)
+                        .fontWeight(.heavy)
                         .foregroundColor(Color(red: 0.74, green: 0.74, blue: 0.74))
                         .padding(.bottom, 8)
                     

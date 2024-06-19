@@ -39,6 +39,11 @@ extension Color{
     
     static let uvText = Color(hex: "DFEDFF")
     
+    //MainView
+    static let mainBlue = Color(hex: "318DFF")
+    
+    
+    
     
     
 }

@@ -114,12 +114,20 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		DF7B55252C225F3400DA9A70 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DF9E78D52C1FDD810003A112 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		DF9E78CF2C1FDD580003A112 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				DF2EEE812C207AD900415417 /* Onboarding */,
 				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
-				DF9E78D52C1FDD810003A112 /* MainView.swift */,
+				DF7B55252C225F3400DA9A70 /* Main */,
 				DF9E78DB2C1FDD9A0003A112 /* Information */,
 			);
 			path = View;

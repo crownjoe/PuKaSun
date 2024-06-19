@@ -11,7 +11,7 @@ import SwiftUI
 struct capuri_sunApp: App {
     var body: some Scene {
         WindowGroup {
-            PukaSunView()
+            MainView()
         }
     }
 }
