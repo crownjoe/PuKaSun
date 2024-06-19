@@ -70,6 +70,8 @@ struct LiveActivityLiveActivity: Widget {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
+                    //다이나믹 터치했을 때
+                    
                     Text("Leading")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
@@ -80,7 +82,7 @@ struct LiveActivityLiveActivity: Widget {
                     // more content
                 }
             } compactLeading: {
-//                Image("img_dynamic")
+                Image("img_dynamic")
             } compactTrailing: {
 //                Text("T \(context.state.emoji)")
             } minimal: {

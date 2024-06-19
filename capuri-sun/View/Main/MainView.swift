@@ -20,9 +20,10 @@ struct MainView: View {
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
     
+    @State private var startTimer: Bool = false
+    
     var body: some View {
-        
-        // TODO: 캐릭터 바뀌게 & 시간 변하게
+        // TODO: 캐릭터 바뀌게 & 시간 변하게     
         
         ZStack{
             Image("img_mainBackground")
@@ -79,10 +80,25 @@ struct MainView: View {
                         UvView5
                     }
                     
+                    // TODO: 캐릭터 바뀌게
+                    
                     Image("img_char1")
                         .padding(.leading, 40)
                     
-                    noticeAlarm
+                    if !startTimer { //기본 버튼 외출 누르면 시간 가기 시작
+                        noticeOutAlarm
+                            .onTapGesture {
+                                self.startTimer = true
+                            }
+                    }
+                    else if startTimer{
+                        noticeAlarm
+                    }
+                    
+                    else if startTimer { // 시간 다 지나면 떠야하는 버튼
+                        noticeFinishAlarm
+                    }
+                    
                 }.padding(.bottom, 30)
                 
             }
@@ -235,13 +251,11 @@ struct MainView: View {
         }
     }
     
-    
     private var noticeAlarm: some View {
         HStack(spacing: 6) {
             Image("img_mainAlarm")
                 .frame(width: 90, height: 94)
                 .padding(.leading, 10)
-            
             
             VStack(alignment: .leading, spacing: 5) {
                 
@@ -261,7 +275,6 @@ struct MainView: View {
                     .progressViewStyle(CustomProgressViewStyle())
                     .frame(width: 227, height: 12)
                     .padding(.trailing, 10)
-                
             }
         }
         .padding(.vertical, 12)
@@ -269,6 +282,66 @@ struct MainView: View {
         .cornerRadius(14)
         
     }
+    
+    // MARK: 외출 버튼
+    private var noticeOutAlarm: some View {
+        
+        ZStack{
+            Image("img_outbackBtn")
+            
+            HStack {
+                Image("img_outBtn")
+                    .frame(width: 90, height: 94)
+                    .padding(.leading, 10)
+                
+                
+                Text("외출")
+                    .font(.system(size: 26))
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.white)
+                    .padding(.bottom, 5)
+                
+                
+            }.padding(.trailing, 20)
+            
+        }
+    }
+      
+    // MARK: 끝나는 버튼
+    private var noticeFinishAlarm: some View {
+        HStack(spacing: 6) {
+            Image("img_mainAlarm2")
+                .frame(width: 90, height: 94)
+                .padding(.leading, 10)
+                .onTapGesture {
+                    // TODO: 타이머 흘러가게
+                }
+                    VStack(alignment: .leading, spacing: 5) {
+                        
+                        Text("자외선 차단제를")
+                            .font(.system(size: 22))
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color.suncreamPink)
+                        
+                        
+                        Text("바르실 시간입니다!")
+                            .font(.system(size: 22))
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color.white)
+                            .padding(.bottom, 5)
+                        
+                        
+                    }
+                    Spacer()
+                        .frame(width: 64)
+                        .foregroundColor(.red)
+                    
+                }
+                .padding(.vertical, 12)
+                .background(Color.mainBlue)
+                .cornerRadius(14)
+            
+        }
     
     struct CustomProgressViewStyle: ProgressViewStyle {
         func makeBody(configuration: Configuration) -> some View {
@@ -288,9 +361,7 @@ struct MainView: View {
             }
         }
     }
-    
-    
-    
+
     func getWeatherInfo(_ location: CLLocation) {
         Task {
             do {

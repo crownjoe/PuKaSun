@@ -16,7 +16,7 @@
 		DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D52C1FDD810003A112 /* MainView.swift */; };
 		DF9E78D82C1FDD8A0003A112 /* SuncreamVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D72C1FDD8A0003A112 /* SuncreamVIew.swift */; };
 		DF9E78DA2C1FDD910003A112 /* UVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D92C1FDD910003A112 /* UVView.swift */; };
-		DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */; };
+		DF9E78DD2C1FDDD50003A112 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DC2C1FDDD50003A112 /* Alarm.swift */; };
 		DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */; };
 		DFAEFA7B2C1BD7A000913FEC /* capuri_sunApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */; };
 		DFAEFA7F2C1BD7A100913FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */; };
@@ -67,7 +67,7 @@
 		DF9E78D52C1FDD810003A112 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DF9E78D72C1FDD8A0003A112 /* SuncreamVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuncreamVIew.swift; sourceTree = "<group>"; };
 		DF9E78D92C1FDD910003A112 /* UVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVView.swift; sourceTree = "<group>"; };
-		DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModel.swift; sourceTree = "<group>"; };
+		DF9E78DC2C1FDDD50003A112 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		DFAEFA772C1BD7A000913FEC /* capuri-sun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "capuri-sun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = capuri_sunApp.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		DF9E78E22C1FDDFF0003A112 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DF9E78DC2C1FDDD50003A112 /* AlarmModel.swift */,
+				DF9E78DC2C1FDDD50003A112 /* Alarm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,7 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */,
-				DF9E78DD2C1FDDD50003A112 /* AlarmModel.swift in Sources */,
+				DF9E78DD2C1FDDD50003A112 /* Alarm.swift in Sources */,
 				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
 				DF6A44812C21B18F0048EE4F /* CoreMotionService.swift in Sources */,
@@ -506,6 +506,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,6 +543,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -567,6 +569,7 @@
 				INFOPLIST_FILE = LiveActivity/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActivity;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -594,6 +597,7 @@
 				INFOPLIST_FILE = LiveActivity/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActivity;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
