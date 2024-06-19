@@ -493,10 +493,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"capuri-sun/Preview Content\"";
-				DEVELOPMENT_TEAM = F9L92QCATL;
+				DEVELOPMENT_TEAM = 4QMNM64P9Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "capuri-sun/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = pukaSun;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSMotionUsageDescription = "걸음수 데이터 측정을 위해 데이터 접근 권한이 필요합니다.";
@@ -530,10 +531,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"capuri-sun/Preview Content\"";
-				DEVELOPMENT_TEAM = F9L92QCATL;
+				DEVELOPMENT_TEAM = 4QMNM64P9Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "capuri-sun/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = pukaSun;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSMotionUsageDescription = "걸음수 데이터 측정을 위해 데이터 접근 권한이 필요합니다.";
@@ -564,7 +566,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F9L92QCATL;
+				DEVELOPMENT_TEAM = 4QMNM64P9Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActivity/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActivity;
@@ -592,7 +594,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F9L92QCATL;
+				DEVELOPMENT_TEAM = 4QMNM64P9Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveActivity/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LiveActivity;
