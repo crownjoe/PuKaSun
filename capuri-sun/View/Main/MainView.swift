@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 import WeatherKit
+import ActivityKit
 
 struct MainView: View {
     @StateObject private var locationManager = LocationManager()
@@ -21,12 +22,19 @@ struct MainView: View {
     @State private var timer: Timer?
     
     @State private var startTimer: Bool = false
+    @State private var newTimer: Bool = false
+    
+    //    @Query var alarms: [Alarm]
+    
+    @AppStorage("alarmTime") var alarmTime: Double = 0.2
+    
     
     var body: some View {
-        // TODO: 캐릭터 바뀌게 & 시간 변하게     
+        // TODO: 캐릭터 바뀌게 & 시간 변하게
         
         ZStack{
             Image("img_mainBackground")
+                .resizable()
                 .ignoresSafeArea(.all)
             
             VStack{
@@ -85,17 +93,17 @@ struct MainView: View {
                     Image("img_char1")
                         .padding(.leading, 40)
                     
-                    if !startTimer { //기본 버튼 외출 누르면 시간 가기 시작
+                    if !startTimer { // TODO: 다음날 외출 버튼이 떠야함!
                         noticeOutAlarm
                             .onTapGesture {
                                 self.startTimer = true
+                                startLivaActivity()
                             }
                     }
-                    else if startTimer{
+                    else if startTimer && !newTimer{
                         noticeAlarm
                     }
-                    
-                    else if startTimer { // 시간 다 지나면 떠야하는 버튼
+                    else if newTimer {
                         noticeFinishAlarm
                     }
                     
@@ -199,7 +207,7 @@ struct MainView: View {
                 Circle()
                     .frame(width: 147, height: 147)
                     .foregroundColor(.uv4)
-    
+                
                 Text(uvIndex)
                     .fontWeight(.bold)
                     .font(.system(size: 140))
@@ -251,41 +259,8 @@ struct MainView: View {
         }
     }
     
-    private var noticeAlarm: some View {
-        HStack(spacing: 6) {
-            Image("img_mainAlarm")
-                .frame(width: 90, height: 94)
-                .padding(.leading, 10)
-            
-            VStack(alignment: .leading, spacing: 5) {
-                
-                Text("2시간 00분")
-                    .font(.system(size: 26))
-                    .fontWeight(.heavy)
-                    .foregroundColor(Color.suncreamPink)
-                
-                
-                Text("후에 자외선 차단제를 발라주세요!")
-                    .font(.system(size: 13))
-                    .fontWeight(.heavy)
-                    .foregroundColor(Color.white)
-                    .padding(.bottom, 5)
-                
-                ProgressView(value: progress, total: 1.0)
-                    .progressViewStyle(CustomProgressViewStyle())
-                    .frame(width: 227, height: 12)
-                    .padding(.trailing, 10)
-            }
-        }
-        .padding(.vertical, 12)
-        .background(Color.mainBlue)
-        .cornerRadius(14)
-        
-    }
-    
     // MARK: 외출 버튼
     private var noticeOutAlarm: some View {
-        
         ZStack{
             Image("img_outbackBtn")
             
@@ -306,7 +281,49 @@ struct MainView: View {
             
         }
     }
-      
+    
+    private var noticeAlarm: some View {
+        HStack(spacing: 6) {
+            Image("img_mainAlarm")
+                .frame(width: 90, height: 94)
+                .padding(.leading, 10)
+            
+            VStack(alignment: .leading, spacing: 5) {
+                Text(changeTime(alarmTime: alarmTime))
+                    .font(.system(size: 26))
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.suncreamPink)
+                
+                Text("후에 자외선 차단제를 발라주세요!")
+                    .font(.system(size: 13))
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.white)
+                    .padding(.bottom, 5)
+                
+                ProgressView(value: progress, total: alarmTime)
+                    .progressViewStyle(CustomProgressViewStyle())
+                    .frame(width: 227, height: 12)
+                    .padding(.trailing, 10)
+            }
+            .onAppear{
+                let interval = 1.0
+                Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+                    if progress < alarmTime {
+                        progress += interval / 60
+                    } else {
+                        timer.invalidate()
+                        self.newTimer = true
+                        self.progress = 0.0
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 12)
+        .background(Color.mainBlue)
+        .cornerRadius(14)
+        
+    }
+    
     // MARK: 끝나는 버튼
     private var noticeFinishAlarm: some View {
         HStack(spacing: 6) {
@@ -314,46 +331,42 @@ struct MainView: View {
                 .frame(width: 90, height: 94)
                 .padding(.leading, 10)
                 .onTapGesture {
-                    // TODO: 타이머 흘러가게
+                    self.newTimer = false
                 }
-                    VStack(alignment: .leading, spacing: 5) {
-                        
-                        Text("자외선 차단제를")
-                            .font(.system(size: 22))
-                            .fontWeight(.heavy)
-                            .foregroundColor(Color.suncreamPink)
-                        
-                        
-                        Text("바르실 시간입니다!")
-                            .font(.system(size: 22))
-                            .fontWeight(.heavy)
-                            .foregroundColor(Color.white)
-                            .padding(.bottom, 5)
-                        
-                        
-                    }
-                    Spacer()
-                        .frame(width: 64)
-                        .foregroundColor(.red)
-                    
-                }
-                .padding(.vertical, 12)
-                .background(Color.mainBlue)
-                .cornerRadius(14)
-            
+            VStack(alignment: .leading, spacing: 5) {
+                
+                Text("자외선 차단제를")
+                    .font(.system(size: 22))
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.suncreamPink)
+                
+                Text("바르실 시간입니다!")
+                    .font(.system(size: 22))
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.white)
+                    .padding(.bottom, 5)
+            }
+            Spacer()
+                .frame(width: 64)
+                .foregroundColor(.red)
         }
+        .padding(.vertical, 12)
+        .background(Color.mainBlue)
+        .cornerRadius(14)
+        
+    }
     
     struct CustomProgressViewStyle: ProgressViewStyle {
         func makeBody(configuration: Configuration) -> some View {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(red: 0.98, green: 0.64, blue: 0.84))
+                        .fill(Color.customGray)
                         .cornerRadius(13.5)
                         .frame(width: 227, height: 12)
                     
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(red: 0.81, green: 0.81, blue: 0.81))
+                        .fill(Color.suncreamPink)
                         .cornerRadius(13.5)
                         .frame(width: geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0), height: 12)
                         .animation(.linear, value: configuration.fractionCompleted)
@@ -361,7 +374,29 @@ struct MainView: View {
             }
         }
     }
-
+    
+    func startLivaActivity() {
+        let liveActivityAttributes = LiveActivityAttributes(name: "pukaSun")
+        let contentState = LiveActivityAttributes.ContentState(emoji: "7")
+        
+        do {
+            let activity = try Activity<LiveActivityAttributes>.request(
+                attributes: liveActivityAttributes,
+                contentState: contentState
+            )
+            print(activity)
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    func changeTime(alarmTime: Double) -> String {
+        let hours = Int(alarmTime) / 60
+        let minutes = Int(alarmTime) % 60
+        return "\(hours)시간 \(minutes)분"
+    }
+    
     func getWeatherInfo(_ location: CLLocation) {
         Task {
             do {

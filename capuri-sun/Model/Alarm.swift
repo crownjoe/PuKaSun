@@ -10,9 +10,9 @@ import SwiftData
 
 @Model
 class Alarm {
-    var time: Int
+    var time: Double = 10.0
     
     init(time: Int) {
-        self.time = time
+        self.time = Double(time)
     }
 }
