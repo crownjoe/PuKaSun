@@ -68,7 +68,7 @@ struct UVView: View {
                                     .padding(.trailing, 20)
                                 
                                 
-                                Text("1 - 2")
+                                Text("0 - 2")
                                     .fontWeight(.bold)
                                     .font(.system(size: 30))
                                     .foregroundColor(.uvText)

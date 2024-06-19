@@ -24,10 +24,11 @@ struct MainView: View {
     @State private var startTimer: Bool = false
     @State private var newTimer: Bool = false
     
-    //    @Query var alarms: [Alarm]
+    @State private var oneThirdPassed = false
+    @State private var twoThirdsPassed = false
     
+    //@Query var alarms: [Alarm]
     @AppStorage("alarmTime") var alarmTime: Double = 0.2
-    
     
     var body: some View {
         // TODO: 캐릭터 바뀌게 & 시간 변하게
@@ -76,7 +77,7 @@ struct MainView: View {
                 }.padding(.bottom, 30)
                 
                 VStack{
-                    if uvIndex == "1" || uvIndex == "2" {
+                    if uvIndex == "0" || uvIndex == "1" || uvIndex == "2" {
                         UvView1
                     } else if uvIndex == "3" || uvIndex == "4" || uvIndex == "5" {
                         UvView2
@@ -88,11 +89,24 @@ struct MainView: View {
                         UvView5
                     }
                     
-                    // TODO: 캐릭터 바뀌게
+                    if oneThirdPassed && !twoThirdsPassed  {
+                        Image("img_char2")
+                            .frame(width: 148, height: 233)
+                            .padding(.leading, 40)
+                    }
                     
-                    Image("img_char1")
-                        .padding(.leading, 40)
+                    else if !oneThirdPassed && twoThirdsPassed {
+                        Image("img_char3")
+                            .frame(width: 148, height: 233)
+                            .padding(.leading, 40)
+                    }
                     
+                    else {
+                        Image("img_char1")
+                            .frame(width: 148, height: 233)
+                            .padding(.leading, 40)
+                    }
+                
                     if !startTimer { // TODO: 다음날 외출 버튼이 떠야함!
                         noticeOutAlarm
                             .onTapGesture {
@@ -281,7 +295,7 @@ struct MainView: View {
             
         }
     }
-    
+    // MARK: 진행중 버튼
     private var noticeAlarm: some View {
         HStack(spacing: 6) {
             Image("img_mainAlarm")
@@ -305,11 +319,24 @@ struct MainView: View {
                     .frame(width: 227, height: 12)
                     .padding(.trailing, 10)
             }
-            .onAppear{
-                let interval = 1.0
+            .onAppear {
+                let interval = 0.1
                 Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
                     if progress < alarmTime {
                         progress += interval / 60
+                        
+                        if progress >= (alarmTime / 3) && progress < (2 * alarmTime / 3) {
+                            print("들어옴1")
+                            oneThirdPassed = true
+                            twoThirdsPassed = false
+                        }
+                        
+                        else if progress >= (2 * alarmTime / 3) {
+                            print("들어옴2")
+                            oneThirdPassed = false
+                            twoThirdsPassed = true
+                        }
+                        
                     } else {
                         timer.invalidate()
                         self.newTimer = true
@@ -323,7 +350,6 @@ struct MainView: View {
         .cornerRadius(14)
         
     }
-    
     // MARK: 끝나는 버튼
     private var noticeFinishAlarm: some View {
         HStack(spacing: 6) {
@@ -332,6 +358,8 @@ struct MainView: View {
                 .padding(.leading, 10)
                 .onTapGesture {
                     self.newTimer = false
+                    self.oneThirdPassed = false
+                    self.twoThirdsPassed = false
                 }
             VStack(alignment: .leading, spacing: 5) {
                 
@@ -389,7 +417,6 @@ struct MainView: View {
             print(error)
         }
     }
-    
     
     func changeTime(alarmTime: Double) -> String {
         let hours = Int(alarmTime) / 60
