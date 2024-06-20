@@ -12,7 +12,6 @@ struct AlarmView: View {
     @State private var showMainView = false
     @State private var selectedHour: Int? = nil
     
-//    @AppStorage("alarmTime") var alarmTime: Double = 0.0
     @ObservedObject private var alarmTimeManager = AlarmTimeManager.shared
     
     @State private var selectedButton: Int? = nil
@@ -48,7 +47,7 @@ struct AlarmView: View {
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 80)
                     
                     VStack(spacing: 22) {
                         ZStack {
@@ -102,7 +101,7 @@ struct AlarmView: View {
                             Button(action: {
                                 showPicker.toggle()
                             }) {
-                                Text("\(selectedHour != nil && selectedHour != 0 ? "\(selectedHour!)" : "_")시간마다")
+                                Text("\(selectedHour != nil && selectedHour != 1 && selectedHour != 0 ? "\(selectedHour!)" : "_")시간마다")
                                     .fontWeight(.bold)
                                     .font(.system(size: 20))
                                     .foregroundColor(.white)
@@ -128,12 +127,12 @@ struct AlarmView: View {
                                         connectData()
                                     }
                                     
-                                }.presentationDetents([.height(250)])
+                                }.presentationDetents([.height(280)])
                                 
                             }
                             
                             Button(action: {
-                                selectedHour = 0
+                                selectedHour = 1
                                 connectData()
                             }) {
                                 Text("안받을게요🥲")
@@ -145,25 +144,27 @@ struct AlarmView: View {
                                     .cornerRadius(20)
                                     .padding(.bottom, 55)
                             }
+                            .padding(.bottom, 50)
                             
-                                Button(action: {
-                                    self.showMainView = true
-                                }) {
-                                    Text("시작하기")
-                                        .bold()
-                                        .font(.system(size: 20))
-                                        .foregroundColor(.alarmcolor2)
-                                        .frame(width: 308, height: 60)
-                                        .background(Color.white)
-                                        .cornerRadius(10)
-                                }
-                                .padding()
+                            Button(action: {
+                                self.showMainView = true
+                            }) {
+                                Text("시작하기")
+                                    .bold()
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.alarmcolor2)
+                                    .frame(width: 308, height: 60)
+                                    .background(Color.white)
+                                    .cornerRadius(10)
+                            }
+                            .padding(.bottom, 80)
+                            .padding()
                         }
                     }
                 }
             }
-//            .navigationBarHidden(true)
-//            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
         else {
             MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTimeManager.alarmTime)

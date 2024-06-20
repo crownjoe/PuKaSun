@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct capuri_sunApp: App {
-    var body: some Scene {
+    @State private var alarmTime: Double = 0.0
+    
+    var body: some Scene { 
         WindowGroup {
-            OnboardingView()
+            OnboardingView(alarmTime: $alarmTime)
         }
     }
 }

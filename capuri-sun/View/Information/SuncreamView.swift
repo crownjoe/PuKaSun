@@ -45,8 +45,7 @@ struct SuncreamView: View {
 //                    }
 //
 //                }
-                Spacer()
-                    .frame(height: 17)
+
                 
                 HStack{
                     VStack(alignment: .leading, spacing: 6){
@@ -54,6 +53,7 @@ struct SuncreamView: View {
                             .fontWeight(.bold)
                             .font(.system(size: 30))
                             .foregroundColor(.white)
+                            .padding(.top, 40)
                         
                         Text("카드를 뒤집어 주세요!")
                             .font(.system(size: 15))
