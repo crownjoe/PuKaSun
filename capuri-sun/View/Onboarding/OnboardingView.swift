@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @State private var showAdditionalText = false // 상태 변수 선언
+    @State private var showAdditionalText = false
+    @State private var showPukaView = false
 
     var body: some View {
+        if !showPukaView{
         ZStack {
             Color.backgroundBlue
                 .ignoresSafeArea(.all)
@@ -39,44 +41,68 @@ struct OnboardingView: View {
                     .font(.system(size: 30))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
-
-                Rectangle()
-                    .frame(width: 312, height: 1)
-                    .padding(.top, 20)
-                    .padding(.bottom, 20)
-                    .foregroundColor(.white)
-
-                // 이곳에 showAdditionalText가 true일 때 나타나는 텍스트를 추가합니다.
-                if showAdditionalText {
-                    Text("자외선 지수를 실시간으로 확인하고,")
-                        .font(.system(size: 17))
-                        .foregroundColor(.white)
-                        .padding(.bottom, 20)
+            
                     
-                    Text("자외선 차단제를 발라야 할 때")
-                        .font(.system(size: 17))
-                        .foregroundColor(.white)
-                        .padding(.bottom, 20)
+                    if showAdditionalText {
+                        Rectangle()
+                            .frame(width: 312, height: 1)
+                            .padding(.top, 20)
+                            .padding(.bottom, 20)
+                            .foregroundColor(.white)
+                        Text("자외선 지수를 실시간으로 확인하고,")
+                            .font(.system(size: 17))
+                            .foregroundColor(.white)
+                            .padding(.bottom, 20)
+                        
+                        Text("자외선 차단제를 발라야 할 때")
+                            .font(.system(size: 17))
+                            .foregroundColor(.white)
+                            .padding(.bottom, 20)
+                        
+                        Text("알려드려요.")
+                            .font(.system(size: 17))
+                            .foregroundColor(.white)
+                            .padding(.bottom, 155)
+                    }
                     
-                    Text("알려드려요.")
-                        .font(.system(size: 17))
-                        .foregroundColor(.white)
-                        .padding(.bottom, 155)
+                    if !showAdditionalText{ //처음 눌렀을 때
+                        Button(action: {
+                            showAdditionalText = true
+                        }) {
+                            Text("다음")
+                                .bold()
+                                .font(.system(size: 20))
+                                .foregroundColor(.alarmcolor2)
+                                .frame(width: 307.96, height: 59)
+                                .background(Color.white)
+                                .cornerRadius(10)
+                        }
+                        
+                        .padding(.top, showAdditionalText ? 0 : 320)
+                    }
+                    else { //두 번 눌렀을 때
+                        Button(action: {
+                            showPukaView = true
+                            
+                        }) {
+                            Text("다음")
+                                .bold()
+                                .font(.system(size: 20))
+                                .foregroundColor(.alarmcolor2)
+                                .frame(width: 307.96, height: 59)
+                                .background(Color.white)
+                                .cornerRadius(10)
+                        }
+                        .padding(.top, showAdditionalText ? 0 : 320)
+                    }
                 }
+                .animation(.default, value: showAdditionalText)
+            
 
-                Button(action: {
-                    showAdditionalText = true // 버튼이 눌릴 때 상태 변수를 true로 설정
-                }) {
-                    Text("다음")
-                        .bold()
-                        .font(.system(size: 20))
-                        .foregroundColor(.alarmcolor2)
-                        .frame(width: 307.96, height: 59)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                }
-                .padding(.top, showAdditionalText ? 0 : 155) // 추가 텍스트가 없을 때의 공간 유지
             }
+        }
+        else {
+            PukaSunView()
         }
     }
 }

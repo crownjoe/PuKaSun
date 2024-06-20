@@ -1,5 +1,5 @@
 //
-//  SuncreamVIew.swift
+//  SuncreamView.swift
 //  capuri-sun
 //
 //  Created by 조세연 on 6/17/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SuncreamVIew: View {
+struct SuncreamView: View {
     
     @State private var imageName1 = "img_suncream1"
     @State private var text1 = "실내"
@@ -24,18 +24,26 @@ struct SuncreamVIew: View {
     @State private var imageName5 = "img_suncream5"
     @State private var text5 = "야외 물놀이            "
     
+    @Binding var address: String
+    @Binding var uvIndex: String
+    @Binding var condition: String
+    @Binding var temperature: String
+    @Binding var alarmTime: Double
+    
 
     var body: some View {
         ZStack{
             Color.backgroundBlue
+                .ignoresSafeArea(.all)
             
             VStack{
-                HStack(spacing: 294){
-                    Image("img_before")
-                    
-                    Text("닫기")
-                        .font(.system(size: 20))
-                        .foregroundColor(.customGray)
+                HStack {
+                    NavigationLink(destination:  MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
+                        Image("img_before")
+                        
+                        Spacer()
+                    }
+
                 }
                 Spacer()
                     .frame(height: 17)
@@ -171,10 +179,13 @@ struct SuncreamVIew: View {
                 }
             }
             
-        }.ignoresSafeArea(.all)
+        }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.all)
     }
 }
 
-#Preview {
-    SuncreamVIew()
-}
+//#Preview {
+//    SuncreamView()
+//}

@@ -11,42 +11,95 @@ import SwiftUI
 
 struct LiveActivityAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
+        //변하는 값 -> 시간 
         var emoji: String
     }
-
-    // Fixed non-changing properties about your activity go here!
+    
+    // 안변하는 값
     var name: String
 }
 
 struct LiveActivityLiveActivity: Widget {
+//    AlarmTimeManager.shared.alarmTime
+    @State private var progress: Double = 0.0
+    @State private var timer: Timer?
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager.shared
+//    @AppStorage("alarmTime") var alarmTime: Double = 0.0
+
+    
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: LiveActivityAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.emoji)")
+            Text("\(alarmTimeManager.alarmTime)")
+            HStack(spacing: 20) {
+                Image("img_LiveActivitySuncream")
+                    .frame(width: 90, height: 94)
+                    .padding(.leading, 14)
+                
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    
+                    HStack{
+                        Image("img_LiveActivitySun")//
+                            .frame(width: 33, height: 33)
+                        
+                        Text(changeTime(alarmTime: alarmTimeManager.alarmTime))
+                            .font(.system(size: 26))
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color(red: 0.98, green: 0.64, blue: 0.84))
+                        
+                    }
+                    
+                    Text("후에 자외선 차단제를 발라주세요!")
+                        .font(.system(size: 13))
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color(red: 0.74, green: 0.74, blue: 0.74))
+                        .padding(.bottom, 8)
+                    
+                    
+                    ProgressView(value: progress, total: alarmTimeManager.alarmTime)
+                        .progressViewStyle(CustomProgressViewStyle())
+                        .frame(width: 227, height: 12)
+                        .padding(.trailing, 10)
+                        .onAppear {
+                            print(alarmTimeManager.alarmTime)
+                        }
+                    
+                }
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
-
+            .padding(.vertical, 18)
+            .activityBackgroundTint(Color.white)
+            .activitySystemActionForegroundColor(Color(red: 0.74, green: 0.74, blue: 0.74))
+            
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    //다이나믹 터치했을 때
+                    Image("img_dynamicicon")
                 }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                DynamicIslandExpandedRegion(.center) {
+                    Text("얼굴 타는중 🥵")
+                        .font(.system(size: 23))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(red: 0.98, green: 0.64, blue: 0.84))
+                    
+                    Text("자외선 차단제를 발라주세요!")
+                        .font(.system(size: 15))
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color.white)
+                        .padding(.trailing, 30)
+                        
                 }
-                DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
-                    // more content
-                }
+//                DynamicIslandExpandedRegion(.bottom) {
+//                    Text("Bottom \(context.state.emoji)")
+//                    // more content
+//                }
             } compactLeading: {
-                Text("L")
+                Image("img_dynamic")
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+//                Text("T \(context.state.emoji)")
             } minimal: {
                 Text(context.state.emoji)
             }
@@ -55,6 +108,33 @@ struct LiveActivityLiveActivity: Widget {
         }
     }
 }
+
+func changeTime(alarmTime: Double) -> String {
+    let hours = Int(alarmTime) / 60
+    let minutes = Int(alarmTime) % 60
+    return "\(hours)시간 \(minutes)분"
+}
+
+struct CustomProgressViewStyle: ProgressViewStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(red: 0.98, green: 0.64, blue: 0.84))
+                    .cornerRadius(13.5)
+                    .frame(width: 227, height: 12)
+                
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(red: 0.81, green: 0.81, blue: 0.81))
+                    .cornerRadius(13.5)
+                    .frame(width: geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0), height: 12)
+                    .animation(.linear, value: configuration.fractionCompleted)
+            }
+        }
+    }
+}
+
+
 
 extension LiveActivityAttributes {
     fileprivate static var preview: LiveActivityAttributes {
@@ -65,15 +145,15 @@ extension LiveActivityAttributes {
 extension LiveActivityAttributes.ContentState {
     fileprivate static var smiley: LiveActivityAttributes.ContentState {
         LiveActivityAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: LiveActivityAttributes.ContentState {
-         LiveActivityAttributes.ContentState(emoji: "🤩")
-     }
+    }
+    
+    fileprivate static var starEyes: LiveActivityAttributes.ContentState {
+        LiveActivityAttributes.ContentState(emoji: "🤩")
+    }
 }
 
 #Preview("Notification", as: .content, using: LiveActivityAttributes.preview) {
-   LiveActivityLiveActivity()
+    LiveActivityLiveActivity()
 } contentStates: {
     LiveActivityAttributes.ContentState.smiley
     LiveActivityAttributes.ContentState.starEyes

@@ -15,20 +15,27 @@ struct UVView: View {
     @State private var showFirstHStack4 = true
     @State private var showFirstHStack5 = true
     
+    @Binding var address: String
+    @Binding var uvIndex: String
+    @Binding var condition: String
+    @Binding var temperature: String
+    @Binding var alarmTime: Double
+    
     // TODO: 애니메이션 이슈 해결
     
     var body: some View {
         
         ZStack{
             Color.backgroundBlue
+                .ignoresSafeArea(.all)
             
             VStack{
-                HStack(spacing: 294){
-                    Image("img_before")
-                    
-                    Text("닫기")
-                        .font(.system(size: 20))
-                        .foregroundColor(.customGray)
+                HStack{
+                    NavigationLink(destination:  MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
+                        Image("img_before")
+                    }
+                                        
+                    Spacer()
                 }
                 Spacer()
                     .frame(height: 17)
@@ -68,7 +75,7 @@ struct UVView: View {
                                     .padding(.trailing, 20)
                                 
                                 
-                                Text("1 - 2")
+                                Text("0 - 2")
                                     .fontWeight(.bold)
                                     .font(.system(size: 30))
                                     .foregroundColor(.uvText)
@@ -325,7 +332,10 @@ struct UVView: View {
                 
             }
             
-        }.ignoresSafeArea(.all)
+        }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.all)
     }
 }
 
@@ -365,6 +375,3 @@ struct FlipModifier: ViewModifier {
     }
 }
 
-#Preview {
-    UVView()
-}
