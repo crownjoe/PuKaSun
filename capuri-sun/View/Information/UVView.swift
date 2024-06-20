@@ -27,14 +27,15 @@ struct UVView: View {
         
         ZStack{
             Color.backgroundBlue
+                .ignoresSafeArea(.all)
             
             VStack{
-                HStack(spacing: 294){
+                HStack{
                     NavigationLink(destination:  MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
                         Image("img_before")
                     }
-                    
-                   
+                                        
+                    Spacer()
                 }
                 Spacer()
                     .frame(height: 17)
@@ -373,7 +374,4 @@ struct FlipModifier: ViewModifier {
             )
     }
 }
-//
-//#Preview {
-//    UVView()
-//}
+

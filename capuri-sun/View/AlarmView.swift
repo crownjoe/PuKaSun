@@ -12,7 +12,8 @@ struct AlarmView: View {
     @State private var showMainView = false
     @State private var selectedHour: Int? = nil
     
-    @AppStorage("alarmTime") var alarmTime: Double = 0.0
+//    @AppStorage("alarmTime") var alarmTime: Double = 0.0
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager.shared
     
     @State private var selectedButton: Int? = nil
     var body: some View {
@@ -142,10 +143,9 @@ struct AlarmView: View {
                                     .frame(width: 308, height: 60)
                                     .background(Color.alarmcolor)
                                     .cornerRadius(20)
-                                    .padding(.bottom, 95)
+                                    .padding(.bottom, 55)
                             }
                             
-                            HStack {
                                 Button(action: {
                                     self.showMainView = true
                                 }) {
@@ -158,7 +158,6 @@ struct AlarmView: View {
                                         .cornerRadius(10)
                                 }
                                 .padding()
-                            }
                         }
                     }
                 }
@@ -167,7 +166,7 @@ struct AlarmView: View {
             .navigationBarBackButtonHidden(true)
         }
         else {
-            MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)
+            MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTimeManager.alarmTime)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
         }
@@ -175,8 +174,8 @@ struct AlarmView: View {
     
     func connectData() {
         let hour = selectedHour ?? 0
-        alarmTime = Double(hour * 60)
-        print(alarmTime)
+        alarmTimeManager.alarmTime = Double(hour * 60)
+        //print(alarmTimeManager.alarmTime)
     }
 }
 

@@ -59,7 +59,7 @@ struct MainView: View {
                         .background(Color.suncreamBackBlue)
                         .cornerRadius(20)
                         
-                        NavigationLink(destination: AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: alarmTime)){
+                        NavigationLink(destination: AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)){
                             Image("img_alarm")
                         }
                         
@@ -122,6 +122,8 @@ struct MainView: View {
                     }.padding(.bottom, 30)
                 }
             }
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -324,13 +326,11 @@ struct MainView: View {
                         progress += interval / 60
                         
                         if progress >= (alarmTime / 3) && progress < (2 * alarmTime / 3) {
-                            print("들어옴1")
                             oneThirdPassed = true
                             twoThirdsPassed = false
                         }
                         
                         else if progress >= (2 * alarmTime / 3) {
-                            print("들어옴2")
                             oneThirdPassed = false
                             twoThirdsPassed = true
                         }

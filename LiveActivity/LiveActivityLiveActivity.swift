@@ -20,14 +20,17 @@ struct LiveActivityAttributes: ActivityAttributes {
 }
 
 struct LiveActivityLiveActivity: Widget {
-    
+//    AlarmTimeManager.shared.alarmTime
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager.shared
+//    @AppStorage("alarmTime") var alarmTime: Double = 0.0
+
     
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: LiveActivityAttributes.self) { context in
             // Lock screen/banner UI goes here
-            
+            Text("\(alarmTimeManager.alarmTime)")
             HStack(spacing: 20) {
                 Image("img_LiveActivitySuncream")
                     .frame(width: 90, height: 94)
@@ -37,10 +40,10 @@ struct LiveActivityLiveActivity: Widget {
                 VStack(alignment: .leading, spacing: 8) {
                     
                     HStack{
-                        Image("img_LiveActivitySun")
+                        Image("img_LiveActivitySun")//
                             .frame(width: 33, height: 33)
                         
-                        Text("2시간 00분")
+                        Text(changeTime(alarmTime: alarmTimeManager.alarmTime))
                             .font(.system(size: 26))
                             .fontWeight(.heavy)
                             .foregroundColor(Color(red: 0.98, green: 0.64, blue: 0.84))
@@ -54,10 +57,13 @@ struct LiveActivityLiveActivity: Widget {
                         .padding(.bottom, 8)
                     
                     
-                    ProgressView(value: progress, total: 1.0)
+                    ProgressView(value: progress, total: alarmTimeManager.alarmTime)
                         .progressViewStyle(CustomProgressViewStyle())
                         .frame(width: 227, height: 12)
                         .padding(.trailing, 10)
+                        .onAppear {
+                            print(alarmTimeManager.alarmTime)
+                        }
                     
                 }
             }
@@ -71,10 +77,20 @@ struct LiveActivityLiveActivity: Widget {
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
                     //다이나믹 터치했을 때
-                    Image("img_pushDynamic")
+                    Image("img_dynamicicon")
                 }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                DynamicIslandExpandedRegion(.center) {
+                    Text("얼굴 타는중 🥵")
+                        .font(.system(size: 23))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(red: 0.98, green: 0.64, blue: 0.84))
+                    
+                    Text("자외선 차단제를 발라주세요!")
+                        .font(.system(size: 15))
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color.white)
+                        .padding(.trailing, 30)
+                        
                 }
 //                DynamicIslandExpandedRegion(.bottom) {
 //                    Text("Bottom \(context.state.emoji)")
@@ -91,6 +107,12 @@ struct LiveActivityLiveActivity: Widget {
             .keylineTint(Color.red)
         }
     }
+}
+
+func changeTime(alarmTime: Double) -> String {
+    let hours = Int(alarmTime) / 60
+    let minutes = Int(alarmTime) % 60
+    return "\(hours)시간 \(minutes)분"
 }
 
 struct CustomProgressViewStyle: ProgressViewStyle {
@@ -111,6 +133,7 @@ struct CustomProgressViewStyle: ProgressViewStyle {
         }
     }
 }
+
 
 
 extension LiveActivityAttributes {

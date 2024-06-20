@@ -33,6 +33,14 @@ struct PukaSunView: View {
                     
                     Image("img_puka1")
                         .padding(.top, 38)
+                        .padding(.bottom, 18)
+                    
+                    Text(" Weather")
+                        .fontWeight(.regular)
+                        .font(.system(size: 20))
+                        .onTapGesture {
+                            //https://developer.apple.com/weatherkit/data-source-attribution/ 연결
+                        }
                     
                     
                     Text("자외선 걱정 없이 외출하세요! ")
@@ -40,7 +48,8 @@ struct PukaSunView: View {
                         .foregroundColor(.pukacolor)
                         .padding(.bottom, 155)
                         .fontWeight(.bold)
-                        .padding(.top, 40)
+                        .padding(.top, 20)
+                        .padding(.bottom, -40)
                     
                     Button(action: {
                         locationManager.getCurrentLocation { location in
@@ -60,12 +69,11 @@ struct PukaSunView: View {
                             .bold()
                             .font(.system(size: 20))
                             .foregroundColor(.alarmcolor2)
-                            .frame(width: 307.96, height: 59)
+                            .frame(width: 308, height: 60)
                             .background(Color.pukacolor)
                             .cornerRadius(10)
                     }
-                    
-                    
+                
                 }
                 .ignoresSafeArea(.all)
             }

@@ -22,6 +22,8 @@
 		DFAEFA7F2C1BD7A100913FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */; };
 		DFAEFA822C1BD7A100913FEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA812C1BD7A100913FEC /* Preview Assets.xcassets */; };
 		DFAEFA892C1BD7C300913FEC /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA882C1BD7C300913FEC /* .gitignore  */; };
+		DFC384532C23C81E007248B0 /* AlarmTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */; };
+		DFC384542C23C85A007248B0 /* AlarmTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */; };
 		DFF209702C21360A0011B243 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF2096F2C21360A0011B243 /* WidgetKit.framework */; };
 		DFF209722C21360A0011B243 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF209712C21360A0011B243 /* SwiftUI.framework */; };
 		DFF209752C21360A0011B243 /* LiveActivitytBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209742C21360A0011B243 /* LiveActivitytBundle.swift */; };
@@ -74,6 +76,7 @@
 		DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFAEFA812C1BD7A100913FEC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DFAEFA882C1BD7C300913FEC /* .gitignore  */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitignore "; sourceTree = "<group>"; };
+		DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTimeManager.swift; sourceTree = "<group>"; };
 		DFF2096D2C21360A0011B243 /* LiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFF2096F2C21360A0011B243 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		DFF209712C21360A0011B243 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -108,6 +111,7 @@
 		DF2EEE812C207AD900415417 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				DF2EEE7D2C20663A00415417 /* LocationManager.swift */,
 				DF9E78D12C1FDD710003A112 /* OnboardingView.swift */,
 				DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */,
 			);
@@ -117,7 +121,6 @@
 		DF7B55252C225F3400DA9A70 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				DF2EEE7D2C20663A00415417 /* LocationManager.swift */,
 				DF9E78D52C1FDD810003A112 /* MainView.swift */,
 			);
 			path = Main;
@@ -128,6 +131,7 @@
 			children = (
 				DF2EEE812C207AD900415417 /* Onboarding */,
 				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
+				DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */,
 				DF7B55252C225F3400DA9A70 /* Main */,
 				DF9E78DB2C1FDD9A0003A112 /* Information */,
 			);
@@ -329,6 +333,7 @@
 			files = (
 				DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */,
 				DF9E78DD2C1FDDD50003A112 /* Alarm.swift in Sources */,
+				DFC384532C23C81E007248B0 /* AlarmTimeManager.swift in Sources */,
 				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
 				DF6A44812C21B18F0048EE4F /* CoreMotionService.swift in Sources */,
@@ -347,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFF209752C21360A0011B243 /* LiveActivitytBundle.swift in Sources */,
+				DFC384542C23C85A007248B0 /* AlarmTimeManager.swift in Sources */,
 				DFF2097B2C21360A0011B243 /* AppIntent.swift in Sources */,
 				DFF209792C21360A0011B243 /* LiveActivity.swift in Sources */,
 				DFF209772C21360A0011B243 /* LiveActivityLiveActivity.swift in Sources */,
