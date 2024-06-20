@@ -162,8 +162,8 @@ struct AlarmView: View {
                     }
                 }
             }
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
+//            .navigationBarHidden(true)
+//            .navigationBarBackButtonHidden(true)
         }
         else {
             MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTimeManager.alarmTime)

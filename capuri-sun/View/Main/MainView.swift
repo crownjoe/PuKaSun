@@ -122,10 +122,11 @@ struct MainView: View {
                     }.padding(.bottom, 30)
                 }
             }
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
+//            .navigationBarHidden(true)
+//            .navigationBarBackButtonHidden(true)
         }
         .edgesIgnoringSafeArea(.all)
+        .tint(Color.white)
     }
     
     private var UvView1: some View {

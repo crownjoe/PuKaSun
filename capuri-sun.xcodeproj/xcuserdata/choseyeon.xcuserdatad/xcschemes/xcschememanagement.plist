@@ -7,12 +7,25 @@
 		<key>LiveActivityExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>capuri-sun.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>DFAEFA762C1BD7A000913FEC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DFF2096C2C21360A0011B243</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

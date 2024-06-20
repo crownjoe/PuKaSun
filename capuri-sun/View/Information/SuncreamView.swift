@@ -37,14 +37,14 @@ struct SuncreamView: View {
                 .ignoresSafeArea(.all)
             
             VStack{
-                HStack {
-                    NavigationLink(destination:  MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
-                        Image("img_before")
-                        
-                        Spacer()
-                    }
-
-                }
+//                HStack {
+//                    NavigationLink(destination:  MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
+//                        Image("img_before")
+//                        
+//                        Spacer()
+//                    }
+//
+//                }
                 Spacer()
                     .frame(height: 17)
                 
@@ -180,8 +180,8 @@ struct SuncreamView: View {
             }
             
         }
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
+//        .navigationBarHidden(true)
+//        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all)
     }
 }
