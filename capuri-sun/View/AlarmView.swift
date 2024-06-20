@@ -10,7 +10,7 @@ struct AlarmView: View {
     
     @State private var showPicker = false
     @State private var showMainView = false
-    @State private var selectedHour: Int? = nil
+    @State private var selectedHour: Int = 3
     
     @ObservedObject private var alarmTimeManager = AlarmTimeManager.shared
     
@@ -101,7 +101,7 @@ struct AlarmView: View {
                             Button(action: {
                                 showPicker.toggle()
                             }) {
-                                Text("\(selectedHour != nil && selectedHour != 1 && selectedHour != 0 ? "\(selectedHour!)" : "_")시간마다")
+                                Text("\(0...3 ~= selectedHour  ?  "_시간마다" : "\(selectedHour)시간마다")")
                                     .fontWeight(.bold)
                                     .font(.system(size: 20))
                                     .foregroundColor(.white)
@@ -123,6 +123,7 @@ struct AlarmView: View {
                                     .padding()
                                     
                                     Button("완료") {
+                                        selectedHour = selectedHour
                                         showPicker.toggle()
                                         connectData()
                                     }

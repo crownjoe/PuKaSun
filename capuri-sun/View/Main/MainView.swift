@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import CoreLocation
-import WeatherKit
 import ActivityKit
 
 struct MainView: View {
@@ -94,18 +92,21 @@ struct MainView: View {
                             Image("img_char2")
                                 .frame(width: 148, height: 233)
                                 .padding(.leading, 40)
+                                .padding(.bottom, -20)
                         }
                         
                         else if !oneThirdPassed && twoThirdsPassed {
                             Image("img_char3")
                                 .frame(width: 148, height: 233)
                                 .padding(.leading, 40)
+                                .padding(.bottom, -20)
                         }
                         
                         else {
                             Image("img_char1")
                                 .frame(width: 148, height: 233)
                                 .padding(.leading, 40)
+                                .padding(.bottom, -20)
                         }
                         
                         if !startTimer { // TODO: 다음날 외출 버튼이 떠야함!
@@ -115,15 +116,18 @@ struct MainView: View {
                                     self.startTimer = true
                                     startLivaActivity()
                                 }
+                                .padding(.top, 56)
                         }
                         else if startTimer && !newTimer{
                             noticeAlarm
+                                .padding(.top, 40)
                         }
                         else if newTimer {
                             noticeFinishAlarm
+                                .padding(.top, 40)
                         }
                         
-                    }.padding(.bottom, 30)
+                    }.padding(.bottom, 20)
                 }
             }
 //            .navigationBarHidden(true)
