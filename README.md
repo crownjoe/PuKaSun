@@ -26,5 +26,20 @@
 ## 🖼️ Prototype
 (프로토타입과 설명 추가)
 
+<table>
+  <tr>
+    <td><img src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M10-WeatherKit/assets/135544903/e7248b2a-d475-47f0-b0b6-b8ed584b6c13" width="100%"></td>
+    <td><img src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M10-WeatherKit/assets/135544903/86d493a9-1545-4dd3-8a01-abb755b2047e" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M10-WeatherKit/assets/135544903/dc25634e-06cc-4c67-a872-599516ad5dba" width="100%"></td>
+    <td><img src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M10-WeatherKit/assets/135544903/8531cb9d-4fc9-457b-9fec-9ecd9b713690" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M10-WeatherKit/assets/135544903/d4cf0f29-2f73-4340-a816-be696889f4fa" width="100%"></td>
+    <td><img src="https://github.com/DeveloperAcademy-POSTECH/2024-NC2-M10-WeatherKit/assets/135544903/1d511565-4bf9-4cc6-8e3c-a18e491e0e15" width="100%"></td>
+  </tr>
+</table>
+
 ## 🛠️ About Code
 (핵심 코드에 대한 설명 추가)
