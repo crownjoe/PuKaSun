@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import CoreLocation
-import WeatherKit
 import ActivityKit
 
 struct MainView: View {
@@ -16,7 +14,7 @@ struct MainView: View {
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
-    
+    @Binding var alarmTime: Double
     
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
@@ -29,7 +27,7 @@ struct MainView: View {
     
     //@Query var alarms: [Alarm]
     //@AppStorage("alarmTime") var alarmTime: Double = 0.2
-    @Binding var alarmTime: Double
+
     
     var body: some View {
         NavigationStack {
@@ -42,6 +40,9 @@ struct MainView: View {
                     HStack(spacing: 20){
                         HStack(spacing: 3){
                             Image("img_location")
+                                .frame(width: 30, height: 30)
+                                .padding(.bottom, 4)
+                                .padding(.trailing, -4)
                             
                             Text(address)
                                 .font(.system(size: 15))
@@ -91,42 +92,49 @@ struct MainView: View {
                             Image("img_char2")
                                 .frame(width: 148, height: 233)
                                 .padding(.leading, 40)
+                                .padding(.bottom, -20)
                         }
                         
                         else if !oneThirdPassed && twoThirdsPassed {
                             Image("img_char3")
                                 .frame(width: 148, height: 233)
                                 .padding(.leading, 40)
+                                .padding(.bottom, -20)
                         }
                         
                         else {
                             Image("img_char1")
                                 .frame(width: 148, height: 233)
                                 .padding(.leading, 40)
+                                .padding(.bottom, -20)
                         }
                         
                         if !startTimer { // TODO: 다음날 외출 버튼이 떠야함!
                             noticeOutAlarm
                                 .onTapGesture {
+                                    print("메인뷰", alarmTime)
                                     self.startTimer = true
                                     startLivaActivity()
                                 }
+                                .padding(.top, 56)
                         }
                         else if startTimer && !newTimer{
                             noticeAlarm
+                                .padding(.top, 40)
                         }
                         else if newTimer {
                             noticeFinishAlarm
+                                .padding(.top, 40)
                         }
                         
-                    }.padding(.bottom, 30)
+                    }.padding(.bottom, 20)
                 }
             }
 //            .navigationBarHidden(true)
 //            .navigationBarBackButtonHidden(true)
         }
         .edgesIgnoringSafeArea(.all)
-        .tint(Color.white)
+        .tint(Color.customGray)
     }
     
     private var UvView1: some View {
@@ -304,7 +312,7 @@ struct MainView: View {
                 .padding(.leading, 10)
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(changeTime(alarmTime: alarmTime))
+                Text(changeTime(alarmTime: (alarmTime - progress)) )
                     .font(.system(size: 26))
                     .fontWeight(.heavy)
                     .foregroundColor(Color.suncreamPink)
@@ -321,7 +329,7 @@ struct MainView: View {
                     .padding(.trailing, 10)
             }
             .onAppear {
-                let interval = 0.1
+                let interval = 0.01
                 Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
                     if progress < alarmTime {
                         progress += interval / 60
@@ -404,7 +412,7 @@ struct MainView: View {
     
     func startLivaActivity() {
         let liveActivityAttributes = LiveActivityAttributes(name: "pukaSun")
-        let contentState = LiveActivityAttributes.ContentState(emoji: "7")
+        let contentState = LiveActivityAttributes.ContentState(alarmTime: alarmTime)
         
         do {
             let activity = try Activity<LiveActivityAttributes>.request(

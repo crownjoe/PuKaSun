@@ -10,5 +10,5 @@ import Foundation
 public final class AlarmTimeManager: ObservableObject {
     static let shared = AlarmTimeManager()
     private init() { self.alarmTime = alarmTime }
-    @Published var alarmTime: Double = 1.0
+    @Published var alarmTime: Double = 30.0
 }

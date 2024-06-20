@@ -11,26 +11,23 @@ import SwiftUI
 
 struct LiveActivityAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
-        //변하는 값 -> 시간 
-        var emoji: String
+        //변하는 값 -> 시간
+        var alarmTime: Double
     }
-    
     // 안변하는 값
     var name: String
 }
 
 struct LiveActivityLiveActivity: Widget {
-//    AlarmTimeManager.shared.alarmTime
+    //    AlarmTimeManager.shared.alarmTime
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager.shared
-//    @AppStorage("alarmTime") var alarmTime: Double = 0.0
-
+    
     
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: LiveActivityAttributes.self) { context in
             // Lock screen/banner UI goes here
-            Text("\(alarmTimeManager.alarmTime)")
+            
             HStack(spacing: 20) {
                 Image("img_LiveActivitySuncream")
                     .frame(width: 90, height: 94)
@@ -43,7 +40,7 @@ struct LiveActivityLiveActivity: Widget {
                         Image("img_LiveActivitySun")//
                             .frame(width: 33, height: 33)
                         
-                        Text(changeTime(alarmTime: alarmTimeManager.alarmTime))
+                        Text(changeTime(alarmTime: context.state.alarmTime - progress)) //
                             .font(.system(size: 26))
                             .fontWeight(.heavy)
                             .foregroundColor(Color(red: 0.98, green: 0.64, blue: 0.84))
@@ -56,25 +53,33 @@ struct LiveActivityLiveActivity: Widget {
                         .foregroundColor(Color(red: 0.74, green: 0.74, blue: 0.74))
                         .padding(.bottom, 8)
                     
+                    timerView(alarmTime: context.state.alarmTime)
                     
-                    ProgressView(value: progress, total: alarmTimeManager.alarmTime)
-                        .progressViewStyle(CustomProgressViewStyle())
-                        .frame(width: 227, height: 12)
-                        .padding(.trailing, 10)
-                        .onAppear {
-                            print(alarmTimeManager.alarmTime)
-                        }
+//                                        ProgressView(value: progress, total: context.state.alarmTime)
+//                                            .progressViewStyle(CustomProgressViewStyle())
+//                                            .frame(width: 227, height: 12)
+//                                            .padding(.trailing, 10)
                     
                 }
+                //                .onAppear {
+                //                    let interval = 0.01
+                //                    Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+                //                        if progress < context.state.alarmTime {
+                //                            progress += interval / 60
+                //
+                //                        } else {
+                //                            timer.invalidate()
+                //                            self.progress = 0.0
+                //                        }
+                //                    }
+                //                }
             }
             .padding(.vertical, 18)
-            .activityBackgroundTint(Color.white)
+//            .activityBackgroundTint(Color.white)
             .activitySystemActionForegroundColor(Color(red: 0.74, green: 0.74, blue: 0.74))
             
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
                     //다이나믹 터치했을 때
                     Image("img_dynamicicon")
@@ -90,22 +95,64 @@ struct LiveActivityLiveActivity: Widget {
                         .fontWeight(.heavy)
                         .foregroundColor(Color.white)
                         .padding(.trailing, 30)
-                        
+                    
                 }
-//                DynamicIslandExpandedRegion(.bottom) {
-//                    Text("Bottom \(context.state.emoji)")
-//                    // more content
-//                }
             } compactLeading: {
                 Image("img_dynamic")
             } compactTrailing: {
-//                Text("T \(context.state.emoji)")
+                //                Text("T \(context.state.emoji)")
             } minimal: {
-                Text(context.state.emoji)
+                //                Text(context.state.emoji)
             }
             .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.red)
+            .keylineTint(Color(red: 0.98, green: 0.64, blue: 0.84))
         }
+    }
+}
+
+struct timerView: View {
+    @StateObject private var viewModel: TimerViewModel
+    
+    init(alarmTime: Double) {
+        _viewModel = StateObject(wrappedValue: TimerViewModel(alarmTime: alarmTime))
+    }
+    
+    var body: some View {
+        VStack {
+            ProgressView(value: viewModel.progress, total: viewModel.alarmTime)
+                .progressViewStyle(CustomProgressViewStyle())
+                .frame(width: 227, height: 12)
+                .padding(.trailing, 10)
+        }
+    }
+}
+
+
+class TimerViewModel: ObservableObject {
+    @Published var progress: Double = 0.0
+    var alarmTime: Double
+    private var timer: Timer?
+    
+    init(alarmTime: Double) {
+        self.alarmTime = alarmTime
+        startTimer()
+    }
+    
+    private func startTimer() {
+        let interval = 0.01
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
+            if self.progress < self.alarmTime {
+                self.progress += interval / 60
+            } else {
+                timer.invalidate()
+                self.progress = 0.0
+            }
+        }
+    }
+    
+    deinit {
+        timer?.invalidate()
     }
 }
 
@@ -120,12 +167,12 @@ struct CustomProgressViewStyle: ProgressViewStyle {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color(red: 0.98, green: 0.64, blue: 0.84))
+                    .fill(Color(red: 0.81, green: 0.81, blue: 0.81))
                     .cornerRadius(13.5)
                     .frame(width: 227, height: 12)
                 
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color(red: 0.81, green: 0.81, blue: 0.81))
+                    .fill(Color(red: 0.98, green: 0.64, blue: 0.84))
                     .cornerRadius(13.5)
                     .frame(width: geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0), height: 12)
                     .animation(.linear, value: configuration.fractionCompleted)
@@ -136,25 +183,25 @@ struct CustomProgressViewStyle: ProgressViewStyle {
 
 
 
-extension LiveActivityAttributes {
-    fileprivate static var preview: LiveActivityAttributes {
-        LiveActivityAttributes(name: "World")
-    }
-}
-
-extension LiveActivityAttributes.ContentState {
-    fileprivate static var smiley: LiveActivityAttributes.ContentState {
-        LiveActivityAttributes.ContentState(emoji: "😀")
-    }
-    
-    fileprivate static var starEyes: LiveActivityAttributes.ContentState {
-        LiveActivityAttributes.ContentState(emoji: "🤩")
-    }
-}
-
-#Preview("Notification", as: .content, using: LiveActivityAttributes.preview) {
-    LiveActivityLiveActivity()
-} contentStates: {
-    LiveActivityAttributes.ContentState.smiley
-    LiveActivityAttributes.ContentState.starEyes
-}
+//extension LiveActivityAttributes {
+//    fileprivate static var preview: LiveActivityAttributes {
+//        LiveActivityAttributes(name: "World")
+//    }
+//}
+//
+//extension LiveActivityAttributes.ContentState {
+//    fileprivate static var smiley: LiveActivityAttributes.ContentState {
+//        LiveActivityAttributes.ContentState(emoji: "😀")
+//    }
+//
+//    fileprivate static var starEyes: LiveActivityAttributes.ContentState {
+//        LiveActivityAttributes.ContentState(emoji: "🤩")
+//    }
+//}
+//
+//#Preview("Notification", as: .content, using: LiveActivityAttributes.preview) {
+//    LiveActivityLiveActivity()
+//} contentStates: {
+//    LiveActivityAttributes.ContentState.smiley
+//    LiveActivityAttributes.ContentState.starEyes
+//}
