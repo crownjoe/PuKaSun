@@ -39,9 +39,10 @@ struct PukaSunView: View {
                         .fontWeight(.regular)
                         .font(.system(size: 20))
                         .onTapGesture {
-                            //https://developer.apple.com/weatherkit/data-source-attribution/ 연결
+                            if let url = URL(string: "https://developer.apple.com/weatherkit/data-source-attribution/") {
+                                UIApplication.shared.open(url)
+                            }
                         }
-                    
                     
                     Text("자외선 걱정 없이 외출하세요! ")
                         .font(.system(size: 20))
@@ -73,7 +74,7 @@ struct PukaSunView: View {
                             .background(Color.pukacolor)
                             .cornerRadius(10)
                     }
-                
+                    
                 }
                 .ignoresSafeArea(.all)
             }

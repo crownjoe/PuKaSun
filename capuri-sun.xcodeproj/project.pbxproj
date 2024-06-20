@@ -503,7 +503,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "capuri-sun/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = pukaSun;
+				INFOPLIST_KEY_CFBundleDisplayName = PuKaSun;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSMotionUsageDescription = "걸음수 데이터 측정을 위해 데이터 접근 권한이 필요합니다.";
@@ -541,7 +541,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "capuri-sun/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = pukaSun;
+				INFOPLIST_KEY_CFBundleDisplayName = PuKaSun;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 권한 요청";
 				INFOPLIST_KEY_NSMotionUsageDescription = "걸음수 데이터 측정을 위해 데이터 접근 권한이 필요합니다.";
