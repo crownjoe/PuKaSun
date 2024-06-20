@@ -24,6 +24,12 @@ struct SuncreamView: View {
     @State private var imageName5 = "img_suncream5"
     @State private var text5 = "야외 물놀이            "
     
+    @Binding var address: String
+    @Binding var uvIndex: String
+    @Binding var condition: String
+    @Binding var temperature: String
+    @Binding var alarmTime: Double
+    
 
     var body: some View {
         ZStack{
@@ -31,11 +37,11 @@ struct SuncreamView: View {
             
             VStack{
                 HStack(spacing: 294){
-                    Image("img_before")
+                    NavigationLink(destination:  MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
+                        Image("img_before")
+                    }
                     
-                    Text("닫기")
-                        .font(.system(size: 20))
-                        .foregroundColor(.customGray)
+                
                 }
                 Spacer()
                     .frame(height: 17)
@@ -171,10 +177,13 @@ struct SuncreamView: View {
                 }
             }
             
-        }.ignoresSafeArea(.all)
+        }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.all)
     }
 }
 
-#Preview {
-    SuncreamView()
-}
+//#Preview {
+//    SuncreamView()
+//}

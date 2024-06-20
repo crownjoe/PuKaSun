@@ -32,7 +32,7 @@ struct MainView: View {
     @Binding var alarmTime: Double
     
     var body: some View {
-        NavigationView{
+        NavigationStack {
             ZStack{
                 Image("img_mainBackground")
                     .resizable()
@@ -63,15 +63,16 @@ struct MainView: View {
                             Image("img_alarm")
                         }
                         
-                        NavigationLink(destination: SuncreamView()){
+                        NavigationLink(destination: SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
                             Image("img_suncream")
                         }
                         
-                        NavigationLink(destination: UVView()){
+                        NavigationLink(destination: UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
                             Image("img_uv")
                         }
                         
                     }.padding(.bottom, 30)
+                    
                     
                     VStack{
                         if uvIndex == "0" || uvIndex == "1" || uvIndex == "2" {
@@ -122,8 +123,6 @@ struct MainView: View {
                 }
             }
         }
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.all)
     }
     

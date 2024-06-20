@@ -163,14 +163,19 @@ struct AlarmView: View {
                     }
                 }
             }
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
         else {
             MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
         }
     }
     
-    func connectData(){
-        alarmTime = Double(selectedHour ?? 0)
+    func connectData() {
+        let hour = selectedHour ?? 0
+        alarmTime = Double(hour * 60)
         print(alarmTime)
     }
 }
