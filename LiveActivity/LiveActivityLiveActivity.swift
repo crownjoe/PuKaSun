@@ -11,40 +11,32 @@ import SwiftUI
 
 struct LiveActivityAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
-        //변하는 값 -> 시간
         var alarmTime: Double
     }
-    // 안변하는 값
     var name: String
 }
 
 struct LiveActivityLiveActivity: Widget {
-    //    AlarmTimeManager.shared.alarmTime
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
     
-    
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: LiveActivityAttributes.self) { context in
-            // Lock screen/banner UI goes here
             
             HStack(spacing: 20) {
                 Image("img_LiveActivitySuncream")
                     .frame(width: 90, height: 94)
                     .padding(.leading, 14)
-                
-                
-                VStack(alignment: .leading, spacing: 8) {
                     
+                VStack(alignment: .leading, spacing: 8) {
                     HStack{
-                        Image("img_LiveActivitySun")//
+                        Image("img_LiveActivitySun")
                             .frame(width: 33, height: 33)
                         
-                        Text(changeTime(alarmTime: context.state.alarmTime - progress)) //
+                        Text(changeTime(alarmTime: context.state.alarmTime - progress))
                             .font(.system(size: 26))
                             .fontWeight(.heavy)
                             .foregroundColor(Color(red: 0.98, green: 0.64, blue: 0.84))
-                        
                     }
                     
                     Text("후에 자외선 차단제를 발라주세요!")

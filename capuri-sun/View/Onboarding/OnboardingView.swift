@@ -75,7 +75,8 @@ struct OnboardingView: View {
                             .padding(.bottom, 155)
                     }
                     
-                    if !showAdditionalText{ //처음 눌렀을 때
+                    if !showAdditionalText{
+                        
                         Button(action: {
                             showAdditionalText = true
                             
@@ -117,8 +118,6 @@ struct OnboardingView: View {
                     }
                 }
                 .animation(.default, value: showAdditionalText)
-            
-
             }
         }
         else {
@@ -136,7 +135,6 @@ struct OnboardingView: View {
                 
                 let temperatureValue = result.currentWeather.temperature.value
                 self.temperature = "\(String(format: "%.1f", temperatureValue))°"
-                
                 self.condition = translateCondition(result.currentWeather.condition.description)
                 
             } catch {
