@@ -177,7 +177,6 @@ struct AlarmView: View {
     func connectData() {
         let hour = selectedHour ?? 0
         alarmTimeManager.alarmTime = Double(hour * 60)
-        //print(alarmTimeManager.alarmTime)
     }
 }
 
