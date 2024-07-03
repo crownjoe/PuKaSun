@@ -7,8 +7,10 @@
 
 import SwiftUI
 import ActivityKit
+import UserNotifications
 
 struct MainView: View {
+    let manager = NotificationManager.instance
     
     @Binding var address: String
     @Binding var uvIndex: String
@@ -109,14 +111,18 @@ struct MainView: View {
                                 .padding(.bottom, -20)
                         }
                         
-                        if !startTimer { // TODO: 다음날 외출 버튼이 떠야함!
+                        if !startTimer { // TODO: 다음날 외출 버튼이 떠야함! & 알림 여기서 시작
                             noticeOutAlarm
                                 .onTapGesture {
                                     print("메인뷰", alarmTime)
                                     self.startTimer = true
-                                    startLivaActivity()
+                                    manager.makeNotification(alarmTime: alarmTime)
+                                    //startLivaActivity()
                                 }
                                 .padding(.top, 56)
+                                .onAppear {
+                                    manager.requestAuthorization()
+                                }
                         }
                         else if startTimer && !newTimer{
                             noticeAlarm
@@ -132,6 +138,7 @@ struct MainView: View {
             }
 //            .navigationBarHidden(true)
 //            .navigationBarBackButtonHidden(true)
+               
         }
         .edgesIgnoringSafeArea(.all)
         .tint(Color.customGray)
@@ -408,6 +415,43 @@ struct MainView: View {
                 }
             }
         }
+    }
+    
+    class NotificationManager {
+        static let instance = NotificationManager()
+        private init() {}
+        
+        func requestAuthorization() {
+            let options: UNAuthorizationOptions = [.alert, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: options) { (success, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("성공")
+                }
+            }
+        }
+        
+        func makeNotification(alarmTime : TimeInterval) {
+            let content = UNMutableNotificationContent()
+            content.title = "설정한 시간이 지났습니다"
+            content.subtitle = "얼굴 타는중🥵 자외선 차단제를 다시 발라주세요!"
+            content.sound = .default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (alarmTime * 60), repeats: false)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request) { (error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("알림 설정 성공")
+                }
+            }
+        }
+        
+//        func cancelNotification() {
+//            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//        }
     }
     
     func startLivaActivity() {

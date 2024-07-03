@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7D2C20663A00415417 /* LocationManager.swift */; };
 		DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */; };
-		DF6A44812C21B18F0048EE4F /* CoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A44802C21B18F0048EE4F /* CoreMotionService.swift */; };
+		DF6A44812C21B18F0048EE4F /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A44802C21B18F0048EE4F /* CoreMotionManager.swift */; };
 		DF6A44822C21BF510048EE4F /* LiveActivityLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */; };
 		DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D12C1FDD710003A112 /* OnboardingView.swift */; };
 		DF9E78D42C1FDD7A0003A112 /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */; };
@@ -23,7 +23,6 @@
 		DFAEFA822C1BD7A100913FEC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA812C1BD7A100913FEC /* Preview Assets.xcassets */; };
 		DFAEFA892C1BD7C300913FEC /* .gitignore  in Resources */ = {isa = PBXBuildFile; fileRef = DFAEFA882C1BD7C300913FEC /* .gitignore  */; };
 		DFC384532C23C81E007248B0 /* AlarmTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */; };
-		DFC384542C23C85A007248B0 /* AlarmTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */; };
 		DFF209702C21360A0011B243 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF2096F2C21360A0011B243 /* WidgetKit.framework */; };
 		DFF209722C21360A0011B243 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF209712C21360A0011B243 /* SwiftUI.framework */; };
 		DFF209752C21360A0011B243 /* LiveActivitytBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209742C21360A0011B243 /* LiveActivitytBundle.swift */; };
@@ -62,8 +61,8 @@
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
 		DF2EEE7D2C20663A00415417 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PukaSunView.swift; sourceTree = "<group>"; };
-		DF6A447F2C21B15A0048EE4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		DF6A44802C21B18F0048EE4F /* CoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionService.swift; sourceTree = "<group>"; };
+		DF6A447F2C21B15A0048EE4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF6A44802C21B18F0048EE4F /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		DF9E78D12C1FDD710003A112 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		DF9E78D52C1FDD810003A112 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -111,11 +110,38 @@
 		DF2EEE812C207AD900415417 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				DF2EEE7D2C20663A00415417 /* LocationManager.swift */,
 				DF9E78D12C1FDD710003A112 /* OnboardingView.swift */,
 				DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */,
+				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		DF5893C52C35A5A1003847FD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */,
+				DF6A447F2C21B15A0048EE4F /* Info.plist */,
+				DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DF5893C62C35A5B7003847FD /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		DF5893C72C35A603003847FD /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DF2EEE7D2C20663A00415417 /* LocationManager.swift */,
+				DF6A44802C21B18F0048EE4F /* CoreMotionManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		DF7B55252C225F3400DA9A70 /* Main */ = {
@@ -130,35 +156,34 @@
 			isa = PBXGroup;
 			children = (
 				DF2EEE812C207AD900415417 /* Onboarding */,
-				DF9E78D32C1FDD7A0003A112 /* AlarmView.swift */,
-				DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */,
 				DF7B55252C225F3400DA9A70 /* Main */,
-				DF9E78DB2C1FDD9A0003A112 /* Information */,
+				DF9E78DB2C1FDD9A0003A112 /* Info */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		DF9E78DB2C1FDD9A0003A112 /* Information */ = {
+		DF9E78DB2C1FDD9A0003A112 /* Info */ = {
 			isa = PBXGroup;
 			children = (
 				DF9E78D92C1FDD910003A112 /* UVView.swift */,
 				DF9E78D72C1FDD8A0003A112 /* SuncreamView.swift */,
 			);
-			path = Information;
+			path = Info;
 			sourceTree = "<group>";
 		};
-		DF9E78E02C1FDDEA0003A112 /* Extension */ = {
+		DF9E78E02C1FDDEA0003A112 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
 				DF9E78DE2C1FDDE50003A112 /* ColorExtension.swift */,
 			);
-			path = Extension;
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		DF9E78E22C1FDDFF0003A112 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				DF9E78DC2C1FDDD50003A112 /* Alarm.swift */,
+				DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -186,14 +211,12 @@
 		DFAEFA792C1BD7A000913FEC /* capuri-sun */ = {
 			isa = PBXGroup;
 			children = (
-				DF6A447F2C21B15A0048EE4F /* Info.plist */,
-				DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */,
-				DFAEFA7A2C1BD7A000913FEC /* capuri_sunApp.swift */,
-				DF6A44802C21B18F0048EE4F /* CoreMotionService.swift */,
-				DF9E78E02C1FDDEA0003A112 /* Extension */,
+				DF5893C52C35A5A1003847FD /* App */,
 				DF9E78CF2C1FDD580003A112 /* View */,
 				DF9E78E22C1FDDFF0003A112 /* Model */,
-				DFAEFA7E2C1BD7A100913FEC /* Assets.xcassets */,
+				DF5893C72C35A603003847FD /* Manager */,
+				DF9E78E02C1FDDEA0003A112 /* Helper */,
+				DF5893C62C35A5B7003847FD /* Resource */,
 				DFAEFA802C1BD7A100913FEC /* Preview Content */,
 			);
 			path = "capuri-sun";
@@ -336,7 +359,7 @@
 				DFC384532C23C81E007248B0 /* AlarmTimeManager.swift in Sources */,
 				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
-				DF6A44812C21B18F0048EE4F /* CoreMotionService.swift in Sources */,
+				DF6A44812C21B18F0048EE4F /* CoreMotionManager.swift in Sources */,
 				DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */,
 				DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */,
 				DF6A44822C21BF510048EE4F /* LiveActivityLiveActivity.swift in Sources */,
@@ -352,7 +375,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFF209752C21360A0011B243 /* LiveActivitytBundle.swift in Sources */,
-				DFC384542C23C85A007248B0 /* AlarmTimeManager.swift in Sources */,
 				DFF2097B2C21360A0011B243 /* AppIntent.swift in Sources */,
 				DFF209792C21360A0011B243 /* LiveActivity.swift in Sources */,
 				DFF209772C21360A0011B243 /* LiveActivityLiveActivity.swift in Sources */,
