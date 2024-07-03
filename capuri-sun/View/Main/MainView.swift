@@ -444,14 +444,14 @@ struct MainView: View {
                 if let error = error {
                     print(error.localizedDescription)
                 } else {
-                    print("Notification scheduled successfully.")
+                    print("알림 설정 성공")
                 }
             }
         }
         
-        func cancelNotification() {
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        }
+//        func cancelNotification() {
+//            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//        }
     }
     
     func startLivaActivity() {
