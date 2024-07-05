@@ -204,11 +204,14 @@ struct AlarmView: View {
                                 Text("시작하기")
                                     .bold()
                                     .font(.system(size: 20))
-                                    .foregroundColor(.alarmcolor2)
+//                                    .foregroundColor(.alarmcolor2)
+                                    .foregroundColor((1...8).contains(selectedHour) ? .alarmcolor2 : .gray)
                                     .frame(width: 308, height: 60)
-                                    .background(Color.white)
+//                                    .background(Color.white)
+                                    .background((1...8).contains(selectedHour) ? .white : .customGray)
                                     .cornerRadius(10)
                             }
+                            .disabled(!(1...8).contains(selectedHour))
                             .padding(.bottom, 80)
                             .padding()
                         }

@@ -145,12 +145,10 @@ struct OnboardingView: View {
     
     func translateCondition(_ condition: String) -> String {
         switch condition {
-        case "Partly Cloudy", "Mostly Cloudy", "Cloudy":
+        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy":
             return "흐림"
         case "Clear", "Mostly Clear":
             return "맑음"
-        case "Foggy":
-            return "안개"
         case "Windy":
             return "바람"
         case "Rain", "Heavy Rain", "Drizzle":
