@@ -17,7 +17,7 @@ struct AlarmView: View {
     
     @State private var selectedButton: Int? = nil
     
-    let timeRange = 4..<9
+    let timeRange = 5..<9
     
     var body: some View {
         if !showMainView{
@@ -64,8 +64,8 @@ struct AlarmView: View {
                                 Button(action: {
                                     selectedHour = 2
                                     connectData()
-//                                    selectedHour = 0
-//                                    isClicked.toggle() // 버튼 클릭 상태 변경
+                                    //                                    selectedHour = 0
+                                    //                                    isClicked.toggle() // 버튼 클릭 상태 변경
                                 })
                                 {
                                     HStack {
@@ -119,19 +119,19 @@ struct AlarmView: View {
                                 
                                 
                             }
-                        } 
+                        }
                         .overlay(
                             selectedHour == 2 ?
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
                             : nil
                         )
-
+                        
                         // MARK: 3시간마다
                         Button(action: {
                             selectedHour = 3
                             connectData()
-//                            selectedHour = 0
+                            //                            selectedHour = 0
                         }) {
                             Text("3시간마다")
                                 .fontWeight(.bold)
@@ -147,27 +147,47 @@ struct AlarmView: View {
                             : nil
                         )
                         
+                        // MARK: 4시간마다
+                        Button(action: {
+                            selectedHour = 4
+                            connectData()
+                            //                            selectedHour = 0
+                        }) {
+                            Text("4시간마다")
+                                .fontWeight(.bold)
+                                .font(.system(size: 20))
+                                .foregroundColor(.white)
+                                .frame(width: 308, height: 60)
+                                .background(Color.alarmcolor)
+                                .cornerRadius(20)
+                        }.overlay(
+                            selectedHour == 4 ?
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.suncreamPink, lineWidth: 4)
+                            : nil
+                        )
+                        
                         VStack {
                             // MARK: _시간마다
                             Button(action: {
                                 showPicker.toggle()
                             }) {
-                                Text("\(0...3 ~= selectedHour  ?  "_시간마다" : "\(selectedHour)시간마다")")
+                                Text("\(0...4 ~= selectedHour  ?  "_시간마다" : "\(selectedHour)시간마다")")
                                     .fontWeight(.bold)
                                     .font(.system(size: 20))
                                     .foregroundColor(.white)
                                     .frame(width: 308, height: 60)
                                     .background(Color.alarmcolor)
                                     .cornerRadius(20)
-//                                    .padding(.bottom, 22)
+                                //                                    .padding(.bottom, 22)
                             }
                             .overlay(
-                                (selectedHour == 4 || selectedHour == 5 || selectedHour == 6 || selectedHour == 7 || selectedHour == 8) ?
+                                (selectedHour == 5 || selectedHour == 6 || selectedHour == 7 || selectedHour == 8) ?
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(Color.suncreamPink, lineWidth: 4)
                                 : nil
                             )
-
+                            
                             .sheet(isPresented: $showPicker) {
                                 VStack {
                                     Picker("시간", selection: $selectedHour) {
@@ -179,7 +199,7 @@ struct AlarmView: View {
                                         if selectedHour == nil {
                                             selectedHour = timeRange.first ?? selectedHour
                                         }
-                                        if (selectedHour != 0), 0...3 ~= selectedHour {
+                                        if (selectedHour != 0), 0...4 ~= selectedHour {
                                             self.selectedHour = timeRange.first ?? selectedHour
                                         }
                                     }
@@ -192,7 +212,7 @@ struct AlarmView: View {
                                         selectedHour = selectedHour
                                         showPicker.toggle()
                                         connectData()
-                                    }
+                                    }.font(.headline)
                                     
                                 }.presentationDetents([.height(280)])
                                 
@@ -204,10 +224,8 @@ struct AlarmView: View {
                                 Text("시작하기")
                                     .bold()
                                     .font(.system(size: 20))
-//                                    .foregroundColor(.alarmcolor2)
                                     .foregroundColor((1...8).contains(selectedHour) ? .alarmcolor2 : .gray)
                                     .frame(width: 308, height: 60)
-//                                    .background(Color.white)
                                     .background((1...8).contains(selectedHour) ? .white : .customGray)
                                     .cornerRadius(10)
                             }

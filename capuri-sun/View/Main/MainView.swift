@@ -7,10 +7,9 @@
 
 import SwiftUI
 import ActivityKit
-import UserNotifications
 
 struct MainView: View {
-    let manager = NotificationManager.instance
+    @StateObject private var notificationManager = NotificationManager()
     
     @Binding var address: String
     @Binding var uvIndex: String
@@ -29,7 +28,7 @@ struct MainView: View {
     
     //@Query var alarms: [Alarm]
     //@AppStorage("alarmTime") var alarmTime: Double = 0.2
-
+    
     
     var body: some View {
         NavigationStack {
@@ -116,13 +115,10 @@ struct MainView: View {
                                 .onTapGesture {
                                     print("메인뷰", alarmTime)
                                     self.startTimer = true
-                                    manager.makeNotification(alarmTime: alarmTime)
+                                    notificationManager.makeNotification(alarmTime: alarmTime)
                                     //startLivaActivity()
                                 }
                                 .padding(.top, 56)
-                                .onAppear {
-                                    manager.requestAuthorization()
-                                }
                         }
                         else if startTimer && !newTimer{
                             noticeAlarm
@@ -136,9 +132,9 @@ struct MainView: View {
                     }.padding(.bottom, 20)
                 }
             }
-//            .navigationBarHidden(true)
-//            .navigationBarBackButtonHidden(true)
-               
+            //            .navigationBarHidden(true)
+            //            .navigationBarBackButtonHidden(true)
+            
         }
         .edgesIgnoringSafeArea(.all)
         .tint(Color.customGray)
@@ -402,14 +398,12 @@ struct MainView: View {
         func makeBody(configuration: Configuration) -> some View {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 0)
                         .fill(Color.customGray)
-                        .cornerRadius(13.5)
                         .frame(width: 227, height: 12)
                     
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 0)
                         .fill(Color.suncreamPink)
-                        .cornerRadius(13.5)
                         .frame(width: geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0), height: 12)
                         .animation(.linear, value: configuration.fractionCompleted)
                 }
@@ -417,58 +411,7 @@ struct MainView: View {
         }
     }
     
-    class NotificationManager {
-        static let instance = NotificationManager()
-        private init() {}
-        
-        func requestAuthorization() {
-            let options: UNAuthorizationOptions = [.alert, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: options) { (success, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    print("성공")
-                }
-            }
-        }
-        
-        func makeNotification(alarmTime : TimeInterval) {
-            let content = UNMutableNotificationContent()
-            content.title = "설정한 시간이 지났습니다"
-            content.subtitle = "얼굴 타는중🥵 자외선 차단제를 다시 발라주세요!"
-            content.sound = .default
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (alarmTime * 60), repeats: false)
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    print("알림 설정 성공")
-                }
-            }
-        }
-        
-//        func cancelNotification() {
-//            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-//        }
-    }
-    
-    func startLivaActivity() {
-        let liveActivityAttributes = LiveActivityAttributes(name: "pukaSun")
-        let contentState = LiveActivityAttributes.ContentState(alarmTime: alarmTime)
-        
-        do {
-            let activity = try Activity<LiveActivityAttributes>.request(
-                attributes: liveActivityAttributes,
-                contentState: contentState
-            )
-            print(activity)
-        } catch {
-            print(error)
-        }
-    }
-    
+
     func changeTime(alarmTime: Double) -> String {
         let hours = Int(alarmTime) / 60
         let minutes = Int(alarmTime) % 60
