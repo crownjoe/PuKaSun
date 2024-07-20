@@ -22,12 +22,6 @@ struct OnboardingView: View {
     @Binding var temperature: String
     @Binding var location: CLLocation?
     
-//    @State private var location: CLLocation?
-//    @State private var address: String = ""
-//    @State private var uvIndex: String = ""
-//    @State private var condition: String = ""
-//    @State private var temperature: String = ""
-    
     var body: some View {
         if !showPukaView{
             ZStack {
@@ -86,7 +80,6 @@ struct OnboardingView: View {
                         
                         Button(action: {
                             showAdditionalText = true
-                            
                             locationManager.getCurrentLocation { location in
                                 self.location = location
                                 self.address = locationManager.address
@@ -95,6 +88,7 @@ struct OnboardingView: View {
                                 } else {
                                     print("위치 정보를 가져올 수 없습니다.")
                                 }
+                                
                             }
                         }) {
                             Text("다음")
@@ -146,6 +140,9 @@ struct OnboardingView: View {
                 self.temperature = "\(String(format: "%.1f", temperatureValue))°"
                 self.condition = translateCondition(result.currentWeather.condition.description)
                 
+                print("날씨", result.currentWeather.condition.description)
+                print("condition", condition)
+                
             } catch {
                 print(String(describing: error))
             }
@@ -154,15 +151,15 @@ struct OnboardingView: View {
     
     func translateCondition(_ condition: String) -> String {
         switch condition {
-        case "PartlyCloudy", "MostlyCloudy", "Cloudy", "Foggy":
+        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy":
             return "흐림"
-        case "Clear", "MostlyClear":
+        case "Clear", "Mostly Clear":
             return "맑음"
         case "Windy":
             return "바람"
-        case "Rain", "HeavyRain", "Drizzle":
+        case "Rain", "Heavy Rain", "Drizzle":
             return "비"
-        case "Snow", "HeavySnow":
+        case "Snow", "Heavy Snow":
             return "눈"
         case "Strongstorm", "Thunderstorm":
             return "뇌우"

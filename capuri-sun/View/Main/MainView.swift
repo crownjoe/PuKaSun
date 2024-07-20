@@ -21,7 +21,7 @@ struct MainView: View {
     @Binding var temperature: String
     @Binding var location: CLLocation?
     
-    @State private var progress: Double = 0.0
+//    @State private var progress: Double = 0.0
     @State private var timer: Timer?
     
     @State private var startTimer: Bool = false
@@ -111,7 +111,7 @@ struct MainView: View {
                         }
                         
                         // MARK: - 외출버튼
-                        if !startTimer {
+                        if !startTimer && alarmTimeManager.progress == 0 {
                             noticeOutAlarm
                                 .onTapGesture {
                                     self.startTimer = true
@@ -121,12 +121,16 @@ struct MainView: View {
                                 }
                                 .padding(.top, 56)
                         }
-                        else if startTimer && !newTimer{
+                        else if startTimer && !newTimer {
                             noticeAlarm
                                 .padding(.top, 40)
                         }
-                        else if newTimer {
+                        else if newTimer && alarmTimeManager.progress == 0 {
                             noticeFinishAlarm
+                                .padding(.top, 40)
+                        }
+                        else {
+                            noticeAlarm
                                 .padding(.top, 40)
                         }
                         
@@ -324,7 +328,7 @@ struct MainView: View {
                 .padding(.leading, 10)
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(changeTime(alarmTime: Int((((alarmTimeManager.selectedTime ?? 0) * 60) - progress))) )
+                Text(changeTime(alarmTime: Int((((alarmTimeManager.selectedTime ?? 0) * 60) - (alarmTimeManager.progress ?? 0)))) )
                     .font(.system(size: 26))
                     .fontWeight(.heavy)
                     .foregroundColor(Color.suncreamPink)
@@ -335,7 +339,7 @@ struct MainView: View {
                     .foregroundColor(Color.white)
                     .padding(.bottom, 5)
                 
-                ProgressView(value: progress, total: ((alarmTimeManager.selectedTime ?? 0) * 60))
+                ProgressView(value: alarmTimeManager.progress, total: ((alarmTimeManager.selectedTime ?? 0) * 60))
                     .progressViewStyle(CustomProgressViewStyle())
                     .frame(width: 227, height: 12)
                     .padding(.trailing, 10)
@@ -343,23 +347,24 @@ struct MainView: View {
             .onAppear {
                 let interval = 0.01
                 Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
-                    if progress < ((alarmTimeManager.selectedTime ?? 0) * 60) {
-                        progress += interval / 60
+                    if (alarmTimeManager.progress ?? 0) < ((alarmTimeManager.selectedTime ?? 0) * 60) {
+                        alarmTimeManager.progress = (alarmTimeManager.progress ?? 0) + (interval / 60)
                         
-                        if progress >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && progress < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
+                        if (alarmTimeManager.progress ?? 0) >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && (alarmTimeManager.progress ?? 0) < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
                             oneThirdPassed = true
                             twoThirdsPassed = false
                         }
                         
-                        else if progress >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
+                        else if (alarmTimeManager.progress ?? 0) >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
                             oneThirdPassed = false
                             twoThirdsPassed = true
                         }
                         
                     } else {
                         timer.invalidate()
+                        
                         self.newTimer = true
-                        self.progress = 0.0
+                        alarmTimeManager.progress = 0.0
                     }
                 }
             }
@@ -447,21 +452,20 @@ struct MainView: View {
     
     func translateCondition(_ condition: String) -> String {
         switch condition {
-        case "PartlyCloudy", "MostlyCloudy", "Cloudy", "Foggy":
+        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy":
             return "흐림"
-        case "Clear", "MostlyClear":
+        case "Clear", "Mostly Clear":
             return "맑음"
         case "Windy":
             return "바람"
-        case "Rain", "HeavyRain", "Drizzle":
+        case "Rain", "Heavy Rain", "Drizzle":
             return "비"
-        case "Snow", "HeavySnow":
+        case "Snow", "Heavy Snow":
             return "눈"
         case "Strongstorm", "Thunderstorm":
             return "뇌우"
         default:
             return condition
         }
-        
     }
 }
