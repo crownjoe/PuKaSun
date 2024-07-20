@@ -1,10 +1,12 @@
 import SwiftUI
+import CoreLocation
 
 struct AlarmView: View {
     @Binding var address: String
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
+    @Binding var location: CLLocation?
     
     @State private var showPicker = false
     @State private var showMainView = false
@@ -199,7 +201,7 @@ struct AlarmView: View {
             .navigationBarBackButtonHidden(true)
         }
         else {
-            MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+            MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
         }

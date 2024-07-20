@@ -32,6 +32,7 @@
 		DFF2097B2C21360A0011B243 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2097A2C21360A0011B243 /* AppIntent.swift */; };
 		DFF2097D2C21360B0011B243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFF2097C2C21360B0011B243 /* Assets.xcassets */; };
 		DFF209812C21360B0011B243 /* LiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DFF2096D2C21360A0011B243 /* LiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DFFC79772C4B69C200C03A40 /* ContorlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFC79762C4B69C200C03A40 /* ContorlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		DFF2097A2C21360A0011B243 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		DFF2097C2C21360B0011B243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFF2097E2C21360B0011B243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFFC79762C4B69C200C03A40 /* ContorlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContorlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		DF9E78CF2C1FDD580003A112 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DFFC79762C4B69C200C03A40 /* ContorlView.swift */,
 				DF2EEE812C207AD900415417 /* Onboarding */,
 				DF7B55252C225F3400DA9A70 /* Main */,
 				DF9E78DB2C1FDD9A0003A112 /* Info */,
@@ -362,6 +365,7 @@
 				DF6245442C390C88006975BF /* NotificationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,
 				DF6A44812C21B18F0048EE4F /* CoreMotionManager.swift in Sources */,
+				DFFC79772C4B69C200C03A40 /* ContorlView.swift in Sources */,
 				DF9E78DF2C1FDDE50003A112 /* ColorExtension.swift in Sources */,
 				DF9E78D22C1FDD710003A112 /* OnboardingView.swift in Sources */,
 				DF6A44822C21BF510048EE4F /* LiveActivityLiveActivity.swift in Sources */,

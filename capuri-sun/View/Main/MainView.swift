@@ -7,14 +7,19 @@
 
 import SwiftUI
 import ActivityKit
+import CoreLocation
+import WeatherKit
 
 struct MainView: View {
     @StateObject private var notificationManager = NotificationManager()
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    @ObservedObject private var locationManager = LocationManager()
     
     @Binding var address: String
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
+    @Binding var location: CLLocation?
     
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
@@ -24,8 +29,6 @@ struct MainView: View {
     
     @State private var oneThirdPassed = false
     @State private var twoThirdsPassed = false
-    
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
     
     var body: some View {
         NavigationStack {
@@ -58,7 +61,7 @@ struct MainView: View {
                         .background(Color.suncreamBackBlue)
                         .cornerRadius(20)
                         
-                        NavigationLink(destination: AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)){
+                        NavigationLink(destination: AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)){
                             Image("img_alarm")
                         }
                         
@@ -108,7 +111,7 @@ struct MainView: View {
                         }
                         
                         // MARK: - 외출버튼
-                        if !startTimer { // TODO: 다음날 외출 버튼이 떠야함! & 알림 여기서 시작
+                        if !startTimer {
                             noticeOutAlarm
                                 .onTapGesture {
                                     self.startTimer = true
@@ -134,6 +137,16 @@ struct MainView: View {
             //            .navigationBarBackButtonHidden(true)
             
         }
+        .onAppear{
+            locationManager.getCurrentLocation { location in
+                self.location = location
+                self.address = locationManager.address
+                if let location = location {
+                    getWeatherInfo(location)
+                } else {
+                    print("위치 정보를 가져올 수 없습니다.")
+                }
+            }}
         .edgesIgnoringSafeArea(.all)
         .tint(Color.customGray)
     }
@@ -292,8 +305,6 @@ struct MainView: View {
                 Image("img_outBtn")
                     .frame(width: 90, height: 94)
                     .padding(.leading, 10)
-                
-                
                 Text("외출")
                     .font(.system(size: 26))
                     .fontWeight(.heavy)
@@ -368,6 +379,7 @@ struct MainView: View {
                     self.newTimer = false
                     self.oneThirdPassed = false
                     self.twoThirdsPassed = false
+                    alarmTimeManager.selectedTime = 0
                 }
             VStack(alignment: .leading, spacing: 5) {
                 
@@ -409,14 +421,47 @@ struct MainView: View {
         }
     }
     
-    
     func changeTime(alarmTime: Int) -> String {
         let hours = Int(alarmTime) / 60
         let minutes = Int(alarmTime) % 60
         return "\(hours)시간 \(minutes)분"
     }
     
+    func getWeatherInfo(_ location: CLLocation) {
+        Task {
+            do {
+                let service = WeatherService()
+                let result = try await service.weather(for: location)
+                
+                self.uvIndex = "\(result.currentWeather.uvIndex.value)"
+                
+                let temperatureValue = result.currentWeather.temperature.value
+                self.temperature = "\(String(format: "%.1f", temperatureValue))°"
+                self.condition = translateCondition(result.currentWeather.condition.description)
+                
+            } catch {
+                print(String(describing: error))
+            }
+        }
+    }
+    
+    func translateCondition(_ condition: String) -> String {
+        switch condition {
+        case "PartlyCloudy", "MostlyCloudy", "Cloudy", "Foggy":
+            return "흐림"
+        case "Clear", "MostlyClear":
+            return "맑음"
+        case "Windy":
+            return "바람"
+        case "Rain", "HeavyRain", "Drizzle":
+            return "비"
+        case "Snow", "HeavySnow":
+            return "눈"
+        case "Strongstorm", "Thunderstorm":
+            return "뇌우"
+        default:
+            return condition
+        }
+        
+    }
 }
-
-
-

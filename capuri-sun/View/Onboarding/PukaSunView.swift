@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct PukaSunView: View {
     
@@ -13,6 +14,7 @@ struct PukaSunView: View {
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
+    @Binding var location: CLLocation?
     
     @State private var showAlarmView = false
     
@@ -64,7 +66,7 @@ struct PukaSunView: View {
             }
         }
         else {
-            AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+            AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
         }
     }
 }

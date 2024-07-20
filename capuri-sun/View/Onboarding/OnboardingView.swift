@@ -11,16 +11,22 @@ import WeatherKit
 
 struct OnboardingView: View {
     @StateObject private var notificationManager = NotificationManager()
-    @StateObject private var locationManager = LocationManager()
+    @ObservedObject private var locationManager = LocationManager()
     
     @State private var showAdditionalText = false
     @State private var showPukaView = false
     
-    @State private var location: CLLocation?
-    @State private var address: String = ""
-    @State private var uvIndex: String = ""
-    @State private var condition: String = ""
-    @State private var temperature: String = ""
+    @Binding var address: String
+    @Binding var uvIndex: String
+    @Binding var condition: String
+    @Binding var temperature: String
+    @Binding var location: CLLocation?
+    
+//    @State private var location: CLLocation?
+//    @State private var address: String = ""
+//    @State private var uvIndex: String = ""
+//    @State private var condition: String = ""
+//    @State private var temperature: String = ""
     
     var body: some View {
         if !showPukaView{
@@ -124,7 +130,7 @@ struct OnboardingView: View {
             }
         }
         else {
-            PukaSunView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+            PukaSunView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
         }
     }
     
@@ -148,17 +154,17 @@ struct OnboardingView: View {
     
     func translateCondition(_ condition: String) -> String {
         switch condition {
-        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy":
+        case "PartlyCloudy", "MostlyCloudy", "Cloudy", "Foggy":
             return "흐림"
-        case "Clear", "Mostly Clear":
+        case "Clear", "MostlyClear":
             return "맑음"
         case "Windy":
             return "바람"
-        case "Rain", "Heavy Rain", "Drizzle":
+        case "Rain", "HeavyRain", "Drizzle":
             return "비"
-        case "Snow", "Heavy Snow":
+        case "Snow", "HeavySnow":
             return "눈"
-        case "Strong Storms", "Thunder Storms":
+        case "Strongstorm", "Thunderstorm":
             return "뇌우"
         default:
             return condition
