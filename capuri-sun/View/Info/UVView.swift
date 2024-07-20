@@ -19,7 +19,6 @@ struct UVView: View {
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
-    @Binding var alarmTime: Double
     
     // TODO: 애니메이션 이슈 해결
     
@@ -30,13 +29,6 @@ struct UVView: View {
                 .ignoresSafeArea(.all)
             
             VStack{
-//                HStack{
-//                    NavigationLink(destination:  MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
-//                        Image("img_before")
-//                    }
-//                                        
-//                    Spacer()
-//                }
                 Spacer()
                     .frame(height: 17)
                 
@@ -333,8 +325,6 @@ struct UVView: View {
             }
             
         }
-//        .navigationBarHidden(true)
-//        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all)
     }
 }

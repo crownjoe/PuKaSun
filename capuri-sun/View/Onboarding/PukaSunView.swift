@@ -9,20 +9,11 @@ import SwiftUI
 
 struct PukaSunView: View {
     
-//    @StateObject private var locationManager = LocationManager()
-//    @State private var location: CLLocation?
-//    @State private var address: String = ""
-//    @State private var uvIndex: String = ""
-//    @State private var condition: String = ""
-//    @State private var temperature: String = ""
-    
     @Binding var address: String
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
-    @Binding var alarmTime: Double
     
-
     @State private var showAlarmView = false
     
     var body: some View {

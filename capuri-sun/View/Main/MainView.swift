@@ -15,7 +15,6 @@ struct MainView: View {
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
-    @Binding var alarmTime: Double
     
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
@@ -26,9 +25,7 @@ struct MainView: View {
     @State private var oneThirdPassed = false
     @State private var twoThirdsPassed = false
     
-    //@Query var alarms: [Alarm]
-    //@AppStorage("alarmTime") var alarmTime: Double = 0.2
-    
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
     
     var body: some View {
         NavigationStack {
@@ -65,11 +62,11 @@ struct MainView: View {
                             Image("img_alarm")
                         }
                         
-                        NavigationLink(destination: SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
+                        NavigationLink(destination: SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)){
                             Image("img_suncream")
                         }
                         
-                        NavigationLink(destination: UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
+                        NavigationLink(destination: UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)){
                             Image("img_uv")
                         }
                         
@@ -110,12 +107,13 @@ struct MainView: View {
                                 .padding(.bottom, -20)
                         }
                         
+                        // MARK: - 외출버튼
                         if !startTimer { // TODO: 다음날 외출 버튼이 떠야함! & 알림 여기서 시작
                             noticeOutAlarm
                                 .onTapGesture {
-                                    print("메인뷰", alarmTime)
                                     self.startTimer = true
-                                    notificationManager.makeNotification(alarmTime: alarmTime)
+                                    let alarmTime = alarmTimeManager.selectedTime ?? 0
+                                    notificationManager.makeNotification(alarmTime: TimeInterval(alarmTime))
                                     //startLivaActivity()
                                 }
                                 .padding(.top, 56)
@@ -315,7 +313,7 @@ struct MainView: View {
                 .padding(.leading, 10)
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(changeTime(alarmTime: (alarmTime - progress)) )
+                Text(changeTime(alarmTime: Int((((alarmTimeManager.selectedTime ?? 0) * 60) - progress))) )
                     .font(.system(size: 26))
                     .fontWeight(.heavy)
                     .foregroundColor(Color.suncreamPink)
@@ -326,7 +324,7 @@ struct MainView: View {
                     .foregroundColor(Color.white)
                     .padding(.bottom, 5)
                 
-                ProgressView(value: progress, total: alarmTime)
+                ProgressView(value: progress, total: ((alarmTimeManager.selectedTime ?? 0) * 60))
                     .progressViewStyle(CustomProgressViewStyle())
                     .frame(width: 227, height: 12)
                     .padding(.trailing, 10)
@@ -334,15 +332,15 @@ struct MainView: View {
             .onAppear {
                 let interval = 0.01
                 Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
-                    if progress < alarmTime {
+                    if progress < ((alarmTimeManager.selectedTime ?? 0) * 60) {
                         progress += interval / 60
                         
-                        if progress >= (alarmTime / 3) && progress < (2 * alarmTime / 3) {
+                        if progress >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && progress < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
                             oneThirdPassed = true
                             twoThirdsPassed = false
                         }
                         
-                        else if progress >= (2 * alarmTime / 3) {
+                        else if progress >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
                             oneThirdPassed = false
                             twoThirdsPassed = true
                         }
@@ -411,8 +409,8 @@ struct MainView: View {
         }
     }
     
-
-    func changeTime(alarmTime: Double) -> String {
+    
+    func changeTime(alarmTime: Int) -> String {
         let hours = Int(alarmTime) / 60
         let minutes = Int(alarmTime) % 60
         return "\(hours)시간 \(minutes)분"

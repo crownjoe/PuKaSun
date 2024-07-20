@@ -21,7 +21,6 @@ struct OnboardingView: View {
     @State private var uvIndex: String = ""
     @State private var condition: String = ""
     @State private var temperature: String = ""
-    @Binding var alarmTime: Double
     
     var body: some View {
         if !showPukaView{
@@ -103,7 +102,7 @@ struct OnboardingView: View {
                         
                         .padding(.top, showAdditionalText ? 0 : 320)
                     }
-                    else { //두 번 눌렀을 때
+                    else {
                         Button(action: {
                             showPukaView = true
                             
@@ -125,7 +124,7 @@ struct OnboardingView: View {
             }
         }
         else {
-            PukaSunView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)
+            PukaSunView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
         }
     }
     
