@@ -11,6 +11,10 @@ import CoreLocation
 import WeatherKit
 
 struct MainView: View {
+    
+    @State private var pathModel: PathModel = .init()
+    
+    
     @StateObject private var notificationManager = NotificationManager()
     @ObservedObject private var alarmTimeManager = AlarmTimeManager()
     @ObservedObject private var locationManager = LocationManager()
@@ -21,17 +25,15 @@ struct MainView: View {
     @Binding var temperature: String
     @Binding var location: CLLocation?
     
-//    @State private var progress: Double = 0.0
     @State private var timer: Timer?
     
     @State private var startTimer: Bool = false
     @State private var newTimer: Bool = false
-    
     @State private var oneThirdPassed = false
     @State private var twoThirdsPassed = false
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $pathModel.paths) {
             ZStack{
                 Image("img_mainBackground")
                     .resizable()
@@ -61,18 +63,21 @@ struct MainView: View {
                         .background(Color.suncreamBackBlue)
                         .cornerRadius(20)
                         
-                        NavigationLink(destination: AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)){
-                            Image("img_alarm")
-                        }
+                        Image("img_alarm")
+                            .onTapGesture {
+                                pathModel.paths.append(.alarmView)
+                            }
                         
-                        NavigationLink(destination: SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)){
-                            Image("img_suncream")
-                        }
+                        Image("img_suncream")
+                            .onTapGesture {
+                                pathModel.paths.append(.suncreamView)
+                            }
                         
-                        NavigationLink(destination: UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)){
-                            Image("img_uv")
-                        }
-                        
+                        Image("img_uv")
+                            .onTapGesture {
+                                pathModel.paths.append(.uvView)
+                            }
+                   
                     }.padding(.bottom, 30)
                     
                     
@@ -136,11 +141,29 @@ struct MainView: View {
                         
                     }.padding(.bottom, 20)
                 }
+                .navigationDestination(for: Path.self) {
+                    path in
+                    switch path {
+                    case.alarmView:
+                        AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbarRole(.editor)
+                            .tint(.white)
+                    case .suncreamView:
+                        SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbarRole(.editor)
+                            .tint(.white)
+                    case .uvView:
+                        UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbarRole(.editor)
+                            .tint(.white)
+                    }
+                }
             }
-            //            .navigationBarHidden(true)
-            //            .navigationBarBackButtonHidden(true)
-            
         }
+        .environment(pathModel)
         .onAppear{
             locationManager.getCurrentLocation { location in
                 self.location = location

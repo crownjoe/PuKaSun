@@ -62,6 +62,7 @@ struct AlarmView: View {
                             HStack {
                                 Button(action: {
                                     alarmTimeManager.selectedTime = 2
+                                    alarmTimeManager.progress = 0
                                 })
                                 {
                                     HStack {
@@ -96,6 +97,7 @@ struct AlarmView: View {
                         // MARK: - 3시간마다
                         Button(action: {
                             alarmTimeManager.selectedTime = 3
+                            alarmTimeManager.progress = 0
                         }) {
                             Text("3시간마다")
                                 .fontWeight(.bold)
@@ -114,6 +116,7 @@ struct AlarmView: View {
                         // MARK: - 4시간마다
                         Button(action: {
                             alarmTimeManager.selectedTime = 4
+                            alarmTimeManager.progress = 0
                         }) {
                             Text("4시간마다")
                                 .fontWeight(.bold)
@@ -134,7 +137,7 @@ struct AlarmView: View {
                             Button(action: {
                                 showPicker.toggle()
                             }) {
-                                Text("\(0...4 ~= (alarmTimeManager.selectedTime ?? 0) ? "_시간마다" : "\(alarmTimeManager.selectedTime ?? 0)시간마다")")
+                                Text("\(0...4 ~= (alarmTimeManager.selectedTime ?? 0) ? "_시간마다" : "\(Int(alarmTimeManager.selectedTime ?? 0))시간마다")")
                                 
                                     .fontWeight(.bold)
                                     .font(.system(size: 20))
@@ -172,8 +175,10 @@ struct AlarmView: View {
                                     
                                     Button("완료") {
                                         alarmTimeManager.selectedTime = Double(selectedHour)
+                                        alarmTimeManager.progress = 0
                                         showPicker.toggle()
-                                    }.font(.largeTitle)
+                                        
+                                    }.font(.title2)
                                     
                                 }.presentationDetents([.height(280)])
                                 

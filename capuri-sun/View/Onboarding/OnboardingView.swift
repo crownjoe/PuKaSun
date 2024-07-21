@@ -13,6 +13,8 @@ struct OnboardingView: View {
     @StateObject private var notificationManager = NotificationManager()
     @ObservedObject private var locationManager = LocationManager()
     
+    @State private var pathModel: PathModel = .init()
+    
     @State private var showAdditionalText = false
     @State private var showPukaView = false
     

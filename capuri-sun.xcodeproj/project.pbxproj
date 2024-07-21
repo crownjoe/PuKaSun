@@ -33,6 +33,7 @@
 		DFF2097D2C21360B0011B243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFF2097C2C21360B0011B243 /* Assets.xcassets */; };
 		DFF209812C21360B0011B243 /* LiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DFF2096D2C21360A0011B243 /* LiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DFFC79772C4B69C200C03A40 /* ContorlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFC79762C4B69C200C03A40 /* ContorlView.swift */; };
+		DFFC79792C4D0DC000C03A40 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFC79782C4D0DC000C03A40 /* Path.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		DFF2097C2C21360B0011B243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DFF2097E2C21360B0011B243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFFC79762C4B69C200C03A40 /* ContorlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContorlView.swift; sourceTree = "<group>"; };
+		DFFC79782C4D0DC000C03A40 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				DF5893C52C35A5A1003847FD /* App */,
+				DFFC797A2C4D0DCE00C03A40 /* Path */,
 				DF9E78CF2C1FDD580003A112 /* View */,
 				DF9E78E22C1FDDFF0003A112 /* Model */,
 				DF5893C72C35A603003847FD /* Manager */,
@@ -254,6 +257,14 @@
 				DFF2097E2C21360B0011B243 /* Info.plist */,
 			);
 			path = LiveActivity;
+			sourceTree = "<group>";
+		};
+		DFFC797A2C4D0DCE00C03A40 /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				DFFC79782C4D0DC000C03A40 /* Path.swift */,
+			);
+			path = Path;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,6 +371,7 @@
 			files = (
 				DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */,
 				DF9E78DD2C1FDDD50003A112 /* Alarm.swift in Sources */,
+				DFFC79792C4D0DC000C03A40 /* Path.swift in Sources */,
 				DFC384532C23C81E007248B0 /* AlarmTimeManager.swift in Sources */,
 				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF6245442C390C88006975BF /* NotificationManager.swift in Sources */,
