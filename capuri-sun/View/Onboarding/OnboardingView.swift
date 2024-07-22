@@ -10,48 +10,51 @@ import CoreLocation
 import WeatherKit
 
 struct OnboardingView: View {
+    @StateObject private var notificationManager = NotificationManager()
+    @ObservedObject private var locationManager = LocationManager()
+    
+    @State private var pathModel: PathModel = .init()
+    
     @State private var showAdditionalText = false
     @State private var showPukaView = false
     
-    @StateObject private var locationManager = LocationManager()
-    @State private var location: CLLocation?
-    @State private var address: String = ""
-    @State private var uvIndex: String = ""
-    @State private var condition: String = ""
-    @State private var temperature: String = ""
-    @Binding var alarmTime: Double
-
+    @Binding var address: String
+    @Binding var uvIndex: String
+    @Binding var condition: String
+    @Binding var temperature: String
+    @Binding var location: CLLocation?
+    
     var body: some View {
         if !showPukaView{
-        ZStack {
-            Color.backgroundBlue
-                .ignoresSafeArea(.all)
-
-            VStack(alignment: .leading, spacing: 5) {
-                Image("img_onboard")
-
-                Text("자외선 차단제,")
-                    .font(.system(size: 30))
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-                    .padding(.top, 40)
-
-                HStack {
-                    Text("주기적으로")
-                        .font(.system(size: 30))
-                        .foregroundColor(.alarmcolor3)
-                        .fontWeight(.bold)
-                    Text("덧발라야")
+            ZStack {
+                Color.backgroundBlue
+                    .ignoresSafeArea(.all)
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Image("img_onboard")
+                    
+                    Text("자외선 차단제,")
                         .font(.system(size: 30))
                         .foregroundColor(.white)
                         .fontWeight(.bold)
-                }
-
-                Text("피부를 지킬 수 있어요!")
-                    .font(.system(size: 30))
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-            
+                        .padding(.top, 40)
+                    
+                    HStack {
+                        Text("주기적으로")
+                            .font(.system(size: 30))
+                            .foregroundColor(.alarmcolor3)
+                            .fontWeight(.bold)
+                        Text("덧발라야")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                    }
+                    
+                    Text("피부를 지킬 수 있어요!")
+                        .font(.system(size: 30))
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                    
                     
                     if showAdditionalText {
                         Rectangle()
@@ -79,7 +82,6 @@ struct OnboardingView: View {
                         
                         Button(action: {
                             showAdditionalText = true
-                            
                             locationManager.getCurrentLocation { location in
                                 self.location = location
                                 self.address = locationManager.address
@@ -88,6 +90,7 @@ struct OnboardingView: View {
                                 } else {
                                     print("위치 정보를 가져올 수 없습니다.")
                                 }
+                                
                             }
                         }) {
                             Text("다음")
@@ -101,7 +104,7 @@ struct OnboardingView: View {
                         
                         .padding(.top, showAdditionalText ? 0 : 320)
                     }
-                    else { //두 번 눌렀을 때
+                    else {
                         Button(action: {
                             showPukaView = true
                             
@@ -118,10 +121,12 @@ struct OnboardingView: View {
                     }
                 }
                 .animation(.default, value: showAdditionalText)
+            }.onAppear {
+                notificationManager.requestAuthorization()
             }
         }
         else {
-            PukaSunView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)
+            PukaSunView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
         }
     }
     
@@ -137,6 +142,9 @@ struct OnboardingView: View {
                 self.temperature = "\(String(format: "%.1f", temperatureValue))°"
                 self.condition = translateCondition(result.currentWeather.condition.description)
                 
+                print("날씨", result.currentWeather.condition.description)
+                print("condition", condition)
+                
             } catch {
                 print(String(describing: error))
             }
@@ -145,19 +153,17 @@ struct OnboardingView: View {
     
     func translateCondition(_ condition: String) -> String {
         switch condition {
-        case "Partly Cloudy", "Mostly Cloudy", "Cloudy":
+        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy":
             return "흐림"
         case "Clear", "Mostly Clear":
             return "맑음"
-        case "Foggy":
-            return "안개"
         case "Windy":
             return "바람"
         case "Rain", "Heavy Rain", "Drizzle":
             return "비"
         case "Snow", "Heavy Snow":
             return "눈"
-        case "Strong Storms", "Thunder Storms":
+        case "Strongstorm", "Thunderstorm":
             return "뇌우"
         default:
             return condition

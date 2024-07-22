@@ -7,32 +7,33 @@
 
 import SwiftUI
 import ActivityKit
-import UserNotifications
+import CoreLocation
+import WeatherKit
 
 struct MainView: View {
-    let manager = NotificationManager.instance
+    
+    @State private var pathModel: PathModel = .init()
+    
+    
+    @StateObject private var notificationManager = NotificationManager()
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    @ObservedObject private var locationManager = LocationManager()
     
     @Binding var address: String
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
-    @Binding var alarmTime: Double
+    @Binding var location: CLLocation?
     
-    @State private var progress: Double = 0.0
     @State private var timer: Timer?
     
     @State private var startTimer: Bool = false
     @State private var newTimer: Bool = false
-    
     @State private var oneThirdPassed = false
     @State private var twoThirdsPassed = false
     
-    //@Query var alarms: [Alarm]
-    //@AppStorage("alarmTime") var alarmTime: Double = 0.2
-
-    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $pathModel.paths) {
             ZStack{
                 Image("img_mainBackground")
                     .resizable()
@@ -62,18 +63,21 @@ struct MainView: View {
                         .background(Color.suncreamBackBlue)
                         .cornerRadius(20)
                         
-                        NavigationLink(destination: AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)){
-                            Image("img_alarm")
-                        }
+                        Image("img_alarm")
+                            .onTapGesture {
+                                pathModel.paths.append(.alarmView)
+                            }
                         
-                        NavigationLink(destination: SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
-                            Image("img_suncream")
-                        }
+                        Image("img_suncream")
+                            .onTapGesture {
+                                pathModel.paths.append(.suncreamView)
+                            }
                         
-                        NavigationLink(destination: UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
-                            Image("img_uv")
-                        }
-                        
+                        Image("img_uv")
+                            .onTapGesture {
+                                pathModel.paths.append(.uvView)
+                            }
+                   
                     }.padding(.bottom, 30)
                     
                     
@@ -111,35 +115,65 @@ struct MainView: View {
                                 .padding(.bottom, -20)
                         }
                         
-                        if !startTimer { // TODO: 다음날 외출 버튼이 떠야함! & 알림 여기서 시작
+                        // MARK: - 외출버튼
+                        if !startTimer && alarmTimeManager.progress == 0 {
                             noticeOutAlarm
                                 .onTapGesture {
-                                    print("메인뷰", alarmTime)
                                     self.startTimer = true
-                                    manager.makeNotification(alarmTime: alarmTime)
+                                    let alarmTime = alarmTimeManager.selectedTime ?? 0
+                                    notificationManager.makeNotification(alarmTime: TimeInterval(alarmTime))
                                     //startLivaActivity()
                                 }
                                 .padding(.top, 56)
-                                .onAppear {
-                                    manager.requestAuthorization()
-                                }
                         }
-                        else if startTimer && !newTimer{
+                        else if startTimer && !newTimer {
                             noticeAlarm
                                 .padding(.top, 40)
                         }
-                        else if newTimer {
+                        else if newTimer && alarmTimeManager.progress == 0 {
                             noticeFinishAlarm
+                                .padding(.top, 40)
+                        }
+                        else {
+                            noticeAlarm
                                 .padding(.top, 40)
                         }
                         
                     }.padding(.bottom, 20)
                 }
+                .navigationDestination(for: Path.self) {
+                    path in
+                    switch path {
+                    case.alarmView:
+                        AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbarRole(.editor)
+                            .tint(.white)
+                    case .suncreamView:
+                        SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbarRole(.editor)
+                            .tint(.white)
+                    case .uvView:
+                        UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbarRole(.editor)
+                            .tint(.white)
+                    }
+                }
             }
-//            .navigationBarHidden(true)
-//            .navigationBarBackButtonHidden(true)
-               
         }
+        .environment(pathModel)
+        .onAppear{
+            locationManager.getCurrentLocation { location in
+                self.location = location
+                self.address = locationManager.address
+                if let location = location {
+                    getWeatherInfo(location)
+                } else {
+                    print("위치 정보를 가져올 수 없습니다.")
+                }
+            }}
         .edgesIgnoringSafeArea(.all)
         .tint(Color.customGray)
     }
@@ -298,8 +332,6 @@ struct MainView: View {
                 Image("img_outBtn")
                     .frame(width: 90, height: 94)
                     .padding(.leading, 10)
-                
-                
                 Text("외출")
                     .font(.system(size: 26))
                     .fontWeight(.heavy)
@@ -319,7 +351,7 @@ struct MainView: View {
                 .padding(.leading, 10)
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(changeTime(alarmTime: (alarmTime - progress)) )
+                Text(changeTime(alarmTime: Int((((alarmTimeManager.selectedTime ?? 0) * 60) - (alarmTimeManager.progress ?? 0)))) )
                     .font(.system(size: 26))
                     .fontWeight(.heavy)
                     .foregroundColor(Color.suncreamPink)
@@ -330,7 +362,7 @@ struct MainView: View {
                     .foregroundColor(Color.white)
                     .padding(.bottom, 5)
                 
-                ProgressView(value: progress, total: alarmTime)
+                ProgressView(value: alarmTimeManager.progress, total: ((alarmTimeManager.selectedTime ?? 0) * 60))
                     .progressViewStyle(CustomProgressViewStyle())
                     .frame(width: 227, height: 12)
                     .padding(.trailing, 10)
@@ -338,23 +370,24 @@ struct MainView: View {
             .onAppear {
                 let interval = 0.01
                 Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
-                    if progress < alarmTime {
-                        progress += interval / 60
+                    if (alarmTimeManager.progress ?? 0) < ((alarmTimeManager.selectedTime ?? 0) * 60) {
+                        alarmTimeManager.progress = (alarmTimeManager.progress ?? 0) + (interval / 60)
                         
-                        if progress >= (alarmTime / 3) && progress < (2 * alarmTime / 3) {
+                        if (alarmTimeManager.progress ?? 0) >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && (alarmTimeManager.progress ?? 0) < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
                             oneThirdPassed = true
                             twoThirdsPassed = false
                         }
                         
-                        else if progress >= (2 * alarmTime / 3) {
+                        else if (alarmTimeManager.progress ?? 0) >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
                             oneThirdPassed = false
                             twoThirdsPassed = true
                         }
                         
                     } else {
                         timer.invalidate()
+                        
                         self.newTimer = true
-                        self.progress = 0.0
+                        alarmTimeManager.progress = 0.0
                     }
                 }
             }
@@ -374,6 +407,7 @@ struct MainView: View {
                     self.newTimer = false
                     self.oneThirdPassed = false
                     self.twoThirdsPassed = false
+                    alarmTimeManager.selectedTime = 0
                 }
             VStack(alignment: .leading, spacing: 5) {
                 
@@ -402,14 +436,12 @@ struct MainView: View {
         func makeBody(configuration: Configuration) -> some View {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 0)
                         .fill(Color.customGray)
-                        .cornerRadius(13.5)
                         .frame(width: 227, height: 12)
                     
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 0)
                         .fill(Color.suncreamPink)
-                        .cornerRadius(13.5)
                         .frame(width: geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0), height: 12)
                         .animation(.linear, value: configuration.fractionCompleted)
                 }
@@ -417,65 +449,46 @@ struct MainView: View {
         }
     }
     
-    class NotificationManager {
-        static let instance = NotificationManager()
-        private init() {}
-        
-        func requestAuthorization() {
-            let options: UNAuthorizationOptions = [.alert, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: options) { (success, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    print("성공")
-                }
-            }
-        }
-        
-        func makeNotification(alarmTime : TimeInterval) {
-            let content = UNMutableNotificationContent()
-            content.title = "설정한 시간이 지났습니다"
-            content.subtitle = "얼굴 타는중🥵 자외선 차단제를 다시 발라주세요!"
-            content.sound = .default
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (alarmTime * 60), repeats: false)
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    print("알림 설정 성공")
-                }
-            }
-        }
-        
-//        func cancelNotification() {
-//            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-//        }
-    }
-    
-    func startLivaActivity() {
-        let liveActivityAttributes = LiveActivityAttributes(name: "pukaSun")
-        let contentState = LiveActivityAttributes.ContentState(alarmTime: alarmTime)
-        
-        do {
-            let activity = try Activity<LiveActivityAttributes>.request(
-                attributes: liveActivityAttributes,
-                contentState: contentState
-            )
-            print(activity)
-        } catch {
-            print(error)
-        }
-    }
-    
-    func changeTime(alarmTime: Double) -> String {
+    func changeTime(alarmTime: Int) -> String {
         let hours = Int(alarmTime) / 60
         let minutes = Int(alarmTime) % 60
         return "\(hours)시간 \(minutes)분"
     }
     
+    func getWeatherInfo(_ location: CLLocation) {
+        Task {
+            do {
+                let service = WeatherService()
+                let result = try await service.weather(for: location)
+                
+                self.uvIndex = "\(result.currentWeather.uvIndex.value)"
+                
+                let temperatureValue = result.currentWeather.temperature.value
+                self.temperature = "\(String(format: "%.1f", temperatureValue))°"
+                self.condition = translateCondition(result.currentWeather.condition.description)
+                
+            } catch {
+                print(String(describing: error))
+            }
+        }
+    }
+    
+    func translateCondition(_ condition: String) -> String {
+        switch condition {
+        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy":
+            return "흐림"
+        case "Clear", "Mostly Clear":
+            return "맑음"
+        case "Windy":
+            return "바람"
+        case "Rain", "Heavy Rain", "Drizzle":
+            return "비"
+        case "Snow", "Heavy Snow":
+            return "눈"
+        case "Strongstorm", "Thunderstorm":
+            return "뇌우"
+        default:
+            return condition
+        }
+    }
 }
-
-
-

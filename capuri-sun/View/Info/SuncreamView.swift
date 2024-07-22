@@ -28,7 +28,6 @@ struct SuncreamView: View {
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
-    @Binding var alarmTime: Double
     
 
     var body: some View {
@@ -37,16 +36,6 @@ struct SuncreamView: View {
                 .ignoresSafeArea(.all)
             
             VStack{
-//                HStack {
-//                    NavigationLink(destination:  MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTime)){
-//                        Image("img_before")
-//                        
-//                        Spacer()
-//                    }
-//
-//                }
-
-                
                 HStack{
                     VStack(alignment: .leading, spacing: 6){
                         Text("어떤 자외선 차단제를\n발라야 할까요?")
@@ -180,8 +169,6 @@ struct SuncreamView: View {
             }
             
         }
-//        .navigationBarHidden(true)
-//        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.all)
     }
 }

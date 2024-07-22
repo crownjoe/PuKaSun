@@ -6,14 +6,20 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 @main
 struct capuri_sunApp: App {
-    @State private var alarmTime: Double = 0.0
     
-    var body: some Scene { 
+    @State private var location: CLLocation?
+    @State private var address: String = ""
+    @State private var uvIndex: String = ""
+    @State private var condition: String = ""
+    @State private var temperature: String = ""
+    
+    var body: some Scene {
         WindowGroup {
-            OnboardingView(alarmTime: $alarmTime)
+            ContorlView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
         }
     }
 }

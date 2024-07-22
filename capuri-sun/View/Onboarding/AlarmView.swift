@@ -1,5 +1,4 @@
 import SwiftUI
-import WeatherKit
 import CoreLocation
 
 struct AlarmView: View {
@@ -7,17 +6,17 @@ struct AlarmView: View {
     @Binding var uvIndex: String
     @Binding var condition: String
     @Binding var temperature: String
+    @Binding var location: CLLocation?
     
     @State private var showPicker = false
     @State private var showMainView = false
     @State private var selectedHour: Int = 0
     @State private var isClicked: Bool = false
-    
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager.shared
-    
     @State private var selectedButton: Int? = nil
     
-    let timeRange = 4..<9
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    
+    let timeRange = 5..<9
     
     var body: some View {
         if !showMainView{
@@ -53,7 +52,7 @@ struct AlarmView: View {
                     }
                     .padding(.bottom, 80)
                     
-                    // MARK: 2시간마다
+                    // MARK: - 2시간마다
                     VStack(spacing: 22) {
                         ZStack {
                             Color.alarmcolor
@@ -62,14 +61,11 @@ struct AlarmView: View {
                             
                             HStack {
                                 Button(action: {
-                                    selectedHour = 2
-                                    connectData()
-//                                    selectedHour = 0
-//                                    isClicked.toggle() // 버튼 클릭 상태 변경
+                                    alarmTimeManager.selectedTime = 2
+                                    alarmTimeManager.progress = 0
                                 })
                                 {
                                     HStack {
-                                        
                                         Text("2시간마다")
                                             .fontWeight(.bold)
                                             .font(.system(size: 20))
@@ -89,49 +85,19 @@ struct AlarmView: View {
                                             )
                                     }
                                 }
-                                
-                                //                                {
-                                //
-                                //                                    Button(action: {
-                                //                                        selectedHour = 2
-                                //                                        connectData()
-                                //                                        selectedHour = 0
-                                //                                    }) {
-                                //                                        Text("2시간마다")
-                                //                                            .fontWeight(.bold)
-                                //                                            .font(.system(size: 20))
-                                //                                            .foregroundColor(.white)
-                                //
-                                //                                        Text("권장")
-                                //                                            .fontWeight(.bold)
-                                //                                            .foregroundColor(.alarmcolor3)
-                                //                                            .frame(width: 49, height: 28)
-                                //                                            .background(
-                                //                                                RoundedRectangle(cornerRadius: 20)
-                                //                                                    .fill(Color.alarmcolor4)
-                                //                                                    .overlay(
-                                //                                                        RoundedRectangle(cornerRadius: 20)
-                                //                                                            .stroke(Color.alarmcolor5, lineWidth: 2)
-                                //                                                    )
-                                //                                            )
-                                //                                    }
-                                //                                }
-                                
-                                
                             }
-                        } 
+                        }
                         .overlay(
-                            selectedHour == 2 ?
+                            alarmTimeManager.selectedTime == 2 ?
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
                             : nil
                         )
-
-                        // MARK: 3시간마다
+                        
+                        // MARK: - 3시간마다
                         Button(action: {
-                            selectedHour = 3
-                            connectData()
-//                            selectedHour = 0
+                            alarmTimeManager.selectedTime = 3
+                            alarmTimeManager.progress = 0
                         }) {
                             Text("3시간마다")
                                 .fontWeight(.bold)
@@ -141,33 +107,52 @@ struct AlarmView: View {
                                 .background(Color.alarmcolor)
                                 .cornerRadius(20)
                         }.overlay(
-                            selectedHour == 3 ?
+                            alarmTimeManager.selectedTime == 3 ?
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.suncreamPink, lineWidth: 4)
+                            : nil
+                        )
+                        
+                        // MARK: - 4시간마다
+                        Button(action: {
+                            alarmTimeManager.selectedTime = 4
+                            alarmTimeManager.progress = 0
+                        }) {
+                            Text("4시간마다")
+                                .fontWeight(.bold)
+                                .font(.system(size: 20))
+                                .foregroundColor(.white)
+                                .frame(width: 308, height: 60)
+                                .background(Color.alarmcolor)
+                                .cornerRadius(20)
+                        }.overlay(
+                            alarmTimeManager.selectedTime == 4 ?
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
                             : nil
                         )
                         
                         VStack {
-                            // MARK: _시간마다
+                            // MARK: - _시간마다
                             Button(action: {
                                 showPicker.toggle()
                             }) {
-                                Text("\(0...3 ~= selectedHour  ?  "_시간마다" : "\(selectedHour)시간마다")")
+                                Text("\(0...4 ~= (alarmTimeManager.selectedTime ?? 0) ? "_시간마다" : "\(Int(alarmTimeManager.selectedTime ?? 0))시간마다")")
+                                
                                     .fontWeight(.bold)
                                     .font(.system(size: 20))
                                     .foregroundColor(.white)
                                     .frame(width: 308, height: 60)
                                     .background(Color.alarmcolor)
                                     .cornerRadius(20)
-//                                    .padding(.bottom, 22)
                             }
                             .overlay(
-                                (selectedHour == 4 || selectedHour == 5 || selectedHour == 6 || selectedHour == 7 || selectedHour == 8) ?
+                                (alarmTimeManager.selectedTime == 5 || alarmTimeManager.selectedTime == 6 || alarmTimeManager.selectedTime == 7 || alarmTimeManager.selectedTime == 8) ?
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(Color.suncreamPink, lineWidth: 4)
                                 : nil
                             )
-
+                            
                             .sheet(isPresented: $showPicker) {
                                 VStack {
                                     Picker("시간", selection: $selectedHour) {
@@ -179,7 +164,7 @@ struct AlarmView: View {
                                         if selectedHour == nil {
                                             selectedHour = timeRange.first ?? selectedHour
                                         }
-                                        if (selectedHour != 0), 0...3 ~= selectedHour {
+                                        if (selectedHour != 0), 0...4 ~= selectedHour{
                                             self.selectedHour = timeRange.first ?? selectedHour
                                         }
                                     }
@@ -189,10 +174,11 @@ struct AlarmView: View {
                                     .padding()
                                     
                                     Button("완료") {
-                                        selectedHour = selectedHour
+                                        alarmTimeManager.selectedTime = Double(selectedHour)
+                                        alarmTimeManager.progress = 0
                                         showPicker.toggle()
-                                        connectData()
-                                    }
+                                        
+                                    }.font(.title2)
                                     
                                 }.presentationDetents([.height(280)])
                                 
@@ -204,11 +190,12 @@ struct AlarmView: View {
                                 Text("시작하기")
                                     .bold()
                                     .font(.system(size: 20))
-                                    .foregroundColor(.alarmcolor2)
+                                    .foregroundColor((1...8).contains(alarmTimeManager.selectedTime ?? 0) ? .alarmcolor2 : .gray)
                                     .frame(width: 308, height: 60)
-                                    .background(Color.white)
+                                    .background((1...8).contains(alarmTimeManager.selectedTime ?? 0) ? .white : .customGray)
                                     .cornerRadius(10)
                             }
+                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
                             .padding(.bottom, 80)
                             .padding()
                         }
@@ -219,15 +206,10 @@ struct AlarmView: View {
             .navigationBarBackButtonHidden(true)
         }
         else {
-            MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, alarmTime: $alarmTimeManager.alarmTime)
+            MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
         }
-    }
-    
-    func connectData() {
-        let hour = selectedHour ?? 0
-        alarmTimeManager.alarmTime = Double(hour * 60)
     }
 }
 
