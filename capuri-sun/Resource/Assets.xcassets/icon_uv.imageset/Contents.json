@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "Group 205.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "img_outBtn.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
