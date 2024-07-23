@@ -17,6 +17,7 @@ extension Color{
     
     static let customFontBlue = Color(hex: "167EFF")
     static let customLigntBlue = Color(hex: "59A2FF")
+    static let customExplainBlue = Color(hex: "57A2FF")
     
     //SuncreamView
     static let suncreamYellow = Color(hex: "FBF9BC")
