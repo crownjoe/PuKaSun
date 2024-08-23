@@ -25,7 +25,7 @@ struct NewView: View {
                     .resizable()
                     .ignoresSafeArea(.all)
                 
-                VStack (alignment: .leading) {
+                VStack (alignment: .center, spacing: 0) {
                     Spacer()
                     
                     HStack (spacing : 4) {
@@ -59,27 +59,25 @@ struct NewView: View {
                     .padding(.vertical, 5)
                     .background(Color.customBlue)
                     .cornerRadius(20)
-                    .padding(.leading, 38)
-                    .padding(.bottom, -40)
+                    .padding(.top, 28)
+                    .padding(.bottom, 14)
+                    .padding(.trailing, 130)
                     
                     UVindexView()
-                        .padding(.leading, 188)
                         .padding(.bottom, -40)
-
+                    
                     pukaiconView()
-                        .padding(.leading, 66)
                     
                     Spacer()
                         .frame(height: 28)
                     
                     mainButtonView()
-                        
+                    
                     Spacer()
                         .frame(height: 10)
                     
                     outExplainView()
                         .padding(.bottom, 20)
-                        .padding(.leading, 102)
                     
                 }
             }
@@ -91,27 +89,19 @@ struct NewView: View {
 
 struct UVindexView : View {
     var body: some View {
-        ZStack{
+        ZStack {
             Circle()
-                .frame(width: 256)
+                .frame(width: 230)
                 .foregroundColor(.customBlue)
             
-            VStack {
-                Text("UV 지수")
-                    .font(.system(size: 22))
-                    .fontWeight(.bold)
-                    .foregroundColor(.customLigntBlue)
-                    .frame(width: 77, height: 33)
-                    .background(Color.red)
-                    .padding(.bottom, 15)
-                
+            VStack(spacing: 0) {
                 Text("1") // UVindex
                     .font(.system(size: 160))
                     .fontWeight(.bold)
                     .foregroundColor(.suncreamPink)
-                    .background(Color.green)
                     .frame(width: 77, height: 160)
-                    .padding(.bottom, 18)
+                    .padding(.top, 35)
+                    .padding(.bottom, 8)
                 
                 ZStack {
                     Rectangle()
@@ -126,6 +116,7 @@ struct UVindexView : View {
                 }
             }
         }
+        .padding(.leading, 194)
     }
 }
 
@@ -149,8 +140,17 @@ struct buttonView: View {
             Spacer()
                 .frame(height: 70)
             Image(.iconUv)
+                .onTapGesture {
+                    // uv 이동
+                }
             Image(.iconAlarm)
+                .onTapGesture {
+                    // alarm 이동
+                }
             Image(.iconSuncream)
+                .onTapGesture {
+                    // suncream 이동
+                }
         }
     }
 }
@@ -159,13 +159,13 @@ struct mainButtonView: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .frame(width: 340, height: 92)
+                .frame(width: 343, height: 92)
                 .foregroundColor(.customBoxBlue)
-                .cornerRadius(16)
+                .cornerRadius(30)
             
-//            outButtonView()
-//            progressView()
-            endButtonView()
+            //            outButtonView()
+            progressView()
+            //            endButtonView()
             
         }
     }
@@ -173,49 +173,58 @@ struct mainButtonView: View {
 
 struct outButtonView: View {
     var body: some View {
-        Image(.imgOutbtn)
+        HStack(alignment: .center) {
+            Image(.imgOutbtn)
+            // shadow 추가
+        }
+        
     }
 }
 
 
 struct progressView: View {
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             Image(.iconSuncreambtn)
-                .padding(.trailing, 16)
+                .padding(.trailing, 20)
                 .padding(.leading, 86)
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text("2시간 30분")
-                    .font(.system(size: 20))
-                    .fontWeight(.bold)
+                    .font(.system(size: 22))
+                    .fontWeight(.heavy)
                     .foregroundColor(.suncreamPink)
+                    .padding(.bottom, 1)
                 
                 Text("후에 자외선 차단제를 발라주세요!")
-                    .font(.system(size: 12))
-                    .fontWeight(.bold)
+                    .font(.system(size: 14))
+                    .fontWeight(.regular)
                     .foregroundColor(.white)
+                    .padding(.bottom, 4)
                 
                 // TODO: 프로그래스 바 추가
             }
+            
+            Spacer()
         }
     }
 }
 
 struct endButtonView: View {
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             Image(.imgEndbtn)
-                .padding(.trailing, 18)
+                .padding(.trailing, 21)
                 .padding(.leading, 80)
             
-            VStack(alignment: .leading) {
-                Text("자외선 차단제를")
-                    .font(.system(size: 22))
-                    .fontWeight(.bold)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("자외선 차단제")
+                    .font(.system(size: 24))
+                    .fontWeight(.heavy)
                     .foregroundColor(.suncreamPink)
+                    .padding(.bottom, 4)
                 
-                Text("바르실 시간입니다!")
+                Text("를 바르실 시간입니다!")
                     .font(.system(size: 20))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -230,11 +239,11 @@ struct outExplainView: View {
         ZStack{
             Rectangle()
                 .foregroundColor(.customExplainBlue)
-                .frame(width: 246, height: 18)
+                .frame(width: 286, height: 25)
                 .cornerRadius(80)
             
             Text("외출 후 버튼을 눌러 자외선 자단제 알림을 받아보세요!")
-                .font(.system(size: 10))
+                .font(.system(size: 12))
                 .fontWeight(.regular)
                 .foregroundColor(.white)
         }
@@ -247,11 +256,11 @@ struct endExplainView: View {
         ZStack{
             Rectangle()
                 .foregroundColor(.customExplainBlue)
-                .frame(width: 225, height: 18)
+                .frame(width: 286, height: 25)
                 .cornerRadius(80)
             
-            Text("썬크림 버튼을 누르면 푸카가 원상태로 돌아와요!")
-                .font(.system(size: 10))
+            Text("자외선 차단제 버튼을 누르면 푸카가 원상태로 돌아와요!")
+                .font(.system(size: 12))
                 .fontWeight(.regular)
                 .foregroundColor(.white)
         }
