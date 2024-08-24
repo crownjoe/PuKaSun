@@ -67,6 +67,7 @@ struct NewView: View {
                         .padding(.bottom, -40)
                     
                     pukaiconView()
+                        .environment(pathModel)
                     
                     Spacer()
                         .frame(height: 28)
@@ -80,10 +81,30 @@ struct NewView: View {
                         .padding(.bottom, 20)
                     
                 }
+                //                .navigationDestination(for: Path.self) {
+                //                    path in
+                //                    switch path {
+                //                    case.alarmView:
+                //                        AlarmView()
+                ////                        AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
+                //                            .navigationBarTitleDisplayMode(.inline)
+                //                            .toolbarRole(.editor)
+                //                            .tint(.white)
+                //                    case .suncreamView:
+                //                        SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+                //                            .navigationBarTitleDisplayMode(.inline)
+                //                            .toolbarRole(.editor)
+                //                            .tint(.white)
+                //                    case .uvView:
+                //                        UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
+                //                            .navigationBarTitleDisplayMode(.inline)
+                //                            .toolbarRole(.editor)
+                //                            .tint(.white)
+                //                    }
+                //                }
             }
         }
-        
-        
+        .environment(pathModel)
     }
 }
 
@@ -121,6 +142,8 @@ struct UVindexView : View {
 }
 
 struct pukaiconView: View {
+    @Environment(PathModel.self) var pathModel
+    
     var body: some View {
         HStack(spacing: 60) {
             
@@ -129,12 +152,15 @@ struct pukaiconView: View {
                 .frame(width: 220, height: 348)
             
             buttonView()
+                .environment(pathModel)
             
         }
     }
 }
 
 struct buttonView: View {
+    @Environment(PathModel.self) var pathModel
+    
     var body: some View {
         VStack(spacing: 35) {
             Spacer()

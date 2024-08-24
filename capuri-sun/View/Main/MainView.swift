@@ -145,7 +145,8 @@ struct MainView: View {
                     path in
                     switch path {
                     case.alarmView:
-                        AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
+                        AlarmView()
+//                        AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbarRole(.editor)
                             .tint(.white)

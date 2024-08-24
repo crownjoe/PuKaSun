@@ -22,7 +22,8 @@ struct ContorlView: View {
     var body: some View {
         
         if alarmTimeManager.selectedTime == 0 {
-            OnboardingView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
+//            OnboardingView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
+            OnboardingView()
                 .environmentObject(locationManager)
         }
         else {
