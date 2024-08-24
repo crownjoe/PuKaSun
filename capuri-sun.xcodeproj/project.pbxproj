@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7D2C20663A00415417 /* LocationManager.swift */; };
 		DF2EEE802C207A9D00415417 /* PukaSunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */; };
+		DF4921F12C7A3FB200C14CF7 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4921F02C7A3FB200C14CF7 /* WeatherModel.swift */; };
 		DF6245442C390C88006975BF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6245432C390C88006975BF /* NotificationManager.swift */; };
 		DF6A44812C21B18F0048EE4F /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A44802C21B18F0048EE4F /* CoreMotionManager.swift */; };
 		DF6A44822C21BF510048EE4F /* LiveActivityLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF209762C21360A0011B243 /* LiveActivityLiveActivity.swift */; };
@@ -65,6 +66,7 @@
 		DF2436662C1BEC50005B6BB3 /* capuri-sun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "capuri-sun.entitlements"; sourceTree = "<group>"; };
 		DF2EEE7D2C20663A00415417 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DF2EEE7F2C207A9D00415417 /* PukaSunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PukaSunView.swift; sourceTree = "<group>"; };
+		DF4921F02C7A3FB200C14CF7 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		DF6245432C390C88006975BF /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		DF6A44802C21B18F0048EE4F /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		DF9E78D12C1FDD710003A112 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				DF9E78DC2C1FDDD50003A112 /* Alarm.swift */,
+				DF4921F02C7A3FB200C14CF7 /* WeatherModel.swift */,
 				DFC384522C23C81E007248B0 /* AlarmTimeManager.swift */,
 			);
 			path = Model;
@@ -376,6 +379,7 @@
 				DF9E78DD2C1FDDD50003A112 /* Alarm.swift in Sources */,
 				DFFC79792C4D0DC000C03A40 /* Path.swift in Sources */,
 				DFC384532C23C81E007248B0 /* AlarmTimeManager.swift in Sources */,
+				DF4921F12C7A3FB200C14CF7 /* WeatherModel.swift in Sources */,
 				DF2EEE7E2C20663A00415417 /* LocationManager.swift in Sources */,
 				DF6245442C390C88006975BF /* NotificationManager.swift in Sources */,
 				DF9E78D62C1FDD810003A112 /* MainView.swift in Sources */,

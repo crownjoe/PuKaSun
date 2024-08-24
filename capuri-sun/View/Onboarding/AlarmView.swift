@@ -2,17 +2,14 @@ import SwiftUI
 import CoreLocation
 
 struct AlarmView: View {
-//    @Binding var address: String
-//    @Binding var uvIndex: String
-//    @Binding var condition: String
-//    @Binding var temperature: String
-//    @Binding var location: CLLocation?
     
     @State private var showPicker = false
     @State private var showMainView = false
     @State private var selectedHour: Int = 0
     @State private var isClicked: Bool = false
     @State private var selectedButton: Int? = nil
+    
+    @Binding var changeMainView: Bool
     
     @ObservedObject private var alarmTimeManager = AlarmTimeManager()
     
@@ -196,7 +193,8 @@ struct AlarmView: View {
                             
                             Button {
                                 self.showMainView = true
-                                pathModel.onboardingPaths.append(.mainView)
+                                changeMainView = true
+                                
                             } label : {
                                 Text("다음")
                                     .bold()

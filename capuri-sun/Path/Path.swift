@@ -10,7 +10,6 @@ import Foundation
 enum OnboardingPath: Hashable {
     case pukaSunView
     case alarmView
-    case mainView
 }
 
 enum Path: Hashable {

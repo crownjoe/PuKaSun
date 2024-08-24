@@ -11,17 +11,14 @@ import WeatherKit
 
 struct OnboardingView: View {
     @StateObject private var notificationManager = NotificationManager()
+    @EnvironmentObject var weatherModel: WeatherModel
+    
     @ObservedObject private var locationManager = LocationManager()
     
     @State private var pathModel: PathModel = .init()
-    
     @State private var showAdditionalText = false
     
-    //    @Binding var address: String
-    //    @Binding var uvIndex: String
-    //    @Binding var condition: String
-    //    @Binding var temperature: String
-    //    @Binding var location: CLLocation?
+    @Binding var changeMainView: Bool
     
     var body: some View {
         NavigationStack(path: $pathModel.onboardingPaths) {
@@ -83,16 +80,12 @@ struct OnboardingView: View {
                                 .foregroundColor(.white)
                                 .padding(.bottom, 155)
                             
-                            
                         }
                         .frame(height: 320)
-                    }
-                    
-                    else {
+                    } else {
                         Spacer()
                             .frame(height: 320)
                     }
-                    
                     
                     Button(action: {
                         if showAdditionalText {
@@ -101,16 +94,15 @@ struct OnboardingView: View {
                         
                         showAdditionalText = true
                         
-                        //                            locationManager.getCurrentLocation { location in
-                        //                                self.location = location
-                        //                                self.address = locationManager.address
-                        //                                if let location = location {
-                        //                                    getWeatherInfo(location)
-                        //                                } else {
-                        //                                    print("위치 정보를 가져올 수 없습니다.")
-                        //                                }
-                        //
-                        //                            }
+                        locationManager.getCurrentLocation { location in
+                            self.weatherModel.location = location // 위치 업데이트
+                            if let location = location {
+                                self.weatherModel.address = locationManager.address // 주소 업데이트
+                                weatherModel.getWeatherInfo(location)
+                            } else {
+                                print("위치 정보를 가져올 수 없습니다.")
+                            }
+                        }
                     }) {
                         Text("다음")
                             .bold()
@@ -126,75 +118,21 @@ struct OnboardingView: View {
                 .navigationDestination(for: OnboardingPath.self) { path in
                     switch path {
                     case .alarmView:
-                        AlarmView()
+                        AlarmView(changeMainView: $changeMainView)
                             .navigationBarBackButtonHidden()
                             .navigationBarHidden(true)
-                        //                        AlarmView(address: Binding<String>, uvIndex: Binding<String>, condition: Binding<String>, temperature: Binding<String>, location: Binding<CLLocation?>)
+                        
                     case .pukaSunView:
                         PukaSunView()
                             .navigationBarBackButtonHidden()
                             .navigationBarHidden(true)
-                        
-                    case .mainView:
-//                        MainView()
-                        NewView()
-                            .navigationBarBackButtonHidden()
-                            .navigationBarHidden(true)
-                        
                     }
                 }
                 .animation(.default, value: showAdditionalText)
-                
             }.onAppear {
                 notificationManager.requestAuthorization()
             }
         }
         .environment(pathModel)
     }
-    
-    //    func getWeatherInfo(_ location: CLLocation) {
-    //        Task {
-    //            do {
-    //                let service = WeatherService()
-    //                let result = try await service.weather(for: location)
-    //
-    //                self.uvIndex = 3
-    //                "\(result.currentWeather.uvIndex.value)"
-    //
-    //                let temperatureValue = result.currentWeather.temperature.value
-    //                self.temperature = "\(String(format: "%.1f", temperatureValue))°"
-    //                self.condition = translateCondition(result.currentWeather.condition.description)
-    //
-    //                print("날씨", result.currentWeather.condition.description)
-    //                print("condition", condition)
-    //
-    //            } catch {
-    //                print(String(describing: error))
-    //            }
-    //        }
-    //    }
-    
-    func translateCondition(_ condition: String) -> String {
-        switch condition {
-        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy":
-            return "흐림"
-        case "Clear", "Mostly Clear":
-            return "맑음"
-        case "Windy":
-            return "바람"
-        case "Rain", "Heavy Rain", "Drizzle":
-            return "비"
-        case "Snow", "Heavy Snow":
-            return "눈"
-        case "Strongstorm", "Thunderstorm":
-            return "뇌우"
-        default:
-            return condition
-        }
-    }
-    
-}
-
-#Preview {
-    OnboardingView()
 }

@@ -12,13 +12,6 @@ struct PukaSunView: View {
     
     @Environment(PathModel.self) var pathModel
     
-    //    @Binding var address: String
-    //    @Binding var uvIndex: String
-    //    @Binding var condition: String
-    //    @Binding var temperature: String
-    //    @Binding var location: CLLocation?
-    
-    
     var body: some View {
         ZStack {
             Color.suncreamPink
