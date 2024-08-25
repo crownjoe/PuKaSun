@@ -48,10 +48,9 @@ extension Color{
     
     //MainView
     static let mainBlue = Color(hex: "318DFF")
-    
-    
-    
-    
+    static let buttonLightBlue = Color(hex: "4E9DFF")
+    static let buttonBlue = Color(hex: "2C89FB")
+
     
 }
 

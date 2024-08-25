@@ -16,6 +16,7 @@ struct capuri_sunApp: App {
     
     var body: some Scene {
         WindowGroup {
+            
             if !changeMainView {
                 OnboardingView(changeMainView: $changeMainView)
                     .environmentObject(weatherModel)
@@ -24,6 +25,7 @@ struct capuri_sunApp: App {
                 NewView(changeMainView: $changeMainView)
                     .environmentObject(weatherModel)
             }
+            
         }
     }
 }

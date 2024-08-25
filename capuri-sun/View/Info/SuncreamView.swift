@@ -23,12 +23,15 @@ struct SuncreamView: View {
     
     @State private var imageName5 = "img_suncream5"
     @State private var text5 = "야외 물놀이            "
-
-
+    
+    
     var body: some View {
         ZStack {
             Image(.imgDefault)
+                .resizable()
+                .scaledToFill()
                 .ignoresSafeArea(.all)
+            
             
             VStack {
                 HStack {
@@ -130,7 +133,7 @@ struct SuncreamView: View {
                                     .fontWeight(.bold)
                                     .font(.system(size: 35))
                                     .foregroundColor(.suncreamFontOrange)
-                            } 
+                            }
                             .onTapGesture {
                                 if imageName4 == "img_suncream4" {
                                     imageName4 = "img_aftersuncream4"
@@ -153,14 +156,14 @@ struct SuncreamView: View {
                             .foregroundColor(.suncreamFontBlue)
                     }
                     .onTapGesture {
-                                if imageName5 == "img_suncream5" {
-                                    imageName5 = "img_aftersuncream5"
-                                    text5 = ""
-                                } else {
-                                    imageName5 = "img_suncream5"
-                                    text5 = "야외 물놀이            "
-                                }
-                            }
+                        if imageName5 == "img_suncream5" {
+                            imageName5 = "img_aftersuncream5"
+                            text5 = ""
+                        } else {
+                            imageName5 = "img_suncream5"
+                            text5 = "야외 물놀이            "
+                        }
+                    }
                     
                 }
             }
@@ -170,6 +173,6 @@ struct SuncreamView: View {
     }
 }
 
-//#Preview {
-//    SuncreamView()
-//}
+#Preview {
+    SuncreamView()
+}

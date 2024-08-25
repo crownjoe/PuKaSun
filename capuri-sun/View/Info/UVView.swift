@@ -21,6 +21,8 @@ struct UVView: View {
         
         ZStack {
             Image(.imgDefault)
+                .resizable()
+                .scaledToFill()
                 .ignoresSafeArea(.all)
             
             VStack {
@@ -359,3 +361,6 @@ struct FlipModifier: ViewModifier {
     }
 }
 
+#Preview {
+    UVView()
+}

@@ -64,36 +64,12 @@
 //                        .background(Color.suncreamBackBlue)
 //                        .cornerRadius(20)
 //                        
-//                        Image("img_alarm")
-//                            .onTapGesture {
-//                                pathModel.paths.append(.alarmView)
-//                            }
-//                        
-//                        Image("img_suncream")
-//                            .onTapGesture {
-//                                pathModel.paths.append(.suncreamView)
-//                            }
-//                        
-//                        Image("img_uv")
-//                            .onTapGesture {
-//                                pathModel.paths.append(.uvView)
-//                            }
+//        
 //                   
 //                    }.padding(.bottom, 30)
 //                    
 //                    
 //                    VStack{
-//                        if uvIndex == "0" || uvIndex == "1" || uvIndex == "2" {
-//                            UvView1
-//                        } else if uvIndex == "3" || uvIndex == "4" || uvIndex == "5" {
-//                            UvView2
-//                        } else if uvIndex == "6" || uvIndex == "7" {
-//                            UvView3
-//                        } else if uvIndex == "8" || uvIndex == "9" || uvIndex == "10" {
-//                            UvView4
-//                        } else {
-//                            UvView5
-//                        }
 //                        
 //                        if oneThirdPassed && !twoThirdsPassed  {
 //                            Image("img_char2")
@@ -142,188 +118,10 @@
 //                        
 //                    }.padding(.bottom, 20)
 //                }
-//                .navigationDestination(for: Path.self) {
-//                    path in
-//                    switch path {
-//                    case.alarmView:
-//                        AlarmView(changeMainView: Binding<Bool>)
-////                        AlarmView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
-//                            .navigationBarTitleDisplayMode(.inline)
-//                            .toolbarRole(.editor)
-//                            .tint(.white)
-//                    case .suncreamView:
-//                        SuncreamView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
-//                            .navigationBarTitleDisplayMode(.inline)
-//                            .toolbarRole(.editor)
-//                            .tint(.white)
-//                    case .uvView:
-//                        UVView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature)
-//                            .navigationBarTitleDisplayMode(.inline)
-//                            .toolbarRole(.editor)
-//                            .tint(.white)
-//                    }
-//                }
 //            }
 //        }
-//        .environment(pathModel)
-//        .onAppear{
-//            locationManager.getCurrentLocation { location in
-//                self.location = location
-//                self.address = locationManager.address
-//                if let location = location {
-//                    getWeatherInfo(location)
-//                } else {
-//                    print("위치 정보를 가져올 수 없습니다.")
-//                }
-//            }}
-//        .edgesIgnoringSafeArea(.all)
-//        .tint(Color.customGray)
 //    }
 //    
-//    private var UvView1: some View {
-//        VStack(spacing : 2){
-//            ZStack{
-//                Circle()
-//                    .frame(width: 147, height: 147)
-//                    .foregroundColor(.uv1)
-//                
-//                Text(uvIndex)
-//                    .fontWeight(.bold)
-//                    .font(.system(size: 140))
-//                    .foregroundColor(.suncreamPink)
-//            }.padding(.leading, 10)
-//            
-//            Text("UV 지수")
-//                .fontWeight(.bold)
-//                .font(.system(size: 15))
-//                .foregroundColor(.suncreamPink)
-//                .padding(.bottom, 2)
-//            
-//            Text("낮음")
-//                .fontWeight(.bold)
-//                .font(.system(size: 35))
-//                .foregroundColor(.uv1)
-//                .padding(.horizontal, 20)
-//                .background(Color.suncreamBackBlue)
-//                .cornerRadius(20)
-//        }
-//    }
-//    
-//    private var UvView2: some View {
-//        VStack(spacing : 2){
-//            ZStack{
-//                Circle()
-//                    .frame(width: 147, height: 147)
-//                    .foregroundColor(.uv3)
-//                
-//                Text(uvIndex)
-//                    .fontWeight(.bold)
-//                    .font(.system(size: 140))
-//                    .foregroundColor(.uv2)
-//            }.padding(.leading, 10)
-//            
-//            Text("UV 지수")
-//                .fontWeight(.bold)
-//                .font(.system(size: 15))
-//                .foregroundColor(.suncreamPink)
-//                .padding(.bottom, 2)
-//            
-//            Text("보통")
-//                .fontWeight(.bold)
-//                .font(.system(size: 35))
-//                .foregroundColor(.uv2)
-//                .padding(.horizontal, 20)
-//                .background(Color.suncreamBackBlue)
-//                .cornerRadius(20)
-//        }
-//    }
-//    
-//    private var UvView3: some View {
-//        VStack(spacing : 2){
-//            ZStack{
-//                Circle()
-//                    .frame(width: 147, height: 147)
-//                    .foregroundColor(.uv3)
-//                
-//                Text(uvIndex)
-//                    .fontWeight(.bold)
-//                    .font(.system(size: 140))
-//                    .foregroundColor(.suncreamPink)
-//            }.padding(.leading, 10)
-//            
-//            Text("UV 지수")
-//                .fontWeight(.bold)
-//                .font(.system(size: 15))
-//                .foregroundColor(.suncreamPink)
-//                .padding(.bottom, 2)
-//            
-//            Text("높음")
-//                .fontWeight(.bold)
-//                .font(.system(size: 35))
-//                .foregroundColor(.suncreamPink)
-//                .padding(.horizontal, 20)
-//                .background(Color.suncreamBackBlue)
-//                .cornerRadius(20)
-//        }
-//    }
-//    
-//    private var UvView4: some View {
-//        VStack(spacing : 2){
-//            ZStack{
-//                Circle()
-//                    .frame(width: 147, height: 147)
-//                    .foregroundColor(.uv4)
-//                
-//                Text(uvIndex)
-//                    .fontWeight(.bold)
-//                    .font(.system(size: 140))
-//                    .foregroundColor(.suncreamPink)
-//            }.padding(.leading, 10)
-//            
-//            Text("UV 지수")
-//                .fontWeight(.bold)
-//                .font(.system(size: 15))
-//                .foregroundColor(.suncreamPink)
-//                .padding(.bottom, 2)
-//            
-//            Text("매우높음")
-//                .fontWeight(.bold)
-//                .font(.system(size: 35))
-//                .foregroundColor(.uv4)
-//                .padding(.horizontal, 20)
-//                .background(Color.suncreamBackBlue)
-//                .cornerRadius(20)
-//        }
-//    }
-//    
-//    private var UvView5: some View {
-//        VStack(spacing : 2){
-//            ZStack{
-//                Circle()
-//                    .frame(width: 147, height: 147)
-//                    .foregroundColor(.uv5)
-//                
-//                Text(uvIndex)
-//                    .fontWeight(.bold)
-//                    .font(.system(size: 140))
-//                    .foregroundColor(.suncreamPink)
-//            } .padding(.leading, 10)
-//            
-//            Text("UV 지수")
-//                .fontWeight(.bold)
-//                .font(.system(size: 15))
-//                .foregroundColor(.suncreamPink)
-//                .padding(.bottom, 2)
-//            
-//            Text("위험")
-//                .fontWeight(.bold)
-//                .font(.system(size: 35))
-//                .foregroundColor(.uv5)
-//                .padding(.horizontal, 20)
-//                .background(Color.suncreamBackBlue)
-//                .cornerRadius(20)
-//        }
-//    }
 //    
 //    // MARK: 외출 버튼
 //    private var noticeOutAlarm: some View {

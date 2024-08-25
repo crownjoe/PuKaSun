@@ -20,10 +20,10 @@ struct AlarmView: View {
     var body: some View {
         if !showMainView{
             ZStack {
-                Image("img_alarmBackground")
+                Image(.imgBackground)
                     .resizable()
                     .scaledToFill()
-                    .ignoresSafeArea()
+                    .ignoresSafeArea(.all)
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Text("자외선 차단제")
@@ -66,7 +66,8 @@ struct AlarmView: View {
                             
                             HStack {
                                 Button {
-                                    alarmTimeManager.selectedTime = 2
+                                    alarmTimeManager.selectedTime = 1
+                                    // 원래 2임!!
                                     alarmTimeManager.progress = 0
                                 } label: {
                                     HStack {
@@ -92,7 +93,8 @@ struct AlarmView: View {
                             }
                         }
                         .overlay(
-                            alarmTimeManager.selectedTime == 2 ?
+                            //여기도 2임
+                            alarmTimeManager.selectedTime == 1 ?
                             RoundedRectangle(cornerRadius: 24)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
                             : nil
@@ -100,7 +102,7 @@ struct AlarmView: View {
                         
                         // MARK: - 3시간마다
                         Button {
-                            alarmTimeManager.selectedTime = 3
+                            alarmTimeManager.selectedTime = 180
                             alarmTimeManager.progress = 0
                         } label : {
                             Text("3시간마다")
@@ -110,7 +112,8 @@ struct AlarmView: View {
                                 .frame(width: 302, height: 60)
                                 .background(Color.alarmcolor)
                                 .cornerRadius(24)
-                        }.overlay(
+                        }
+                        .overlay(
                             alarmTimeManager.selectedTime == 3 ?
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
@@ -129,7 +132,8 @@ struct AlarmView: View {
                                 .frame(width: 302, height: 60)
                                 .background(Color.alarmcolor)
                                 .cornerRadius(24)
-                        }.overlay(
+                        }
+                        .overlay(
                             alarmTimeManager.selectedTime == 4 ?
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
@@ -204,7 +208,7 @@ struct AlarmView: View {
                                     .background((1...8).contains(alarmTimeManager.selectedTime ?? 0) ? .white : .customGray)
                                     .cornerRadius(10)
                             }
-                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
+//                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
                             .padding(.bottom, 80)
                         }
                     }

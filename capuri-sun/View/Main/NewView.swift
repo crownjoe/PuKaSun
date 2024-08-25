@@ -11,8 +11,11 @@ import CoreLocation
 struct NewView: View {
     
     @EnvironmentObject var weatherModel: WeatherModel
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
     
     @State private var pathModel: PathModel = .init()
+    @State private var oneThirdPassed = false
+    @State private var twoThirdsPassed = false
     
     @Binding var changeMainView: Bool
     
@@ -50,22 +53,21 @@ struct NewView: View {
                     .padding(.trailing, 130)
                     
                     UVindexView()
-                        .padding(.bottom, -40)
+                        .padding(.bottom, -100)
                     
-                    pukaiconView()
+                    pukaiconView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
+                        .padding(.bottom, 14)
                         .environment(pathModel)
                     
-                    Spacer()
-                        .frame(height: 28)
+                    mainButtonView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
                     
-                    mainButtonView()
-                    
-                    Spacer()
-                        .frame(height: 10)
-                    
-                    outExplainView()
-                        .padding(.bottom, 20)
-                    
+                    //                    Spacer()
+                    //                        .frame(height: 10)
+                    //
+                    //                    // TODO: 있을 때도 있고 없을 때도 있음
+                    //                    outExplainView()
+                    //                        .padding(.bottom, 20)
+                    //
                 }
                 .navigationDestination(for: Path.self) {
                     path in
@@ -127,17 +129,31 @@ struct UVindexView : View {
         .padding(.leading, 194)
     }
 }
-// TODO: 푸카아이콘 넣기
 
 struct pukaiconView: View {
     @Environment(PathModel.self) var pathModel
     
+    @Binding var oneThirdPassed: Bool
+    @Binding var twoThirdsPassed: Bool
+    
     var body: some View {
         HStack(spacing: 60) {
             
-            Image(.imgMainpuka1)
-                .resizable()
-                .frame(width: 220, height: 348)
+            if !oneThirdPassed && !twoThirdsPassed {
+                Image(.imgMainpuka1)
+                    .resizable()
+                    .frame(width: 227, height: 422)
+            }
+            else if oneThirdPassed && !twoThirdsPassed {
+                Image(.imgMainpuka2)
+                    .resizable()
+                    .frame(width: 227, height: 422)
+            }
+            else {
+                Image(.imgMainpuka3)
+                    .resizable()
+                    .frame(width: 227, height: 422)
+            }
             
             buttonView()
                 .environment(pathModel)
@@ -171,81 +187,203 @@ struct buttonView: View {
 }
 
 struct mainButtonView: View {
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    
+    @State var ongoingButton = false
+    @State var finishButton = false
+    
+    @Binding var oneThirdPassed: Bool
+    @Binding var twoThirdsPassed: Bool
+    
     var body: some View {
-        ZStack{
+        
+        VStack(alignment: .center, spacing: 0) {
+            if !ongoingButton && !finishButton {
+                outButtonView(ongoingButton: $ongoingButton, finishButton: $finishButton)
+                    .padding(.bottom, 10)
+                
+                outExplainView()
+                    .padding(.bottom, 20)
+            }
+            else if ongoingButton && !finishButton {
+                progressView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed, ongoingButton: $ongoingButton, finishButton: $finishButton)
+                    .padding(.bottom, 10)
+                
+                outEmptyView()
+                    .padding(.bottom, 20)
+                
+            }
+            else if !ongoingButton && finishButton {
+                endButtonView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed, ongoingButton: $ongoingButton, finishButton: $finishButton)
+                    .padding(.bottom, 10)
+                
+                endExplainView()
+                    .padding(.bottom, 20)
+            }
+        }
+    }
+}
+
+// MARK: 외출 버튼
+// TODO: 그림자 넣기, 알림 주기
+struct outButtonView: View {
+    
+    @Binding var ongoingButton: Bool
+    @Binding var finishButton: Bool
+    
+    var body: some View {
+        ZStack {
             Rectangle()
                 .frame(width: 343, height: 92)
-                .foregroundColor(.customBoxBlue)
+                .foregroundColor(.buttonLightBlue)
                 .cornerRadius(30)
             
-            //            outButtonView()
-            progressView()
-            //            endButtonView()
-            
+            HStack(alignment: .center) {
+                Image(.imgOutbtn)
+                    .onTapGesture {
+                        ongoingButton = true
+                        finishButton = false
+                    }
+            }
         }
     }
 }
 
-// TODO: 그림자 넣기
-struct outButtonView: View {
-    var body: some View {
-        HStack(alignment: .center) {
-            Image(.imgOutbtn)
-            // shadow 추가
-        }
-        
-    }
-}
-
-
+// MARK: 진행중 버튼
 struct progressView: View {
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    
+    @Binding var oneThirdPassed: Bool
+    @Binding var twoThirdsPassed: Bool
+    
+    @Binding var ongoingButton: Bool
+    @Binding var finishButton: Bool
+    
     var body: some View {
-        HStack(spacing: 0) {
-            Image(.iconSuncreambtn)
-                .padding(.trailing, 20)
-                .padding(.leading, 86)
+        ZStack {
+            Rectangle()
+                .frame(width: 343, height: 92)
+                .foregroundColor(.buttonBlue)
+                .cornerRadius(30)
             
-            VStack(alignment: .leading, spacing: 0) {
-                Text("2시간 30분")
-                    .font(.system(size: 22))
-                    .fontWeight(.heavy)
-                    .foregroundColor(.suncreamPink)
-                    .padding(.bottom, 1)
+            HStack(spacing: 0) {
+                Image(.iconSuncreambtn)
+                    .padding(.trailing, 20)
+                    .padding(.leading, 86)
                 
-                Text("후에 자외선 차단제를 발라주세요!")
-                    .font(.system(size: 14))
-                    .fontWeight(.regular)
-                    .foregroundColor(.white)
-                    .padding(.bottom, 4)
-                
-                // TODO: 프로그래스 바 추가
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(alarmTimeManager.changeTime(alarmTime: Int((((alarmTimeManager.selectedTime ?? 0) * 60) - (alarmTimeManager.progress ?? 0)))) )
+                        .font(.system(size: 22))
+                        .fontWeight(.heavy)
+                        .foregroundColor(.suncreamPink)
+                        .padding(.bottom, 1)
+                        .padding(.top, 18)
+                    
+                    Text("후에 자외선 차단제를 발라주세요!")
+                        .font(.system(size: 14))
+                        .fontWeight(.regular)
+                        .foregroundColor(.white)
+                        .padding(.bottom, 4)
+                    
+                    ProgressView(value: alarmTimeManager.progress, total: ((alarmTimeManager.selectedTime ?? 0) * 60))
+                        .progressViewStyle(CustomProgressViewStyle())
+                        .padding(.bottom, 20)
+                }
+                .onAppear {
+                    let interval = 0.01
+                    Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+                        if (alarmTimeManager.progress ?? 0) < ((alarmTimeManager.selectedTime ?? 0) * 60) {
+                            alarmTimeManager.progress = ((alarmTimeManager.progress ?? 0) + (interval))
+                            
+                            print("🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                            print("🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                            
+                            if (alarmTimeManager.progress ?? 0) >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && (alarmTimeManager.progress ?? 0) < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
+                                print("1🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                                print("1🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                                oneThirdPassed = true
+                                twoThirdsPassed = false
+                            }
+                            
+                            else if (alarmTimeManager.progress ?? 0) >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
+                                print("2🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                                print("2🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                                oneThirdPassed = false
+                                twoThirdsPassed = true
+                            }
+                            
+                        } else {
+                            timer.invalidate()
+                            ongoingButton = false
+                            finishButton = true
+                            alarmTimeManager.progress = 0.0
+                        }
+                    }
+                }
             }
-            
-            Spacer()
+        }
+    }
+    
+    struct CustomProgressViewStyle: ProgressViewStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color.customGray)
+                        .frame(width: 203, height: 8)
+                    
+                    RoundedRectangle(cornerRadius: 0)
+                        .fill(Color.suncreamPink)
+                        .frame(width: min(geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0), 203), height: 8)
+                        .animation(.linear, value: configuration.fractionCompleted)
+                }
+            }
         }
     }
 }
 
+
+// MARK: 끝난 버튼
 struct endButtonView: View {
+    
+    @Binding var oneThirdPassed: Bool
+    @Binding var twoThirdsPassed: Bool
+    
+    @Binding var ongoingButton: Bool
+    @Binding var finishButton: Bool
+    
     var body: some View {
-        HStack(spacing: 0) {
-            Image(.imgEndbtn)
-                .padding(.trailing, 21)
-                .padding(.leading, 80)
+        ZStack {
+            Rectangle()
+                .frame(width: 343, height: 92)
+                .foregroundColor(.buttonBlue)
+                .cornerRadius(30)
             
-            VStack(alignment: .leading, spacing: 0) {
-                Text("자외선 차단제")
-                    .font(.system(size: 24))
-                    .fontWeight(.heavy)
-                    .foregroundColor(.suncreamPink)
-                    .padding(.bottom, 4)
+            HStack(spacing: 0) {
+                Image(.imgEndbtn)
+                    .padding(.trailing, 21)
+                    .padding(.leading, 80)
                 
-                Text("를 바르실 시간입니다!")
-                    .font(.system(size: 20))
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("자외선 차단제")
+                        .font(.system(size: 24))
+                        .fontWeight(.heavy)
+                        .foregroundColor(.suncreamPink)
+                        .padding(.bottom, 4)
+                    
+                    Text("를 바를 시간입니다!")
+                        .font(.system(size: 20))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+                Spacer()
             }
-            Spacer()
+        }
+        .onTapGesture {
+            ongoingButton = false
+            finishButton = false
+            oneThirdPassed = false
+            twoThirdsPassed = false
         }
     }
 }
@@ -262,6 +400,17 @@ struct outExplainView: View {
                 .font(.system(size: 12))
                 .fontWeight(.regular)
                 .foregroundColor(.white)
+        }
+    }
+}
+
+struct outEmptyView: View {
+    var body: some View {
+        ZStack{
+            Rectangle()
+                .foregroundColor(.clear)
+                .frame(width: 286, height: 25)
+                .cornerRadius(80)
         }
     }
 }
