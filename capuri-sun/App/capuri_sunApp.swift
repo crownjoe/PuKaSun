@@ -21,7 +21,7 @@ struct capuri_sunApp: App {
                     .environmentObject(weatherModel)
             }
             else {
-                NewView()
+                NewView(changeMainView: $changeMainView)
                     .environmentObject(weatherModel)
             }
         }

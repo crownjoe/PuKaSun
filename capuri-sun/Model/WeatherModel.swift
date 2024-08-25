@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import WeatherKit
+import SwiftUI
 
 class WeatherModel: ObservableObject {
     @Published var address: String = ""
@@ -73,7 +74,7 @@ class WeatherModel: ObservableObject {
         case 0...2:
             return "낮음"
         case 3...5:
-            return "중간"
+            return "보통"
         case 6...7:
             return "높음"
         case 8...10:
@@ -85,4 +86,39 @@ class WeatherModel: ObservableObject {
         }
     }
     
+    func changeBackground(condition: String) -> String {
+        switch condition {
+        case "흐림" :
+            return "img_cloud"
+        case "맑음" :
+            return "img_sun"
+        case "바람" :
+            return "img_windy"
+        case "비" :
+            return "img_rain"
+        case "눈" :
+            return "img_snow"
+        case "뇌우" :
+            return "img_strongrain"
+        default:
+            return "img_default"
+        }
+    }
+    
+    func changeUvColor(uvIndex: Int) -> Color {
+        switch uvIndex {
+        case 0...2:
+            return .uvLemon
+        case 3...5:
+            return .uvPink
+        case 6...7:
+            return .uvMint
+        case 8...10:
+            return .uvYellow
+        case 11...:
+            return .uvRed
+        default:
+            return .uvPink
+        }
+    }
 }
