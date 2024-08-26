@@ -99,7 +99,8 @@ struct OnboardingView: View {
                         locationManager.getCurrentLocation { location in
                             self.weatherModel.location = location // 위치 업데이트
                             if let location = location {
-                                self.weatherModel.address = locationManager.address // 주소 업데이트
+                              
+                                self.weatherModel.address = locationManager.address
                                 weatherModel.getWeatherInfo(location)
                             } else {
                                 print("위치 정보를 가져올 수 없습니다.")

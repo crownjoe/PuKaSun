@@ -102,7 +102,7 @@ struct AlarmView: View {
                         
                         // MARK: - 3시간마다
                         Button {
-                            alarmTimeManager.selectedTime = 180
+                            alarmTimeManager.selectedTime = 3
                             alarmTimeManager.progress = 0
                         } label : {
                             Text("3시간마다")
