@@ -11,7 +11,7 @@ import CoreLocation
 struct NewView: View {
     
     @EnvironmentObject var weatherModel: WeatherModel
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
     
     @State private var pathModel: PathModel = .init()
     @State private var oneThirdPassed = false
@@ -61,14 +61,14 @@ struct NewView: View {
                         .padding(.bottom, 14)
                         .environment(pathModel)
                     
-                    mainButtonView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
+                    mainButtonView(alarmTimeManager: alarmTimeManager, oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
                     
                 }
                 .navigationDestination(for: Path.self) {
                     path in
                     switch path {
                     case.alarmView:
-                        AlarmView(changeMainView: $changeMainView, changeAlarmTime: $changeAlarmTime )
+                        AlarmView(changeMainView: $changeMainView, changeAlarmTime: $changeAlarmTime, alarmTimeManager: alarmTimeManager)
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbarRole(.editor)
                         
@@ -90,7 +90,7 @@ struct NewView: View {
     }
 }
 
-// TODO: 터치하면 돌아가게, 인덱스 글씨 크기
+// TODO: 터치하면 돌아가게
 struct UVindexView : View {
     @EnvironmentObject var weatherModel: WeatherModel
     
@@ -116,8 +116,8 @@ struct UVindexView : View {
                         .cornerRadius(18)
                     
                     Text(weatherModel.uvIndexDescription)
-                        .font(.system(size: 25))
-                        .fontWeight(.bold)
+                        .font(.system(size: 22))
+                        .fontWeight(.semibold)
                         .foregroundColor(.customFontBlue)
                 }
             }
@@ -159,10 +159,9 @@ struct pukaiconView: View {
     }
 }
 
-// TODO: 알람뷰 이슈 해결, 알람뷰 누르면 시간 지워야 함
 struct buttonView: View {
     @Environment(PathModel.self) var pathModel
-    
+        
     @Binding var changeAlarmTime: Bool
     
     var body: some View {
@@ -187,10 +186,7 @@ struct buttonView: View {
 }
 
 struct mainButtonView: View {
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
-    
-    @State var ongoingButton = false
-    @State var finishButton = false
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
     
     @Binding var oneThirdPassed: Bool
     @Binding var twoThirdsPassed: Bool
@@ -198,23 +194,23 @@ struct mainButtonView: View {
     var body: some View {
         
         VStack(alignment: .center, spacing: 0) {
-            if !ongoingButton && !finishButton {
-                outButtonView(ongoingButton: $ongoingButton, finishButton: $finishButton)
+            if !alarmTimeManager.ongoingButton && !alarmTimeManager.finishButton {
+                outButtonView(alarmTimeManager: alarmTimeManager)
                     .padding(.bottom, 10)
                 
                 outExplainView()
                     .padding(.bottom, 20)
             }
-            else if ongoingButton && !finishButton {
-                progressView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed, ongoingButton: $ongoingButton, finishButton: $finishButton)
+            else if alarmTimeManager.ongoingButton && !alarmTimeManager.finishButton {
+                progressView(alarmTimeManager: alarmTimeManager, oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
                     .padding(.bottom, 10)
                 
                 outEmptyView()
                     .padding(.bottom, 20)
                 
             }
-            else if !ongoingButton && finishButton {
-                endButtonView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed, ongoingButton: $ongoingButton, finishButton: $finishButton)
+            else if !alarmTimeManager.ongoingButton && alarmTimeManager.finishButton {
+                endButtonView(alarmTimeManager:alarmTimeManager, oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
                     .padding(.bottom, 10)
                 
                 endExplainView()
@@ -228,8 +224,7 @@ struct mainButtonView: View {
 // TODO: 그림자 넣기, 알림 주기
 struct outButtonView: View {
     
-    @Binding var ongoingButton: Bool
-    @Binding var finishButton: Bool
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
     
     var body: some View {
         ZStack {
@@ -241,8 +236,8 @@ struct outButtonView: View {
             HStack(alignment: .center) {
                 Image(.imgOutbtn)
                     .onTapGesture {
-                        ongoingButton = true
-                        finishButton = false
+                        alarmTimeManager.ongoingButton = true
+                        alarmTimeManager.finishButton = false
                     }
             }
         }
@@ -251,13 +246,10 @@ struct outButtonView: View {
 
 // MARK: 진행중 버튼
 struct progressView: View {
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
     
     @Binding var oneThirdPassed: Bool
     @Binding var twoThirdsPassed: Bool
-    
-    @Binding var ongoingButton: Bool
-    @Binding var finishButton: Bool
     
     var body: some View {
         ZStack {
@@ -292,31 +284,33 @@ struct progressView: View {
                 .onAppear {
                     let interval = 0.01
                     Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
-                        if (alarmTimeManager.progress ?? 0) < ((alarmTimeManager.selectedTime ?? 0) * 60) {
-                            alarmTimeManager.progress = ((alarmTimeManager.progress ?? 0) + (interval))
-                            
-                            print("🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
-                            print("🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
-                            
-                            if (alarmTimeManager.progress ?? 0) >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && (alarmTimeManager.progress ?? 0) < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
-                                print("1🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
-                                print("1🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
-                                oneThirdPassed = true
-                                twoThirdsPassed = false
+                        if !alarmTimeManager.finishButton && alarmTimeManager.ongoingButton {
+                            if (alarmTimeManager.progress ?? 0) < ((alarmTimeManager.selectedTime ?? 0) * 60) {
+                                alarmTimeManager.progress = ((alarmTimeManager.progress ?? 0) + (interval))
+                                
+                                print("🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                                print("🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                                
+                                if (alarmTimeManager.progress ?? 0) >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && (alarmTimeManager.progress ?? 0) < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
+                                    print("1🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                                    print("1🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                                    oneThirdPassed = true
+                                    twoThirdsPassed = false
+                                }
+                                
+                                else if (alarmTimeManager.progress ?? 0) >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
+                                    print("2🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                                    print("2🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                                    oneThirdPassed = false
+                                    twoThirdsPassed = true
+                                }
+                                
+                            } else {
+                                timer.invalidate()
+                                alarmTimeManager.ongoingButton = false
+                                alarmTimeManager.finishButton = true
+                                alarmTimeManager.progress = 0.0
                             }
-                            
-                            else if (alarmTimeManager.progress ?? 0) >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
-                                print("2🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
-                                print("2🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
-                                oneThirdPassed = false
-                                twoThirdsPassed = true
-                            }
-                            
-                        } else {
-                            timer.invalidate()
-                            ongoingButton = false
-                            finishButton = true
-                            alarmTimeManager.progress = 0.0
                         }
                     }
                 }
@@ -346,11 +340,10 @@ struct progressView: View {
 // MARK: 끝난 버튼
 struct endButtonView: View {
     
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
+    
     @Binding var oneThirdPassed: Bool
     @Binding var twoThirdsPassed: Bool
-    
-    @Binding var ongoingButton: Bool
-    @Binding var finishButton: Bool
     
     var body: some View {
         ZStack {
@@ -380,8 +373,8 @@ struct endButtonView: View {
             }
         }
         .onTapGesture {
-            ongoingButton = false
-            finishButton = false
+            alarmTimeManager.ongoingButton = false
+            alarmTimeManager.finishButton = false
             oneThirdPassed = false
             twoThirdsPassed = false
         }

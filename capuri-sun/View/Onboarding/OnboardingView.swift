@@ -14,6 +14,7 @@ struct OnboardingView: View {
     @EnvironmentObject var weatherModel: WeatherModel
     
     @ObservedObject private var locationManager = LocationManager()
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
     
     @State private var pathModel: PathModel = .init()
     @State private var showAdditionalText = false
@@ -122,7 +123,7 @@ struct OnboardingView: View {
                 .navigationDestination(for: OnboardingPath.self) { path in
                     switch path {
                     case .alarmView:
-                        AlarmView(changeMainView: $changeMainView, changeAlarmTime: $changeAlarmTime)
+                        AlarmView(changeMainView: $changeMainView, changeAlarmTime: $changeAlarmTime, alarmTimeManager: alarmTimeManager)
                             .navigationBarBackButtonHidden()
                             .navigationBarHidden(true)
                         

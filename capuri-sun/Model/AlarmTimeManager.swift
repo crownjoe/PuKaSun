@@ -20,6 +20,9 @@ class AlarmTimeManager: ObservableObject {
         }
     }
 
+    @Published var ongoingButton = false
+    @Published var finishButton = false
+
     init() {
         self.selectedTime = UserDefaults.standard.double(forKey: "selectedTime")
         self.progress = UserDefaults.standard.double(forKey: "progress")

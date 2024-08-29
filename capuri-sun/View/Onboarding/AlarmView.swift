@@ -14,7 +14,9 @@ struct AlarmView: View {
     
     @Environment(PathModel.self) var pathModel
     
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
+    
+//    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
     
     let timeRange = 5..<9
     
@@ -58,8 +60,6 @@ struct AlarmView: View {
                         .padding(.leading, 20)
                         .padding(.bottom, 56)
                     
-                    // TODO: 터치 영역!!
-                    
                     // MARK: - 2시간마다
                     VStack(spacing: 32) {
                         ZStack {
@@ -92,6 +92,7 @@ struct AlarmView: View {
                                                     )
                                             )
                                     }
+                                    .frame(width: 302, height: 60)
                                 }
                             }
                         }
@@ -202,6 +203,10 @@ struct AlarmView: View {
                                 if changeAlarmTime {
                                     pathModel.paths.removeAll()
                                     changeAlarmTime = false
+                                    
+                                    alarmTimeManager.progress = 0.0
+                                    alarmTimeManager.ongoingButton = false
+                                    alarmTimeManager.finishButton = false
                                 }
                                 
                                 changeMainView = true

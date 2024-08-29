@@ -6,12 +6,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "img_sun1.png",
+      "filename" : "img_sun@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "img_sun2.png",
+      "filename" : "img_sun@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

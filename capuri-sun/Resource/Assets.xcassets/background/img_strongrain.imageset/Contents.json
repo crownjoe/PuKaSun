@@ -6,12 +6,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "img_strongrain1.png",
+      "filename" : "img_strongrain@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "img_strongrain2.png",
+      "filename" : "img_strongrain@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -6,12 +6,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "img_cloud2.png",
+      "filename" : "img_cloud@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "img_cloud3.png",
+      "filename" : "img_cloud3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
