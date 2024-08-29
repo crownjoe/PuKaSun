@@ -10,8 +10,8 @@ import CoreLocation
 import WeatherKit
 
 struct OnboardingView: View {
-    @StateObject private var notificationManager = NotificationManager()
     @EnvironmentObject var weatherModel: WeatherModel
+    @EnvironmentObject var notificationManager: NotificationManager
     
     @ObservedObject private var locationManager = LocationManager()
     @ObservedObject var alarmTimeManager: AlarmTimeManager

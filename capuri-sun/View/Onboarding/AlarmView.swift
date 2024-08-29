@@ -16,8 +16,6 @@ struct AlarmView: View {
     
     @ObservedObject var alarmTimeManager: AlarmTimeManager
     
-//    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
-    
     let timeRange = 5..<9
     
     var body: some View {
@@ -69,8 +67,7 @@ struct AlarmView: View {
                             
                             HStack {
                                 Button {
-                                    alarmTimeManager.selectedTime = 1
-                                    // 원래 2임!!
+                                    alarmTimeManager.selectedTime = 0.01
                                     alarmTimeManager.progress = 0
                                 } label: {
                                     HStack {
@@ -97,8 +94,7 @@ struct AlarmView: View {
                             }
                         }
                         .overlay(
-                            //여기도 2임
-                            alarmTimeManager.selectedTime == 1 ?
+                            alarmTimeManager.selectedTime == 2 ?
                             RoundedRectangle(cornerRadius: 24)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
                             : nil
@@ -220,7 +216,7 @@ struct AlarmView: View {
                                     .background((1...8).contains(alarmTimeManager.selectedTime ?? 0) ? .white : .customGray)
                                     .cornerRadius(10)
                             }
-                            //                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
+//                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
                             .padding(.bottom, 80)
                         }
                     }
@@ -230,7 +226,3 @@ struct AlarmView: View {
         }
     }
 }
-
-//#Preview {
-//    AlarmView()
-//}

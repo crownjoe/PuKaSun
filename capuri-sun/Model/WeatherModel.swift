@@ -33,7 +33,7 @@ class WeatherModel: ObservableObject {
                 self.temperature = "\(String(format: "%.1f", temperatureValue))°"
                 self.condition = translateCondition(result.currentWeather.condition.description)
                 
-                print("🥫🥫🥫🥫🥫🥫🥫🥫🥫🥫")
+                print("🍬🍬🍬🍬🍬🍬🍬")
                 print("날씨", result.currentWeather.condition.description)
                 print("condition", condition)
                 print("uvIndexDescription", uvIndexDescription)

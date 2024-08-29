@@ -31,6 +31,7 @@ struct PukaSunView: View {
                     .fontWeight(.regular)
                     .font(.system(size: 20))
                     .padding(.bottom, 48)
+                    .foregroundColor(.black)
                     .onTapGesture {
                         if let url = URL(string: "https://developer.apple.com/weatherkit/data-source-attribution/") {
                             UIApplication.shared.open(url)

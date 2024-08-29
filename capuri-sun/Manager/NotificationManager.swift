@@ -28,8 +28,10 @@ class NotificationManager: ObservableObject {
         content.subtitle = "얼굴 타는중🥵 자외선 차단제를 다시 발라주세요!"
         content.sound = .default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (alarmTime * 60), repeats: false)
+        // TODO: 알림 호출...
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (alarmTime * 3600), repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
                 print(error.localizedDescription)

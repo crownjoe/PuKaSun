@@ -11,8 +11,10 @@ import CoreLocation
 struct NewView: View {
     
     @EnvironmentObject var weatherModel: WeatherModel
-    @ObservedObject var alarmTimeManager: AlarmTimeManager
+    @EnvironmentObject var notificationManager: NotificationManager
     
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
+        
     @State private var pathModel: PathModel = .init()
     @State private var oneThirdPassed = false
     @State private var twoThirdsPassed = false
@@ -62,6 +64,7 @@ struct NewView: View {
                         .environment(pathModel)
                     
                     mainButtonView(alarmTimeManager: alarmTimeManager, oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
+                        .environmentObject(notificationManager)
                     
                 }
                 .navigationDestination(for: Path.self) {
@@ -90,39 +93,94 @@ struct NewView: View {
     }
 }
 
-// TODO: 터치하면 돌아가게
 struct UVindexView : View {
     @EnvironmentObject var weatherModel: WeatherModel
     
+    @State private var clickedView: Bool = false
+    
     var body: some View {
-        ZStack {
-            Circle()
-                .frame(width: 230)
-                .foregroundColor(.customBlue)
-            
-            VStack(spacing: 0) {
-                Text("\(weatherModel.uvIndex)")
-                    .font(.system(size: 160))
-                    .fontWeight(.bold)
-                    .foregroundColor(weatherModel.changeUvColor(uvIndex: weatherModel.uvIndex))
-                    .frame(height: 160)
-                    .padding(.top, 35)
-                    .padding(.bottom, 8)
+        if !clickedView {
+            ZStack {
+                Circle()
+                    .frame(width: 230)
+                    .foregroundColor(.customBlue)
                 
-                ZStack {
-                    Rectangle()
+                VStack(spacing: 0) {
+                    Text("\(weatherModel.uvIndex)")
+                        .font(.system(size: 160))
+                        .fontWeight(.bold)
                         .foregroundColor(weatherModel.changeUvColor(uvIndex: weatherModel.uvIndex))
-                        .frame(width: 94, height: 38)
-                        .cornerRadius(18)
+                        .frame(height: 160)
+                        .padding(.top, 35)
+                        .padding(.bottom, 8)
                     
-                    Text(weatherModel.uvIndexDescription)
-                        .font(.system(size: 22))
-                        .fontWeight(.semibold)
-                        .foregroundColor(.customFontBlue)
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(weatherModel.changeUvColor(uvIndex: weatherModel.uvIndex))
+                            .frame(width: 94, height: 38)
+                            .cornerRadius(18)
+                        
+                        Text(weatherModel.uvIndexDescription)
+                            .font(.system(size: 22))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.customFontBlue)
+                    }
                 }
             }
+            .padding(.leading, 194)
+            .onTapGesture {
+                clickedView.toggle()
+            }
         }
-        .padding(.leading, 194)
+        else {
+            ZStack {
+                Circle()
+                    .frame(width: 230)
+                    .foregroundColor(.customBlue)
+                
+                VStack(alignment: .center, spacing: 0) {
+                    Image(.imgSunbtn)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 30, height: 30)
+                        .padding(.bottom, 15)
+                        .padding(.top, 30)
+                    
+                    Text("UV 지수")
+                        .font(.system(size: 22))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 7)
+                        .background(Color.uvcolor)
+                        .cornerRadius(18)
+                        .padding(.bottom, 15)
+                    
+                    Text("피부 손상 가능성을")
+                        .font(.system(size: 15))
+                        .fontWeight(.bold)
+                        .foregroundColor(.uvcolor)
+                        .padding(.bottom, 15)
+                    
+                    Text("나타내는 지수")
+                        .font(.system(size: 15))
+                        .fontWeight(.bold)
+                        .foregroundColor(.uvcolor)
+                        .padding(.bottom, 22)
+                    
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.customBlue)
+                            .frame(width: 94, height: 38)
+                            .cornerRadius(18)
+                    }
+                }
+            }
+            .padding(.leading, 194)
+            .onTapGesture {
+                clickedView.toggle()
+            }
+        }
     }
 }
 
@@ -161,7 +219,7 @@ struct pukaiconView: View {
 
 struct buttonView: View {
     @Environment(PathModel.self) var pathModel
-        
+    
     @Binding var changeAlarmTime: Bool
     
     var body: some View {
@@ -187,6 +245,8 @@ struct buttonView: View {
 
 struct mainButtonView: View {
     @ObservedObject var alarmTimeManager: AlarmTimeManager
+
+    @EnvironmentObject var notificationManager: NotificationManager
     
     @Binding var oneThirdPassed: Bool
     @Binding var twoThirdsPassed: Bool
@@ -196,6 +256,7 @@ struct mainButtonView: View {
         VStack(alignment: .center, spacing: 0) {
             if !alarmTimeManager.ongoingButton && !alarmTimeManager.finishButton {
                 outButtonView(alarmTimeManager: alarmTimeManager)
+                    .environmentObject(notificationManager)
                     .padding(.bottom, 10)
                 
                 outExplainView()
@@ -226,6 +287,8 @@ struct outButtonView: View {
     
     @ObservedObject var alarmTimeManager: AlarmTimeManager
     
+    @EnvironmentObject var notificationManager: NotificationManager
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -238,6 +301,10 @@ struct outButtonView: View {
                     .onTapGesture {
                         alarmTimeManager.ongoingButton = true
                         alarmTimeManager.finishButton = false
+                        let alarmTime = alarmTimeManager.selectedTime ?? 0
+                        
+                        notificationManager.requestAuthorization()
+                        notificationManager.makeNotification(alarmTime: TimeInterval(alarmTime))
                     }
             }
         }
@@ -281,37 +348,37 @@ struct progressView: View {
                         .progressViewStyle(CustomProgressViewStyle())
                         .padding(.bottom, 20)
                 }
-                .onAppear {
-                    let interval = 0.01
-                    Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
-                        if !alarmTimeManager.finishButton && alarmTimeManager.ongoingButton {
-                            if (alarmTimeManager.progress ?? 0) < ((alarmTimeManager.selectedTime ?? 0) * 60) {
-                                alarmTimeManager.progress = ((alarmTimeManager.progress ?? 0) + (interval))
-                                
-                                print("🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
-                                print("🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
-                                
-                                if (alarmTimeManager.progress ?? 0) >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && (alarmTimeManager.progress ?? 0) < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
-                                    print("1🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
-                                    print("1🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
-                                    oneThirdPassed = true
-                                    twoThirdsPassed = false
-                                }
-                                
-                                else if (alarmTimeManager.progress ?? 0) >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
-                                    print("2🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
-                                    print("2🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
-                                    oneThirdPassed = false
-                                    twoThirdsPassed = true
-                                }
-                                
-                            } else {
-                                timer.invalidate()
-                                alarmTimeManager.ongoingButton = false
-                                alarmTimeManager.finishButton = true
-                                alarmTimeManager.progress = 0.0
-                            }
+            }
+        }
+        .onAppear {
+            let interval = 1.0
+            Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+                if !alarmTimeManager.finishButton && alarmTimeManager.ongoingButton {
+                    if (alarmTimeManager.progress ?? 0) < ((alarmTimeManager.selectedTime ?? 0) * 60) {
+                        alarmTimeManager.progress = ((alarmTimeManager.progress ?? 0) + (interval/60))
+                        
+                        print("🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                        print("🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                        
+                        if (alarmTimeManager.progress ?? 0) >= (((alarmTimeManager.selectedTime ?? 0) * 60) / 3) && (alarmTimeManager.progress ?? 0) < (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
+                            print("1🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                            print("1🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                            oneThirdPassed = true
+                            twoThirdsPassed = false
                         }
+                        
+                        else if (alarmTimeManager.progress ?? 0) >= (2 * ((alarmTimeManager.selectedTime ?? 0) * 60) / 3) {
+                            print("2🥫🥫🥫🥫🥫",alarmTimeManager.progress ?? 0)
+                            print("2🎵🎵🎵🎵🎵", (alarmTimeManager.selectedTime) ?? 0)
+                            oneThirdPassed = false
+                            twoThirdsPassed = true
+                        }
+                        
+                    } else {
+                        timer.invalidate()
+                        alarmTimeManager.ongoingButton = false
+                        alarmTimeManager.finishButton = true
+                        alarmTimeManager.progress = 0.0
                     }
                 }
             }
@@ -328,7 +395,7 @@ struct progressView: View {
                     
                     RoundedRectangle(cornerRadius: 0)
                         .fill(Color.suncreamPink)
-                        .frame(width: min(geometry.size.width * CGFloat(configuration.fractionCompleted ?? 0), 203), height: 8)
+                        .frame(width: 203 * CGFloat(configuration.fractionCompleted ?? 0), height: 8)
                         .animation(.linear, value: configuration.fractionCompleted)
                 }
             }
