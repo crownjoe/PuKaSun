@@ -17,6 +17,7 @@ struct NewView: View {
     @State private var oneThirdPassed = false
     @State private var twoThirdsPassed = false
     
+    @Binding var changeAlarmTime: Bool
     @Binding var changeMainView: Bool
     
     var body: some View {
@@ -50,36 +51,32 @@ struct NewView: View {
                     .cornerRadius(20)
                     .padding(.top, 28)
                     .padding(.bottom, 14)
+                    .padding(.leading, 10)
                     .padding(.trailing, 130)
                     
                     UVindexView()
                         .padding(.bottom, -100)
                     
-                    pukaiconView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
+                    pukaiconView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed, changeAlarmTime: $changeAlarmTime)
                         .padding(.bottom, 14)
                         .environment(pathModel)
                     
                     mainButtonView(oneThirdPassed: $oneThirdPassed, twoThirdsPassed: $twoThirdsPassed)
                     
-                    //                    Spacer()
-                    //                        .frame(height: 10)
-                    //
-                    //                    // TODO: 있을 때도 있고 없을 때도 있음
-                    //                    outExplainView()
-                    //                        .padding(.bottom, 20)
-                    //
                 }
                 .navigationDestination(for: Path.self) {
                     path in
                     switch path {
                     case.alarmView:
-                        AlarmView(changeMainView: $changeMainView)
+                        AlarmView(changeMainView: $changeMainView, changeAlarmTime: $changeAlarmTime )
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbarRole(.editor)
+                        
                     case .suncreamView:
                         SuncreamView()
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbarRole(.editor)
+                        
                     case .uvView:
                         UVView()
                             .navigationBarTitleDisplayMode(.inline)
@@ -93,8 +90,7 @@ struct NewView: View {
     }
 }
 
-// TODO: 터치하면 돌아가게...
-
+// TODO: 터치하면 돌아가게, 인덱스 글씨 크기
 struct UVindexView : View {
     @EnvironmentObject var weatherModel: WeatherModel
     
@@ -135,6 +131,7 @@ struct pukaiconView: View {
     
     @Binding var oneThirdPassed: Bool
     @Binding var twoThirdsPassed: Bool
+    @Binding var changeAlarmTime: Bool
     
     var body: some View {
         HStack(spacing: 60) {
@@ -155,16 +152,18 @@ struct pukaiconView: View {
                     .frame(width: 227, height: 422)
             }
             
-            buttonView()
+            buttonView(changeAlarmTime: $changeAlarmTime)
                 .environment(pathModel)
             
         }
     }
 }
 
-// TODO: 알람뷰 이슈 해결
+// TODO: 알람뷰 이슈 해결, 알람뷰 누르면 시간 지워야 함
 struct buttonView: View {
     @Environment(PathModel.self) var pathModel
+    
+    @Binding var changeAlarmTime: Bool
     
     var body: some View {
         VStack(spacing: 35) {
@@ -177,6 +176,7 @@ struct buttonView: View {
             Image(.iconAlarm)
                 .onTapGesture {
                     pathModel.paths.append(.alarmView)
+                    changeAlarmTime = true
                 }
             Image(.iconSuncream)
                 .onTapGesture {
@@ -285,7 +285,7 @@ struct progressView: View {
                         .foregroundColor(.white)
                         .padding(.bottom, 4)
                     
-                    ProgressView(value: alarmTimeManager.progress, total: ((alarmTimeManager.selectedTime ?? 0) * 60))
+                    ProgressView(value: alarmTimeManager.progress ?? 0, total: ((alarmTimeManager.selectedTime ?? 0) * 60))
                         .progressViewStyle(CustomProgressViewStyle())
                         .padding(.bottom, 20)
                 }
@@ -396,7 +396,7 @@ struct outExplainView: View {
                 .frame(width: 286, height: 25)
                 .cornerRadius(80)
             
-            Text("외출 후 버튼을 눌러 자외선 자단제 알림을 받아보세요!")
+            Text("외출 후 버튼을 눌러 자외선 차단제 알림을 받아보세요!")
                 .font(.system(size: 12))
                 .fontWeight(.regular)
                 .foregroundColor(.white)

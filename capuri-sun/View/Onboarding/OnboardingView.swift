@@ -19,6 +19,7 @@ struct OnboardingView: View {
     @State private var showAdditionalText = false
     
     @Binding var changeMainView: Bool
+    @Binding var changeAlarmTime: Bool
     
     var body: some View {
         NavigationStack(path: $pathModel.onboardingPaths) {
@@ -121,7 +122,7 @@ struct OnboardingView: View {
                 .navigationDestination(for: OnboardingPath.self) { path in
                     switch path {
                     case .alarmView:
-                        AlarmView(changeMainView: $changeMainView)
+                        AlarmView(changeMainView: $changeMainView, changeAlarmTime: $changeAlarmTime)
                             .navigationBarBackButtonHidden()
                             .navigationBarHidden(true)
                         

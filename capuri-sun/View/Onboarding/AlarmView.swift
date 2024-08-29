@@ -10,10 +10,11 @@ struct AlarmView: View {
     @State private var selectedButton: Int? = nil
     
     @Binding var changeMainView: Bool
-    
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    @Binding var changeAlarmTime: Bool
     
     @Environment(PathModel.self) var pathModel
+    
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
     
     let timeRange = 5..<9
     
@@ -56,6 +57,8 @@ struct AlarmView: View {
                         .fontWeight(.regular)
                         .padding(.leading, 20)
                         .padding(.bottom, 56)
+                    
+                    // TODO: 터치 영역!!
                     
                     // MARK: - 2시간마다
                     VStack(spacing: 32) {
@@ -160,8 +163,6 @@ struct AlarmView: View {
                                     .stroke(Color.suncreamPink, lineWidth: 4)
                                 : nil
                             )
-//                            .padding(.bottom, 80)
-                            
                             .sheet(isPresented: $showPicker) {
                                 VStack {
                                     Picker("시간", selection: $selectedHour) {
@@ -197,6 +198,12 @@ struct AlarmView: View {
                             
                             Button {
                                 self.showMainView = true
+                                
+                                if changeAlarmTime {
+                                    pathModel.paths.removeAll()
+                                    changeAlarmTime = false
+                                }
+                                
                                 changeMainView = true
                                 
                             } label : {
@@ -208,13 +215,13 @@ struct AlarmView: View {
                                     .background((1...8).contains(alarmTimeManager.selectedTime ?? 0) ? .white : .customGray)
                                     .cornerRadius(10)
                             }
-//                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
+                            //                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
                             .padding(.bottom, 80)
                         }
                     }
                 }
             }
-
+            
         }
     }
 }

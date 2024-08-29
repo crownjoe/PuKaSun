@@ -51,7 +51,7 @@ class WeatherModel: ObservableObject {
     /// 날씨 정보 번역
     func translateCondition(_ condition: String) -> String {
         switch condition {
-        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy":
+        case "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Foggy", "Haze":
             return "흐림"
         case "Clear", "Mostly Clear":
             return "맑음"

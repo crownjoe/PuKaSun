@@ -13,19 +13,19 @@ struct capuri_sunApp: App {
     
     @StateObject private var weatherModel = WeatherModel()
     @State var changeMainView: Bool = false
+    @State var changeAlarmTime: Bool = false
     
     var body: some Scene {
         WindowGroup {
             
             if !changeMainView {
-                OnboardingView(changeMainView: $changeMainView)
+                OnboardingView(changeMainView: $changeMainView, changeAlarmTime: $changeAlarmTime)
                     .environmentObject(weatherModel)
             }
             else {
-                NewView(changeMainView: $changeMainView)
+                NewView(changeAlarmTime: $changeAlarmTime, changeMainView: $changeMainView)
                     .environmentObject(weatherModel)
             }
-            
         }
     }
 }
