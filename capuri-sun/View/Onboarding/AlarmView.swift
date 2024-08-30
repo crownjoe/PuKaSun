@@ -67,7 +67,8 @@ struct AlarmView: View {
                             
                             HStack {
                                 Button {
-                                    alarmTimeManager.selectedTime = 0.01
+                                    alarmTimeManager.selectedTime = 2
+                                    //0.01
                                     alarmTimeManager.progress = 0
                                 } label: {
                                     HStack {
@@ -216,7 +217,7 @@ struct AlarmView: View {
                                     .background((1...8).contains(alarmTimeManager.selectedTime ?? 0) ? .white : .customGray)
                                     .cornerRadius(10)
                             }
-//                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
+                            //                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
                             .padding(.bottom, 80)
                         }
                     }
