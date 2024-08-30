@@ -11,6 +11,13 @@ extension Color{
     
     static let backgroundBlue = Color(hex: "4095FF")
     static let customGray = Color(hex: "D9D9D9")
+    static let customBlue = Color(hex: "2587FF")
+    
+    static let customBoxBlue = Color(hex: "2C89FB")
+    
+    static let customFontBlue = Color(hex: "167EFF")
+    static let customLigntBlue = Color(hex: "59A2FF")
+    static let customExplainBlue = Color(hex: "57A2FF")
     
     //SuncreamView
     static let suncreamYellow = Color(hex: "FBF9BC")
@@ -41,10 +48,9 @@ extension Color{
     
     //MainView
     static let mainBlue = Color(hex: "318DFF")
-    
-    
-    
-    
+    static let buttonLightBlue = Color(hex: "4E9DFF")
+    static let buttonBlue = Color(hex: "2C89FB")
+
     
 }
 

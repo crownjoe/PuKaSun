@@ -20,8 +20,17 @@ class AlarmTimeManager: ObservableObject {
         }
     }
 
+    @Published var ongoingButton = false
+    @Published var finishButton = false
+
     init() {
         self.selectedTime = UserDefaults.standard.double(forKey: "selectedTime")
         self.progress = UserDefaults.standard.double(forKey: "progress")
+    }
+    
+    func changeTime(alarmTime: Int) -> String {
+        let hours = Int(alarmTime) / 60
+        let minutes = Int(alarmTime) % 60
+        return "\(hours)시간 \(minutes)분"
     }
 }

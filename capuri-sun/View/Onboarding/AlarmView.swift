@@ -2,11 +2,6 @@ import SwiftUI
 import CoreLocation
 
 struct AlarmView: View {
-    @Binding var address: String
-    @Binding var uvIndex: String
-    @Binding var condition: String
-    @Binding var temperature: String
-    @Binding var location: CLLocation?
     
     @State private var showPicker = false
     @State private var showMainView = false
@@ -14,57 +9,68 @@ struct AlarmView: View {
     @State private var isClicked: Bool = false
     @State private var selectedButton: Int? = nil
     
-    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    @Binding var changeMainView: Bool
+    @Binding var changeAlarmTime: Bool
+    
+    @Environment(PathModel.self) var pathModel
+    
+    @ObservedObject var alarmTimeManager: AlarmTimeManager
     
     let timeRange = 5..<9
     
     var body: some View {
         if !showMainView{
             ZStack {
-                Image("img_alarmBackground")
+                Image(.imgBackground)
                     .resizable()
                     .scaledToFill()
-                    .ignoresSafeArea()
+                    .ignoresSafeArea(.all)
                 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 0) {
                     Text("자외선 차단제")
-                        .font(.system(size: 30))
+                        .font(.system(size: 28))
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                         .padding(.leading, 20)
+                        .padding(.bottom, 8)
                         .padding(.top, 100)
-                    
-                    Spacer()
-                        .frame(height: 5)
                     
                     HStack(spacing: 0) {
                         Text("알림주기")
                             .bold()
-                            .font(.system(size: 30))
+                            .font(.system(size: 28))
                             .foregroundColor(.alarmcolor3)
                             .fontWeight(.bold)
-                            .padding(.leading, 20)
+                        
                         Text("를 설정해 주세요")
                             .bold()
-                            .font(.system(size: 30))
+                            .font(.system(size: 28))
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                     }
-                    .padding(.bottom, 80)
+                    .padding(.leading, 20)
+                    .padding(.bottom, 10)
+                    
+                    Text("설정한 시간으로 정기적 알림을 드려요.")
+                        .font(.system(size: 17))
+                        .foregroundColor(.white)
+                        .fontWeight(.regular)
+                        .padding(.leading, 20)
+                        .padding(.bottom, 56)
                     
                     // MARK: - 2시간마다
-                    VStack(spacing: 22) {
+                    VStack(spacing: 32) {
                         ZStack {
                             Color.alarmcolor
-                                .frame(width: 308, height: 60)
-                                .cornerRadius(20)
+                                .frame(width: 302, height: 60)
+                                .cornerRadius(24)
                             
                             HStack {
-                                Button(action: {
+                                Button {
                                     alarmTimeManager.selectedTime = 2
+                                    //0.01
                                     alarmTimeManager.progress = 0
-                                })
-                                {
+                                } label: {
                                     HStack {
                                         Text("2시간마다")
                                             .fontWeight(.bold)
@@ -84,29 +90,31 @@ struct AlarmView: View {
                                                     )
                                             )
                                     }
+                                    .frame(width: 302, height: 60)
                                 }
                             }
                         }
                         .overlay(
                             alarmTimeManager.selectedTime == 2 ?
-                            RoundedRectangle(cornerRadius: 20)
+                            RoundedRectangle(cornerRadius: 24)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
                             : nil
                         )
                         
                         // MARK: - 3시간마다
-                        Button(action: {
+                        Button {
                             alarmTimeManager.selectedTime = 3
                             alarmTimeManager.progress = 0
-                        }) {
+                        } label : {
                             Text("3시간마다")
                                 .fontWeight(.bold)
                                 .font(.system(size: 20))
                                 .foregroundColor(.white)
-                                .frame(width: 308, height: 60)
+                                .frame(width: 302, height: 60)
                                 .background(Color.alarmcolor)
-                                .cornerRadius(20)
-                        }.overlay(
+                                .cornerRadius(24)
+                        }
+                        .overlay(
                             alarmTimeManager.selectedTime == 3 ?
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
@@ -114,18 +122,19 @@ struct AlarmView: View {
                         )
                         
                         // MARK: - 4시간마다
-                        Button(action: {
+                        Button {
                             alarmTimeManager.selectedTime = 4
                             alarmTimeManager.progress = 0
-                        }) {
+                        } label : {
                             Text("4시간마다")
                                 .fontWeight(.bold)
                                 .font(.system(size: 20))
                                 .foregroundColor(.white)
-                                .frame(width: 308, height: 60)
+                                .frame(width: 302, height: 60)
                                 .background(Color.alarmcolor)
-                                .cornerRadius(20)
-                        }.overlay(
+                                .cornerRadius(24)
+                        }
+                        .overlay(
                             alarmTimeManager.selectedTime == 4 ?
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.suncreamPink, lineWidth: 4)
@@ -134,17 +143,17 @@ struct AlarmView: View {
                         
                         VStack {
                             // MARK: - _시간마다
-                            Button(action: {
+                            Button {
                                 showPicker.toggle()
-                            }) {
-                                Text("\(0...4 ~= (alarmTimeManager.selectedTime ?? 0) ? "_시간마다" : "\(Int(alarmTimeManager.selectedTime ?? 0))시간마다")")
+                            } label : {
+                                Text("\(0...4 ~= (alarmTimeManager.selectedTime ?? 0) ? "__시간마다" : "\(Int(alarmTimeManager.selectedTime ?? 0))시간마다")")
                                 
                                     .fontWeight(.bold)
                                     .font(.system(size: 20))
                                     .foregroundColor(.white)
-                                    .frame(width: 308, height: 60)
+                                    .frame(width: 302, height: 60)
                                     .background(Color.alarmcolor)
-                                    .cornerRadius(20)
+                                    .cornerRadius(24)
                             }
                             .overlay(
                                 (alarmTimeManager.selectedTime == 5 || alarmTimeManager.selectedTime == 6 || alarmTimeManager.selectedTime == 7 || alarmTimeManager.selectedTime == 8) ?
@@ -152,7 +161,6 @@ struct AlarmView: View {
                                     .stroke(Color.suncreamPink, lineWidth: 4)
                                 : nil
                             )
-                            
                             .sheet(isPresented: $showPicker) {
                                 VStack {
                                     Picker("시간", selection: $selectedHour) {
@@ -184,35 +192,38 @@ struct AlarmView: View {
                                 
                             }
                             
-                            Button(action: {
+                            Spacer()
+                            
+                            Button {
                                 self.showMainView = true
-                            }) {
-                                Text("시작하기")
+                                
+                                if changeAlarmTime {
+                                    pathModel.paths.removeAll()
+                                    changeAlarmTime = false
+                                    
+                                    alarmTimeManager.progress = 0.0
+                                    alarmTimeManager.ongoingButton = false
+                                    alarmTimeManager.finishButton = false
+                                }
+                                
+                                changeMainView = true
+                                
+                            } label : {
+                                Text("다음")
                                     .bold()
                                     .font(.system(size: 20))
                                     .foregroundColor((1...8).contains(alarmTimeManager.selectedTime ?? 0) ? .alarmcolor2 : .gray)
-                                    .frame(width: 308, height: 60)
+                                    .frame(width: 329, height: 60)
                                     .background((1...8).contains(alarmTimeManager.selectedTime ?? 0) ? .white : .customGray)
                                     .cornerRadius(10)
                             }
-                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
+                            //                            .disabled(!(1...8).contains(alarmTimeManager.selectedTime ?? 0))
                             .padding(.bottom, 80)
-                            .padding()
                         }
                     }
                 }
             }
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-        }
-        else {
-            MainView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
-                .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
+            
         }
     }
 }
-
-//#Preview {
-//    AlarmView()
-//}

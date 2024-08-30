@@ -15,24 +15,21 @@ struct UVView: View {
     @State private var showFirstHStack4 = true
     @State private var showFirstHStack5 = true
     
-    @Binding var address: String
-    @Binding var uvIndex: String
-    @Binding var condition: String
-    @Binding var temperature: String
-    
     // TODO: 애니메이션 이슈 해결
     
     var body: some View {
         
-        ZStack{
-            Color.backgroundBlue
+        ZStack {
+            Image(.imgDefault)
+                .resizable()
+                .scaledToFill()
                 .ignoresSafeArea(.all)
             
-            VStack{
+            VStack {
                 Spacer()
                     .frame(height: 17)
                 
-                VStack(alignment: .center, spacing: 14){
+                VStack(alignment: .center, spacing: 14) {
                     Text("자외선 지수 단계는?")
                         .fontWeight(.bold)
                         .font(.system(size: 30))
@@ -49,7 +46,7 @@ struct UVView: View {
                 Spacer()
                     .frame(height: 33)
                 
-                VStack(alignment: .center, spacing: 4){
+                VStack(alignment: .center, spacing: 4) {
                     ZStack {
                         Image("img_low1")
                         
@@ -75,8 +72,7 @@ struct UVView: View {
                             .transition(.flipFromLeft)
                         }
                         else {
-                            HStack{
-                                
+                            HStack {
                                 VStack(alignment: .trailing, spacing: 8){
                                     Text("햇빛 노출 보호조치가 필요하지 않음")
                                         .font(.system(size: 13))
@@ -365,3 +361,6 @@ struct FlipModifier: ViewModifier {
     }
 }
 
+#Preview {
+    UVView()
+}

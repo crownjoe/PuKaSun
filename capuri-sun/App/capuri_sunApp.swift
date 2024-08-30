@@ -11,15 +11,27 @@ import CoreLocation
 @main
 struct capuri_sunApp: App {
     
-    @State private var location: CLLocation?
-    @State private var address: String = ""
-    @State private var uvIndex: String = ""
-    @State private var condition: String = ""
-    @State private var temperature: String = ""
+    @StateObject private var weatherModel = WeatherModel()
+    @StateObject private var notificationManager = NotificationManager()
     
+    @ObservedObject private var alarmTimeManager = AlarmTimeManager()
+    
+    @State var changeMainView: Bool = false
+    @State var changeAlarmTime: Bool = false
+    
+    // TODO: 웨더킷 호출
     var body: some Scene {
         WindowGroup {
-            ContorlView(address: $address, uvIndex: $uvIndex, condition: $condition, temperature: $temperature, location: $location)
+            if !changeMainView {
+                OnboardingView(alarmTimeManager: alarmTimeManager, changeMainView: $changeMainView, changeAlarmTime: $changeAlarmTime)
+                    .environmentObject(weatherModel)
+                    .environmentObject(notificationManager)
+            }
+            else {
+                NewView(alarmTimeManager: alarmTimeManager, changeAlarmTime: $changeAlarmTime, changeMainView: $changeMainView)
+                    .environmentObject(weatherModel)
+                    .environmentObject(notificationManager)
+            }
         }
     }
 }

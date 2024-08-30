@@ -24,20 +24,18 @@ struct SuncreamView: View {
     @State private var imageName5 = "img_suncream5"
     @State private var text5 = "야외 물놀이            "
     
-    @Binding var address: String
-    @Binding var uvIndex: String
-    @Binding var condition: String
-    @Binding var temperature: String
     
-
     var body: some View {
-        ZStack{
-            Color.backgroundBlue
+        ZStack {
+            Image(.imgDefault)
+                .resizable()
+                .scaledToFill()
                 .ignoresSafeArea(.all)
             
-            VStack{
-                HStack{
-                    VStack(alignment: .leading, spacing: 6){
+            
+            VStack {
+                HStack {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text("어떤 자외선 차단제를\n발라야 할까요?")
                             .fontWeight(.bold)
                             .font(.system(size: 30))
@@ -58,7 +56,7 @@ struct SuncreamView: View {
                 Spacer()
                     .frame(height: 20)
                 
-                VStack(spacing: 11){
+                VStack(spacing: 11) {
                     HStack(spacing: 7){
                         VStack(spacing: 11){
                             
@@ -71,8 +69,8 @@ struct SuncreamView: View {
                                     .fontWeight(.bold)
                                     .font(.system(size: 35))
                                     .foregroundColor(.suncreamFontYellow)
-                            }.onTapGesture {
-                                
+                            }
+                            .onTapGesture {
                                 // TODO: 애니메이션
                                 
                                 if imageName1 == "img_suncream1" {
@@ -84,7 +82,7 @@ struct SuncreamView: View {
                                 }
                             }
                             
-                            ZStack{
+                            ZStack {
                                 Image(imageName3)
                                     .resizable()
                                     .frame(width: 190, height: 249)
@@ -92,7 +90,8 @@ struct SuncreamView: View {
                                     .fontWeight(.bold)
                                     .font(.system(size: 35))
                                     .foregroundColor(.suncreamFontMint)
-                            }.onTapGesture {
+                            }
+                            .onTapGesture {
                                 if imageName3 == "img_suncream3" {
                                     imageName3 = "img_aftersuncream3"
                                     text3 = ""
@@ -104,9 +103,8 @@ struct SuncreamView: View {
                             
                         }
                         
-                        VStack(spacing: 11){
-                            
-                            ZStack{
+                        VStack(spacing: 11) {
+                            ZStack {
                                 Image(imageName2)
                                     .resizable()
                                     .frame(width: 160, height: 278)
@@ -115,7 +113,8 @@ struct SuncreamView: View {
                                     .font(.system(size: 35))
                                     .foregroundColor(.suncreamFontPink)
                                 
-                            }.onTapGesture {
+                            }
+                            .onTapGesture {
                                 if imageName2 == "img_suncream2" {
                                     imageName2 = "img_aftersuncream2"
                                     text2 = ""
@@ -126,7 +125,7 @@ struct SuncreamView: View {
                             }
                             
                             
-                            ZStack{
+                            ZStack {
                                 Image(imageName4)
                                     .resizable()
                                     .frame(width: 160, height: 160)
@@ -134,7 +133,8 @@ struct SuncreamView: View {
                                     .fontWeight(.bold)
                                     .font(.system(size: 35))
                                     .foregroundColor(.suncreamFontOrange)
-                            } .onTapGesture {
+                            }
+                            .onTapGesture {
                                 if imageName4 == "img_suncream4" {
                                     imageName4 = "img_aftersuncream4"
                                     text4 = ""
@@ -146,7 +146,7 @@ struct SuncreamView: View {
                             
                         }
                     }
-                    ZStack{
+                    ZStack {
                         Image(imageName5)
                             .resizable()
                             .frame(width: 357, height: 118)
@@ -156,14 +156,14 @@ struct SuncreamView: View {
                             .foregroundColor(.suncreamFontBlue)
                     }
                     .onTapGesture {
-                                if imageName5 == "img_suncream5" {
-                                    imageName5 = "img_aftersuncream5"
-                                    text5 = ""
-                                } else {
-                                    imageName5 = "img_suncream5"
-                                    text5 = "야외 물놀이            "
-                                }
-                            }
+                        if imageName5 == "img_suncream5" {
+                            imageName5 = "img_aftersuncream5"
+                            text5 = ""
+                        } else {
+                            imageName5 = "img_suncream5"
+                            text5 = "야외 물놀이            "
+                        }
+                    }
                     
                 }
             }
@@ -173,6 +173,6 @@ struct SuncreamView: View {
     }
 }
 
-//#Preview {
-//    SuncreamView()
-//}
+#Preview {
+    SuncreamView()
+}
